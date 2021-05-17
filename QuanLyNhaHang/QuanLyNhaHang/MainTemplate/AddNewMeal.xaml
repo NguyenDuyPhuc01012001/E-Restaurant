@@ -125,7 +125,7 @@
                 Height="40">
                 <Label
                     x:Name="lbNameSupplier"
-                    Content="Supplier"
+                    Content="Category"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Foreground="Black"
@@ -253,7 +253,7 @@
                            RadiusY="6" Margin="95,0,0,0"
                            Stroke="Gray"
                            HorizontalAlignment="Left"/>
-                <ComboBox
+                <ComboBox x:Name="txtQuantity"
                     materialDesign:HintAssist.Hint="Quantity"
                     VerticalAlignment="Center"
                     FontWeight="Bold"
@@ -324,9 +324,9 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnConfirm" Grid.Column="0" Background="#FFF38413" Content="Confirm" Foreground="White" FontSize="11" FontWeight="Bold" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ButtonAssist.CornerRadius="10"/>
+            <Button x:Name="btnConfirm" Grid.Column="0" Background="#FFF38413" Content="Confirm" Foreground="White" FontSize="11" FontWeight="Bold" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ButtonAssist.CornerRadius="10" Click="btnConfirm_Click"/>
 
-            <Button x:Name="btnCancel" Grid.Column="2" Background="White" Content="Cancel" Foreground="#FFF38413" FontSize="11" FontWeight="Bold"  Style="{StaticResource MaterialDesignOutlinedButton}" materialDesign:ButtonAssist.CornerRadius="10"/>
+            <Button x:Name="btnCancel" Grid.Column="2" Background="White" Content="Cancel" Foreground="#FFF38413" FontSize="11" FontWeight="Bold"  Style="{StaticResource MaterialDesignOutlinedButton}" materialDesign:ButtonAssist.CornerRadius="10" Click="btnCancel_Click"/>
         </Grid>
     </Grid>
 </Window>

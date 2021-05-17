@@ -100,7 +100,7 @@
                             <Button
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
             materialDesign:ButtonAssist.CornerRadius="25"
-            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Background="#FF17A282" HorizontalAlignment="Left" VerticalAlignment="Center" Width="146" Height="45" Margin="10,0,0,0"  >
+            ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Background="#FF17A282" HorizontalAlignment="Left" VerticalAlignment="Center" Width="146" Height="45" Margin="10,0,0,0" Click="Button_Click"  >
 
                                 <StackPanel Orientation="Horizontal" Width="220">
                                     <materialDesign:PackIcon x:Name="AddFieldIcon" Kind="Plus" Height="41" Width="34" Foreground="White"/>

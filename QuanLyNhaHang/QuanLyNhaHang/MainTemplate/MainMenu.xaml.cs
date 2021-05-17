@@ -267,5 +267,10 @@ namespace QuanLyNhaHang
         {
             this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerFieldHolder.Children.Add(new AddNewMeal());
+        }
     }
 }
