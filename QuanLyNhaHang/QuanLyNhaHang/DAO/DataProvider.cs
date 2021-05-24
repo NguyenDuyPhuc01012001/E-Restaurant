@@ -11,7 +11,7 @@ namespace QuanLyNhaHang.DAO
     class DataProvider
     {
         private static DataProvider instance;
-        private string connectionString = @"Data Source=.;Initial Catalog=ERSystem;Integrated Security=True";
+        private string connectionString = @"Data Source=LAPTOP-ERG4JEN2;Initial Catalog=ERSystem;Integrated Security=True";
 
         private DataProvider() { }
 
@@ -34,7 +34,7 @@ namespace QuanLyNhaHang.DAO
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
 
-                if (parameter != null)
+                if (parameter != null)  
                 {
                     string[] listPara = query.Split(' ');
                     int i = 0;
