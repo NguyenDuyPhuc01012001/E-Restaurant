@@ -41,12 +41,27 @@ namespace QuanLyNhaHang.DAO
 
             return list;
         }
+        
+        public int GetOrderQuantityByID(int idFood)
+        {
+            string query = string.Format("select sum(bf.count) from BillInfo bf where bf.idFood = " + idFood);
+            int quantity;
 
+            try 
+            { 
+                quantity = (int)DataProvider.Instance.ExecuteScalar(query); 
+            }
+            catch
+            {
+                quantity = 0;
+            }
+            return quantity;
+        }
         public List<FoodDTO> GetListFood()
         {
             List<FoodDTO> list = new List<FoodDTO>();
 
-            string query = "select * from Food";
+            string query = "SELECT * FROM Food ORDER BY idCategory";
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -59,6 +74,14 @@ namespace QuanLyNhaHang.DAO
             return list;
         }
 
+        //public int FindCategoryID(string idCategory)
+        //{
+
+        //    string query = "select id from FoodCategory where Food.name = " + idCategory;
+        //    int result = (int)DataProvider.Instance.ExecuteScalar(query, new object[] { idCategory });
+        //    return result;
+        //}
+
         public bool AddMeal(string name, int id, float price)
         {
             string query = string.Format("INSERT dbo.Food ( name, idCategory, price ) VALUES  ( N'{0}', {1}, {2})", name, id, price);
@@ -67,9 +90,9 @@ namespace QuanLyNhaHang.DAO
             return result > 0;
         }
 
-        public bool EditMeal(int idFood, string name, int id, float price)
+        public bool EditMeal(int idFood, string name, int idCategory, float price)
         {
-            string query = string.Format("UPDATE dbo.Food SET name = N'{0}', idCategory = {1}, price = {2} WHERE id = {3}", name, id, price, idFood);
+            string query = string.Format("UPDATE dbo.Food SET name = N'{0}', price = {1}, idCategory={2} WHERE id = {3}", name, price, idCategory, idFood);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;

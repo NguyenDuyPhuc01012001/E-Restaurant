@@ -25,6 +25,7 @@ CREATE TABLE Account
 	FOREIGN KEY (idStaff) REFERENCES dbo.Staff(id)
 )
 GO
+SELECT * FROM Account
 
 CREATE TABLE TableFood
 (
@@ -40,6 +41,8 @@ CREATE TABLE FoodCategory
 	name NVARCHAR(100) NOT NULL DEFAULT N'No name'
 )
 GO
+
+select fc.name from FoodCategory fc, Food f where fc.id = f.idCategory
 
 CREATE TABLE Food
 (
@@ -83,6 +86,8 @@ CREATE TABLE BillInfo
 	FOREIGN KEY (idBill) REFERENCES dbo.Bill(id),
 	FOREIGN KEY (idFood) REFERENCES dbo.Food(id)
 )
+select ISNULL(sum(bf.count),0) OrderQuantity  from BillInfo bf, Food f where bf.idFood = f.id
+
 GO
 
 --Thêm NV
@@ -104,6 +109,8 @@ VALUES
     0     -- position - int
     )
 GO
+select fc.name from FoodCategory fc where fc.id = 3
+
 
 INSERT INTO dbo.Staff
 (
@@ -237,6 +244,80 @@ BEGIN
 END
 GO
 
+-- thêm bill
+INSERT	dbo.Bill
+        ( DateCheckIn ,
+          DateCheckOut ,
+          idTable ,
+          status
+        )
+VALUES  ( GETDATE() , -- DateCheckIn - date
+          NULL , -- DateCheckOut - date
+          3 , -- idTable - int
+          0  -- status - int
+        )        
+INSERT	dbo.Bill
+        ( DateCheckIn ,
+          DateCheckOut ,
+          idTable ,
+          status
+        )
+VALUES  ( GETDATE() , -- DateCheckIn - date
+          NULL , -- DateCheckOut - date
+          4, -- idTable - int
+          0  -- status - int
+        )
+INSERT	dbo.Bill
+        ( DateCheckIn ,
+          DateCheckOut ,
+          idTable ,
+          status
+        )
+VALUES  ( GETDATE() , -- DateCheckIn - date
+          GETDATE() , -- DateCheckOut - date
+          5 , -- idTable - int
+          1  -- status - int
+        )
+GO 
+
+-- thêm bill info
+INSERT	dbo.BillInfo
+        ( idBill, idFood, count )
+VALUES  ( 1, -- idBill - int
+          1, -- idFood - int
+          2  -- count - int
+          )
+INSERT	dbo.BillInfo
+        ( idBill, idFood, count )
+VALUES  ( 1, -- idBill - int
+          3, -- idFood - int
+          4  -- count - int
+          )
+INSERT	dbo.BillInfo
+        ( idBill, idFood, count )
+VALUES  ( 1, -- idBill - int
+          5, -- idFood - int
+          1  -- count - int
+          )
+INSERT	dbo.BillInfo
+        ( idBill, idFood, count )
+VALUES  ( 6, -- idBill - int
+          1, -- idFood - int
+          2  -- count - int
+          )
+INSERT	dbo.BillInfo
+        ( idBill, idFood, count )
+VALUES  ( 2, -- idBill - int
+          6, -- idFood - int
+          2  -- count - int
+          )
+INSERT	dbo.BillInfo
+        ( idBill, idFood, count )
+VALUES  ( 3, -- idBill - int
+          5, -- idFood - int
+          2  -- count - int
+          )   
+GO
 --Procedure
 CREATE PROC USP_Login
 @userName varchar(100), @passWord varchar(100)
@@ -257,9 +338,3 @@ BEGIN
 END
 GO
 
-
-
-
-select * from dbo.FoodCategory
-INSERT dbo.FoodCategory( name )
-VALUES ('Bottle')

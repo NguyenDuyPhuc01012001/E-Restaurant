@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyNhaHang.DAO;
+using QuanLyNhaHang.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,26 +52,12 @@ namespace QuanLyNhaHang
             deleteIcon.Foreground = Brushes.White;
         }
 
-        //private void addButton_MouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    addButton.Foreground = Brushes.Green;
-        //}
-
-        //private void addButton_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    addButton.Foreground = Brushes.White;
-        //}
-
-        //private void deleteButton_MouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    deleteButton.Foreground = Brushes.Red;
-        //}
-
-        //private void deleteButton_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    deleteButton.Foreground = Brushes.White;
-        //}
-
-
+        public void SetText(string mealName, string mealCategory, float mealPrice, int orderQuantity)
+        {
+            this.mealName.Text = mealName;
+            this.mealCategory.Text = mealCategory;
+            this.mealPrice.Text = mealPrice.ToString();
+            this.orderQuantity.Text = orderQuantity.ToString();
+        }
     }
 }

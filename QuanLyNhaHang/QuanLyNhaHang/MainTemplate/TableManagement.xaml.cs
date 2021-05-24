@@ -24,12 +24,14 @@ namespace QuanLyNhaHang
         public TableManagement()
         {
             InitializeComponent();
-            Load();
+            Load();            
         }
 
         private void Load()
         {
             LoadTable();
+            LoadCategory();
+            LoadFoodList();
         }
 
         private void LoadTable()
@@ -58,6 +60,54 @@ namespace QuanLyNhaHang
             int tableID = ((sender as Button).Tag as TableDTO).ID;
             //lvBill.Tag = (sender as Button).Tag;
             //ShowBill(tableID);
+        }
+
+        private void exportBillBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+        }
+
+        void LoadCategory()
+        {
+            List<CategoryDTO> listCategory = CategoryDAO.Instance.GetListCategory();
+            cbCategory.ItemsSource = listCategory;
+            cbCategory.DisplayMemberPath = "Name";
+
+        }
+        private void LoadFoodList()
+        {
+            //List<FoodDTO> listFood = FoodDAO.Instance.GetListFood();
+            //cbFood.ItemsSource = listFood;
+            //cbFood.DisplayMemberPath = "Name";
+        }
+
+        private void LoadFoodListByCategory(int id)
+        {
+            //List<FoodDTO> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
+            //cbFood.ItemsSource = listFood;
+            //cbFood.DisplayMemberPath = "Name";
+
+        }
+        private void cbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            int id = 0;
+            ComboBox cb = sender as ComboBox;
+            if (cb.SelectedItem == null)
+                return;
+
+            CategoryDTO selected = cb.SelectedItem as CategoryDTO;
+
+            id = selected.Id;
+
+            LoadFoodListByCategory(id);
+
+        }
+
+        private void cbFood_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
