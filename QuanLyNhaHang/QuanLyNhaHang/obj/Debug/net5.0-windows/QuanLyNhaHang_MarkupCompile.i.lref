@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿C:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.i.cs
 FC:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\App.xaml;;
 FC:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\ChangeMealStatusCard.xaml;;
@@ -36,4 +37,11 @@ FC:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\UI\Table
 FC:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\UI\Table\TableMangager\SelectTable.xaml;;
 FC:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\UI\Table\TableMangager\Table.xaml;;
 FC:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\UI\Table\TableMangager\TableRow.xaml;;
+=======
+﻿
+
+FC:\Users\Xuan Thai\Downloads\Github Repo\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\MainTemplate\AddNewMeal.xaml;;
+FC:\Users\Xuan Thai\Downloads\Github Repo\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\UI\Meal\MealCard.xaml;;
+FC:\Users\Xuan Thai\Downloads\Github Repo\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\UI\Table\TableCard.xaml;;
+>>>>>>> 9fcd4c9d52bf2e4f8adc8c9cd39fd24445f86640
 
