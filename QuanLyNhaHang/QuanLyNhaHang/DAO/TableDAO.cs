@@ -88,6 +88,26 @@ namespace QuanLyNhaHang.DAO
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
+        public string GetTableStatus(int id)
+        {
+            string query = string.Format("select status from TableFood where id = {0}", id);
+            string status = Convert.ToString(DataProvider.Instance.ExecuteScalar(query));
+            return status;
+        }
+        public void UpdateTableStatus(int id)
+        {
+            string tableStatus = GetTableStatus(id);
+            string query;
+            if(tableStatus=="Empty")
+            {
+                query = string.Format("UPDATE TableFood  SET status = 'Using' where id = {0}", id);
+            }
+            else
+            {
+                query = string.Format("UPDATE TableFood  SET status = 'Empty' where id = {0}", id);
+            }
+            DataProvider.Instance.ExecuteNonQuery(query);
+        }
         
     }
 }

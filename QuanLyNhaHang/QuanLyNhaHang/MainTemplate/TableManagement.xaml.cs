@@ -22,6 +22,7 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class TableManagement : Window
     {
+        int tableID;
         public TableManagement()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace QuanLyNhaHang
             LoadFoodList();
             LoadCbTable();
         }
+        
         private void LoadTable()
         {
             TableDAO.Instance.SetTableStatus();
@@ -142,7 +144,7 @@ namespace QuanLyNhaHang
         #region event
         private void BtnTable_Click(object sender, RoutedEventArgs e)
         {
-            int tableID = ((sender as Button).Tag as TableDTO).ID;
+            tableID = ((sender as Button).Tag as TableDTO).ID;
             spmealstatus.Tag = (sender as Button).Tag;
 
             LoadMealStatus(tableID);
@@ -168,6 +170,8 @@ namespace QuanLyNhaHang
                 BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood, count);
                 int idBillInfo = BillInfoDAO.Instance.GetBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood);
                 MealStatusDAO.Instance.InsertMealStatus(idBillInfo, addtionalNoteTextbox.Text);
+                //Update table status
+                TableDAO.Instance.UpdateTableStatus(table.ID);
             }
             else
             {
@@ -193,7 +197,6 @@ namespace QuanLyNhaHang
                         BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
                     }
                 }
-
             }
             LoadMealStatus(table.ID);
             LoadTable();
@@ -207,13 +210,16 @@ namespace QuanLyNhaHang
 
             int id2 = (ucCbTable.cbTable.SelectedItem as TableDTO).ID;
 
-            MessageBox.Show(string.Format("Bạn có thật sự muốn chuyển bàn {0} qua bàn {1}", table.Name, (ucCbTable.cbTable.SelectedItem as TableDTO).Name), "Notify");
+            MessageBox.Show(string.Format("Do you wish to switch table from {0} to {1}", table.Name, (ucCbTable.cbTable.SelectedItem as TableDTO).Name), "Notify");
             TableDAO.Instance.SwitchTable(table.iD, id2);
+            TableDAO.Instance.UpdateTableStatus(table.ID);
+            TableDAO.Instance.UpdateTableStatus(id2);
             LoadTable();
         }
 
         private void applyDiscountBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             TableDTO table = spmealstatus.Tag as TableDTO;
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
             int dis;
@@ -249,6 +255,8 @@ namespace QuanLyNhaHang
                 BillTemplate bill = new BillTemplate(table.iD);
                 bill.Show();
                 BillDAO.Instance.CheckOut(idBill);
+                //update table status
+                TableDAO.Instance.UpdateTableStatus(table.ID);
             }
             MealStatusDAO.Instance.DeleteMealStatusByTable(table.ID);
             spmealstatus.Children.Clear();

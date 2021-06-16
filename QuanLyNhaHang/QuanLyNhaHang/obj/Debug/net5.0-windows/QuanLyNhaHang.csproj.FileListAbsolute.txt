@@ -1130,3 +1130,5 @@ E:\DOAN\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\QuanLy
 E:\DOAN\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\ref\QuanLyNhaHang.dll
 E:\DOAN\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\QuanLyNhaHang.pdb
 E:\DOAN\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\QuanLyNhaHang.genruntimeconfig.cache
+C:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTemplate\EditMeal.g.cs
+C:\Nam2\HocKy2\nhap mon cnpm\QuanLyNhaHang\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTemplate\EditMeal.baml

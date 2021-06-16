@@ -148,6 +148,7 @@
                             VerticalScrollBarVisibility="Visible" />
                     </Grid>
                     <Button
+                        x:Name="confirmButton"
                         Grid.Column="1"
                         Height="60"
                         HorizontalAlignment="Center"
@@ -274,6 +275,7 @@
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
                         <Button
+                            x:Name="exportBillBtn"
                             Grid.Row="2"
                             Click="exportBillBtn_Click"
                             Content="Export bill"

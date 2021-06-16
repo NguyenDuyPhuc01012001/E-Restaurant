@@ -31,8 +31,8 @@ GO
 CREATE TABLE TableFood
 (
 	id INT IDENTITY PRIMARY KEY,
-	name VARCHAR(100) NOT NULL DEFAULT 'No name',
-	status VARCHAR(100) NOT NULL DEFAULT 'Empty'	-- Empty || Using
+	name VARCHAR(100) NOT NULL DEFAULT N'No name',
+	status VARCHAR(100) NOT NULL DEFAULT N'Empty'	-- Empty || Using
 )
 GO
 SET IDENTITY_INSERT TableFood On
@@ -97,7 +97,7 @@ CREATE TABLE Bill
 
 	FOREIGN KEY (idTable) REFERENCES dbo.TableFood(id)
 )
-
+select * from TableFood
 
 CREATE TABLE BillInfo
 (
@@ -589,4 +589,7 @@ DROP COLUMN discount
 
 UPDATE dbo.Bill set discount=0
 
+select status from TableFood where id = 1
 
+UPDATE TableFood  SET status = 'Full' where id = 1
+select * from Bill
