@@ -8,7 +8,7 @@ CREATE TABLE Staff
 (
 	id INT IDENTITY PRIMARY KEY,
 	name NVARCHAR(100) NOT NULL,
-	sex NVARCHAR(5) NOT NULL,
+	sex INT NOT NULL,
 	email NVARCHAR(100) UNIQUE,
 	phone VARCHAR(10) UNIQUE,
 	salary int NOT NULL,
@@ -366,6 +366,7 @@ BEGIN
 END
 GO
 
+
 CREATE PROC USP_InsertBill
 @idTable INT
 AS
@@ -390,7 +391,7 @@ END
 GO
 
 CREATE PROC USP_InsertBillInfo
-@idBill INT, @idFood INT, @count INT
+@idBill INT, @idFood INT, @count INT,@des NVARCHAR(100)
 AS
 BEGIN
   
@@ -405,7 +406,10 @@ BEGIN
    BEGIN
        DECLARE @newCount INT =@foodcount + @count
 	   IF(@newCount > 0)
-	      UPDATE dbo.BillInfo SET count = @newCount WHERE idFood = @idFood
+	     BEGIN
+	      UPDATE dbo.BillInfo SET count = @newCount  WHERE idFood = @idFood
+		  UPDATE dbo.BillInfo SET description = @des WHERE idFood = @idFood
+		 END
        ELSE
 	      DELETE dbo.BillInfo WHERE idBill=@idBill AND idFood = @idFood
 		  
@@ -413,22 +417,17 @@ BEGIN
    ELSE
    BEGIN
      INSERT	dbo.BillInfo
-        ( idBill, idFood, count )
+        ( idBill, idFood, count,description,status )
 VALUES  ( @idBill, -- idBill - int
           @idFood, -- idFood - int
-          @count  -- count - int
+          @count,  -- count - int
+		  @des,
+		  0
           )
 	END
 END
 GO
 
-CREATE PROC USP_InsertMealStatus
-@idBillInfo INT, @des NVARCHAR(100)
-AS
-BEGIN
-   INSERT dbo.MealStatus(idBillInfo,des,status)
-   VALUES(@idBillInfo, @des , 0 )
-END
 
 CREATE PROC USP_SwitchTable
 @idTable1 INT, @idTable2 int
@@ -527,69 +526,28 @@ BEGIN
 END
 GO
 
-exec USP_SwitchTable  @idTable1 = 3 , @idTable2 = 9
-
-SELECT * FROM TableFood
-
--- Trigger
-
-CREATE TRIGGER UTG_UpdateBill
-ON dbo.Bill FOR UPDATE
-AS 
-BEGIN
-     DECLARE @idBill INT
-
-	 SELECT @idBill = id FROM inserted
-
-	 DECLARE @idTable INT
-
-	 SELECT @idTable = idTable FROM dbo.Bill WHERE id=@idBill
-
-	 DECLARE @count int = 0
-
-	 SELECT @count = COUNT(*) FROM dbo.Bill WHERE idTable = @idTable AND status = 0
-
-	 IF(@count = 0)
-	    UPDATE dbo.TableFood SET status = 'Empty' WHERE id = @idTable
-END
-GO
-
-CREATE TRIGGER UTG_UpdateBillInfo
-ON dbo.BillInfo FOR INSERT, UPDATE
-AS 
-BEGIN
-     DECLARE @idBill INT
-
-	 SELECT @idBill = idBill FROM inserted
-
-	 DECLARE @idTable INT
-
-	 SELECT @idTable = idTable FROM dbo.Bill WHERE id=@idBill AND status = 0
-
-	 DECLARE @count INT
-
-	 SELECT @count = COUNT(*) FROM dbo.BillInfo WHERE idBill = @idBill
-
-	 IF(@count>0)
-	 UPDATE dbo.TableFood SET status = N'Using' WHERE id = @idTable
-	 ELSE
-	 UPDATE dbo.TableFood SET status = N'Empty' WHERE id = @idTable
-
-END
-GO
-
-
-
 
 
 --UPDATE BILL
 
 ALTER TABLE dbo.bill
-DROP COLUMN discount 
+ADD discount INT 
 
 UPDATE dbo.Bill set discount=0
 
-select status from TableFood where id = 1
 
-UPDATE TableFood  SET status = 'Full' where id = 1
-select * from Bill
+--UPDATE BILLINFO
+ALTER TABLE dbo.BillInfo
+ADD description NVARCHAR(100)
+
+
+ALTER TABLE dbo.BillInfo
+ADD status INT 
+
+
+--UPDATE STAFF
+ALTER TABLE STAFF
+ALTER COLUMN sex INT
+
+
+

@@ -42,31 +42,30 @@ namespace QuanLyNhaHang
 
         private void LoadMealStatus()
         {
-            List<MealStatusDTO> listMealStatus = MealStatusDAO.Instance.GetListMealStatuses();
-
+            List<BillInfoDTO> listMealStatus = BillInfoDAO.Instance.GetListMenu();
             spMealStatusChef.Children.Clear();
 
-            foreach (MealStatusDTO item in listMealStatus)
+            foreach (BillInfoDTO item in listMealStatus)
             {
                 ChangeMealStatusCard card = new ChangeMealStatusCard();
                 card.cbStatus.Tag = item;
-                card.SetText(item.Category,item.Foodname, item.Count, item.Description, item.Status); 
+                card.SetText(item.Category, item.FoodName, item.Count, item.Description, item.Status);
                 card.cbStatus.SelectionChanged += CbStatus_SelectionChanged;
                 spMealStatusChef.Children.Add(card);
             }
+               
         }
         private void cbTableChef_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TableDTO table = cbTableChef.SelectedItem as TableDTO;
-            List<MealStatusDTO> listMealStatus = MealStatusDAO.Instance.GetListMealStatusesByTable(table.ID);
-
+            List<BillInfoDTO> listMealStatus = BillInfoDAO.Instance.GetListMenuByTable(table.ID);
             spMealStatusChef.Children.Clear();
 
-            foreach (MealStatusDTO item in listMealStatus)
+            foreach (BillInfoDTO item in listMealStatus)
             {
                 ChangeMealStatusCard card = new ChangeMealStatusCard();
                 card.cbStatus.Tag = item;
-                card.SetText(item.Category, item.Foodname, item.Count, item.Description, item.Status);
+                card.SetText(item.Category, item.FoodName, item.Count, item.Description, item.Status);
                 card.cbStatus.SelectionChanged += CbStatus_SelectionChanged;
                 spMealStatusChef.Children.Add(card);
             }
@@ -75,9 +74,9 @@ namespace QuanLyNhaHang
         private void CbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            int idBillInfo = ((sender as ComboBox).Tag as MealStatusDTO).IdBillInfo;
+            int idBillInfo = ((sender as ComboBox).Tag as BillInfoDTO).Id;
             int status = (sender as ComboBox).SelectedIndex;
-            MealStatusDAO.Instance.UpdateStatus(idBillInfo,status);
+            BillInfoDAO.Instance.UpdateStatus(idBillInfo, status);
         }
     }
 }

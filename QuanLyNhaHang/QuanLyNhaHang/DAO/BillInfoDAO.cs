@@ -24,11 +24,28 @@ namespace QuanLyNhaHang.DAO
         }
         private BillInfoDAO() { }
 
+        public List<BillInfoDTO> GetListMenu()
+        {
+            List<BillInfoDTO> listMenu = new List<BillInfoDTO>();
+
+            string query = "SELECT  bf.id, f.name,fc.name as category,bf.description,bf.status, bf.count,f.price, f.price* bf.count as totalPrice from BillInfo as bf, Bill as b,FoodCategory as fc , Food as f where b.id = bf.idBill and f.id = bf.idFood and b.status=0 and fc.id=f.idCategory ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                BillInfoDTO menu = new BillInfoDTO(item);
+                listMenu.Add(menu);
+            }
+
+            return listMenu;
+        }
+
         public List<BillInfoDTO> GetListMenuByTable(int id)
         {
             List<BillInfoDTO> listMenu = new List<BillInfoDTO>();
-         
-            string query = "SELECT f.name, bi.count,f.price, f.price*bi.count as totalPrice from BillInfo as bi, Bill as b , Food as f where bi.idBill = b.id and bi.idFood = f.id and b.status=0 and b.idTable = " + id + "group by f.name, bi.count, f.price";
+
+            string query = "SELECT bf.id, f.name,fc.name as category,bf.description,bf.status, bf.count,f.price, f.price* bf.count as totalPrice from BillInfo as bf, Bill as b,FoodCategory as fc , Food as f where b.id = bf.idBill and f.id = bf.idFood and b.status=0 and fc.id=f.idCategory and b.idTable = " + id;
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -44,7 +61,7 @@ namespace QuanLyNhaHang.DAO
         public List<BillInfoDTO>GetListRevenue(int month)
         {
             List<BillInfoDTO> list = new List<BillInfoDTO>();
-            string query = "SELECT f.name, bf.count,f.price, f.price* bf.count as totalPrice from BillInfo as bf, Bill as b , Food as f where b.id = bf.idBill and f.id = bf.idFood and b.status = 1 and month(b.DateCheckIn) = "+month+" group by f.name, bf.count, f.price"; 
+            string query = "SELECT  bf.id, f.name,fc.name as category,bf.description,bf.status, bf.count,f.price, f.price* bf.count as totalPrice from BillInfo as bf, Bill as b,FoodCategory as fc , Food as f where b.id = bf.idBill and f.id = bf.idFood and b.status = 1 and fc.id=f.idCategory and month(b.DateCheckIn) =" + month;
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
             foreach(DataRow row in data.Rows)
             {
@@ -56,7 +73,7 @@ namespace QuanLyNhaHang.DAO
         public List<BillInfoDTO>GetListRevenue(int month, int year)
         {
             List<BillInfoDTO> list = new List<BillInfoDTO>();
-            string query = "SELECT f.name, bf.count,f.price, f.price*bf.count as totalPrice from BillInfo as bf, Bill as b , Food as f where b.id = bf.idBill and f.id = bf.idFood and b.status = 1 and month(b.DateCheckIn) = "+month+" and year(b.DateCheckIn) = "+year+" group by f.name, bf.count, f.price";
+            string query = "SELECT  bf.id, f.name,fc.name as category,bf.description,bf.status, bf.count,f.price, f.price* bf.count as totalPrice from BillInfo as bf, Bill as b,FoodCategory as fc , Food as f where b.id = bf.idBill and f.id = bf.idFood and b.status = 1 and fc.id=f.idCategory and month(b.DateCheckIn) = " + month + " and year(b.DateCheckIn) = " + year;
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
             foreach (DataRow row in data.Rows)
             {
@@ -65,9 +82,9 @@ namespace QuanLyNhaHang.DAO
             }
             return list;
         }
-        public void InsertBillInfo(int idBill, int idFood, int count)
+        public void InsertBillInfo(int idBill, int idFood, int count, string des)
         {
-            DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idBill , @idFood , @count", new object[] { idBill, idFood, count });
+            DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idBill , @idFood , @count , @des", new object[] { idBill, idFood, count, des });
         }
 
         public int GetBillInfo(int idBill, int idFood)
@@ -82,17 +99,11 @@ namespace QuanLyNhaHang.DAO
                 return -1;
             }
         }
-
-        public int GetCount(int idBillInfo)
+        public void UpdateStatus(int id, int status)
         {
-            try
-            {
-                return (int)DataProvider.Instance.ExecuteScalar("SELECT count FROM BillInfo where id = " + idBillInfo);
-            }
-            catch
-            {
-                return -1;
-            }
+         
+            string query = string.Format("Update dbo.BillInfo set status = {0}  where id = {1}", status, id);
+            DataProvider.Instance.ExecuteNonQuery(query);
         }
     }
 }

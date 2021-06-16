@@ -105,15 +105,15 @@ namespace QuanLyNhaHang
         }
         private void LoadMealStatus(int tableID)
         {
-            List<MealStatusDTO> listBillInfo = MealStatusDAO.Instance.GetListMealStatusesByTable(tableID);
+            List<BillInfoDTO> listBillInfo = BillInfoDAO.Instance.GetListMenuByTable(tableID);
 
             spmealstatus.Children.Clear();
 
-            foreach (MealStatusDTO item in listBillInfo)
+            foreach (BillInfoDTO item in listBillInfo)
             {
                 MealStatusCard card = new MealStatusCard();
                 card.Tag = item;
-                card.SetText(item.Foodname, item.Count, item.Description, item.Status);
+                card.SetText(item.FoodName, item.Count, item.Description, item.Status);
                 spmealstatus.Children.Add(card);
             }
         }
@@ -164,39 +164,16 @@ namespace QuanLyNhaHang
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.iD);
             int idFood = (wpFood.Tag as FoodDTO).Id;
             int count = Int16.Parse(txbQuantity.Text);
+            string description = addtionalNoteTextbox.Text;
             if (idBill == -1)
             {
                 BillDAO.Instance.InsertBill(table.ID);
-                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood, count);
-                int idBillInfo = BillInfoDAO.Instance.GetBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood);
-                MealStatusDAO.Instance.InsertMealStatus(idBillInfo, addtionalNoteTextbox.Text);
-                //Update table status
-                TableDAO.Instance.UpdateTableStatus(table.ID);
+                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood, count, description);
             }
             else
             {
                 int idBillInfo = BillInfoDAO.Instance.GetBillInfo(idBill, idFood);
-
-                if (idBillInfo == -1)
-                {
-                    BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
-                    idBillInfo = BillInfoDAO.Instance.GetBillInfo(idBill, idFood);
-                    MealStatusDAO.Instance.InsertMealStatus(idBillInfo, addtionalNoteTextbox.Text);
-                }
-                else
-                {
-                    int countFood = BillInfoDAO.Instance.GetCount(idBillInfo) + count;
-                    if (countFood > 0)
-                    {
-                        BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
-                        MealStatusDAO.Instance.UpdateDes(idBillInfo, addtionalNoteTextbox.Text);
-                    }
-                    else
-                    {
-                        MealStatusDAO.Instance.DeleteMealStatusByBillInfo(idBillInfo);
-                        BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
-                    }
-                }
+                BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count, description);
             }
             LoadMealStatus(table.ID);
             LoadTable();
@@ -210,10 +187,10 @@ namespace QuanLyNhaHang
 
             int id2 = (ucCbTable.cbTable.SelectedItem as TableDTO).ID;
 
-            MessageBox.Show(string.Format("Do you wish to switch table from {0} to {1}", table.Name, (ucCbTable.cbTable.SelectedItem as TableDTO).Name), "Notify");
+            MessageBox.Show(string.Format("Do you want to switch table from {0} to {1}", table.Name, (ucCbTable.cbTable.SelectedItem as TableDTO).Name), "Notify");
             TableDAO.Instance.SwitchTable(table.iD, id2);
-            TableDAO.Instance.UpdateTableStatus(table.ID);
-            TableDAO.Instance.UpdateTableStatus(id2);
+            /*TableDAO.Instance.UpdateTableStatus(table.ID);
+            TableDAO.Instance.UpdateTableStatus(id2);*/
             LoadTable();
         }
 
@@ -256,9 +233,8 @@ namespace QuanLyNhaHang
                 bill.Show();
                 BillDAO.Instance.CheckOut(idBill);
                 //update table status
-                TableDAO.Instance.UpdateTableStatus(table.ID);
+                //TableDAO.Instance.UpdateTableStatus(table.ID);
             }
-            MealStatusDAO.Instance.DeleteMealStatusByTable(table.ID);
             spmealstatus.Children.Clear();
             LoadTable();
             Price.Text = "0 VND";
