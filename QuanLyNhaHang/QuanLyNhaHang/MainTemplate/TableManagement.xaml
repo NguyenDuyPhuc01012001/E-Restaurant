@@ -153,6 +153,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Content="Confirm"
+                         Click="confirmBtn_Click"
                         FontWeight="Bold"
                         Foreground="WhiteSmoke" />
                 </Grid>
@@ -168,7 +169,7 @@
                         <local:MealStatusManager VerticalAlignment="Center" />
                     </Grid>
                     <ScrollViewer x:Name="MealStatusCardContainer" Grid.Row="1">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel x:Name="spmealstatus" Orientation="Vertical">
                             <local:MealStatusCard />
                             <local:MealStatusCard />
                             <local:MealStatusCard />
@@ -201,7 +202,7 @@
                         </materialDesign:Card>
 
                         <Grid Grid.Row="1">
-                            <local:SelectTable Height="50" />
+                            <local:SelectTable x:Name="ucCbTable" Height="50" />
                         </Grid>
                         <Button
                             Grid.Row="2"
@@ -209,6 +210,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Content="Change"
+                             Click="changeTableBtn_Click"
                             FontWeight="Bold"
                             Foreground="WhiteSmoke" />
                     </Grid>
@@ -231,7 +233,7 @@
                         </materialDesign:Card>
 
                         <Grid Grid.Row="1">
-                            <local:DiscountField Height="50" />
+                            <local:DiscountField x:Name="discount" Height="50" />
                         </Grid>
                         <Button
                             Grid.Row="2"
@@ -239,6 +241,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Content="Apply"
+                             Click="applyDiscountBtn_Click"
                             FontWeight="Bold"
                             Foreground="WhiteSmoke" />
                     </Grid>
@@ -261,6 +264,7 @@
                         </materialDesign:Card>
 
                         <TextBlock
+                            x:Name="Price" 
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
