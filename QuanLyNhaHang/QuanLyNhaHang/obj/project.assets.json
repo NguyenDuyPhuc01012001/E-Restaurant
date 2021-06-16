@@ -596,40 +596,24 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\thinh\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
-=======
-    "C:\\Users\\Xuan Thai\\.nuget\\packages\\": {}
->>>>>>> 9fcd4c9d52bf2e4f8adc8c9cd39fd24445f86640
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Nam2\\HocKy2\\nhap mon cnpm\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj",
       "projectName": "QuanLyNhaHang",
       "projectPath": "C:\\Nam2\\HocKy2\\nhap mon cnpm\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj",
       "packagesPath": "C:\\Users\\thinh\\.nuget\\packages\\",
       "outputPath": "C:\\Nam2\\HocKy2\\nhap mon cnpm\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\Xuan Thai\\Downloads\\Github Repo\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj",
-      "projectName": "QuanLyNhaHang",
-      "projectPath": "C:\\Users\\Xuan Thai\\Downloads\\Github Repo\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj",
-      "packagesPath": "C:\\Users\\Xuan Thai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Xuan Thai\\Downloads\\Github Repo\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\obj\\",
->>>>>>> 9fcd4c9d52bf2e4f8adc8c9cd39fd24445f86640
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-=======
-        "C:\\Users\\Xuan Thai\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 9fcd4c9d52bf2e4f8adc8c9cd39fd24445f86640
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -686,15 +670,17 @@
             "privateAssets": "none"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
->>>>>>> 9fcd4c9d52bf2e4f8adc8c9cd39fd24445f86640
       }
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Nam2\\HocKy2\\nhap mon cnpm\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1701",
       "level": "Warning",
