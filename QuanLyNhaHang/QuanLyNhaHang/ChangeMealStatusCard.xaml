@@ -39,13 +39,13 @@
 
                 </StackPanel>
                 <StackPanel Name="mealStatusChange" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ComboBox
-                 materialDesign:HintAssist.Hint="Change status">
-                        <ComboBoxItem>
-                            Done
-                        </ComboBoxItem>
+                    <ComboBox x:Name="cbStatus"
+                              materialDesign:HintAssist.Hint="Change status">
                         <ComboBoxItem>
                             Not done
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Done
                         </ComboBoxItem>
                        
                     </ComboBox>

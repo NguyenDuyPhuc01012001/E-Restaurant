@@ -37,7 +37,7 @@
             <Grid Grid.Row="1">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Show meal list ordered by table " HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <ComboBox materialDesign:HintAssist.Hint="Choose table">
+                    <ComboBox x:Name="cbTableChef"  SelectionChanged="cbTableChef_SelectionChanged" materialDesign:HintAssist.Hint="Choose table">
                     </ComboBox>
                 </StackPanel>
             </Grid>
@@ -51,7 +51,7 @@
                 </Grid>
                 <Grid x:Name="mealCardContainer" Grid.Row="1" Margin="0,50,0,0">
                     <ScrollViewer Margin="0,-50,0,0">
-                        <StackPanel>
+                        <StackPanel x:Name="spMealStatusChef" Orientation="Vertical" >
                             <local:ChangeMealStatusCard/>
 
                         </StackPanel>

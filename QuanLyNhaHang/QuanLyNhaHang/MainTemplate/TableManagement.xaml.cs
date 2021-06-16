@@ -103,7 +103,7 @@ namespace QuanLyNhaHang
         }
         private void LoadMealStatus(int tableID)
         {
-            List<MealStatusDTO> listBillInfo = MealStatusDAO.Instance.GetListMealStatuses(tableID);
+            List<MealStatusDTO> listBillInfo = MealStatusDAO.Instance.GetListMealStatusesByTable(tableID);
 
             spmealstatus.Children.Clear();
 
@@ -148,7 +148,6 @@ namespace QuanLyNhaHang
             LoadMealStatus(tableID);
             LoadDiscount(tableID);
             LoadPrice(tableID);
-
         }
 
         private void BtnMeal_Click(object sender, RoutedEventArgs e)
@@ -196,9 +195,9 @@ namespace QuanLyNhaHang
                 }
 
             }
-            LoadMealStatus(table.iD);
+            LoadMealStatus(table.ID);
             LoadTable();
-
+            LoadPrice(table.ID);
         }
 
         private void changeTableBtn_Click(object sender, RoutedEventArgs e)
