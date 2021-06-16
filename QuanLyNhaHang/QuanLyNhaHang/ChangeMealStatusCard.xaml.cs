@@ -24,5 +24,18 @@ namespace QuanLyNhaHang
         {
             InitializeComponent();
         }
+
+        public void SetText(string category,string foodname, int count, string des, int status)
+        {
+            mealName.Text = foodname;
+            mealCategory.Text = category;
+            mealQuantity.Text = count.ToString();
+            additonalNote.Text = des;
+            if (status == 1)
+                cbStatus.SelectedIndex = 1;
+            else
+                cbStatus.SelectedIndex = 0;
+
+        }
     }
 }

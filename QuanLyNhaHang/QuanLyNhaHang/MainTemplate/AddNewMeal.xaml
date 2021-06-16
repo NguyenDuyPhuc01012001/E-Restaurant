@@ -9,8 +9,8 @@
         Title="AddNewMeal" Height="400" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="76*"></ColumnDefinition>
+            <ColumnDefinition Width="149*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button x:Name="ChooseImageButton"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"

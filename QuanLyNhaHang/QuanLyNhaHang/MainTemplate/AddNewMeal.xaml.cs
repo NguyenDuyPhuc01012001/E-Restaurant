@@ -60,8 +60,10 @@ namespace QuanLyNhaHang
             if (FoodDAO.Instance.AddMeal(name,categoryID, price))
             {
                 MessageBox.Show("Thành công");
+ 
                 if (addMeal != null)
                     addMeal(this, new EventArgs());
+                
             }
             else
             {
@@ -78,6 +80,7 @@ namespace QuanLyNhaHang
             add { addMeal += value; }
             remove { addMeal -= value; }
         }
+
 
 
 

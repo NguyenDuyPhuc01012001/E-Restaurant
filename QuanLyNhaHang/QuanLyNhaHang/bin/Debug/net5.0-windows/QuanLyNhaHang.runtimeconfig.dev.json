@@ -1,8 +1,13 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\thinh\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\thinh\\.nuget\\packages",
+=======
+      "C:\\Users\\PC\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\PC\\.nuget\\packages",
+>>>>>>> 5b7b28e0ada1ba455a84c28bb6f8f883d675be0e
       "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
     ]
   }

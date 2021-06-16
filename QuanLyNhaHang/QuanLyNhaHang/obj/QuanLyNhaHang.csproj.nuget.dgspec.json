@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Nam2\\HocKy2\\nhap mon cnpm\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj": {}
   },
   "projects": {
@@ -12,12 +13,29 @@
         "projectPath": "C:\\Nam2\\HocKy2\\nhap mon cnpm\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj",
         "packagesPath": "C:\\Users\\thinh\\.nuget\\packages\\",
         "outputPath": "C:\\Nam2\\HocKy2\\nhap mon cnpm\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang\\obj\\",
+=======
+    "E:\\DOAN\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj": {}
+  },
+  "projects": {
+    "E:\\DOAN\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\DOAN\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj",
+        "projectName": "QuanLyNhaHang",
+        "projectPath": "E:\\DOAN\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\QuanLyNhaHang.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "E:\\DOAN\\E-Restaurant\\QuanLyNhaHang\\QuanLyNhaHang\\obj\\",
+>>>>>>> 5b7b28e0ada1ba455a84c28bb6f8f883d675be0e
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 5b7b28e0ada1ba455a84c28bb6f8f883d675be0e
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -75,7 +93,11 @@
               "privateAssets": "none"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+>>>>>>> 5b7b28e0ada1ba455a84c28bb6f8f883d675be0e
         }
       }
     }
