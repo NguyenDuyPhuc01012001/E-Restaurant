@@ -66,6 +66,7 @@ namespace QuanLyNhaHang.MainTemplate
                 MessageBox.Show("Thành công");
                 if (editMeal != null)
                     editMeal(this, new EventArgs());
+                this.Close();
             }
             else
             {

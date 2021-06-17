@@ -1,4 +1,5 @@
 ﻿using QuanLyNhaHang.DAO;
+using QuanLyNhaHang.MainTemplate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,19 +55,21 @@ namespace QuanLyNhaHang
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-
+            EditTable editTable = new EditTable();
+            editTable.OldName.Text = tbkName.Text;
+            editTable.ShowDialog();
         }
         private event EventHandler deleteTable;
         public event EventHandler DeleteTable
         {
-            add { DeleteTable += value; }
-    remove { DeleteTable -= value; }
+            add { deleteTable += value; }
+    remove { deleteTable -= value; }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            int id = Int32.Parse(tbkName.Text);
-            if (TableDAO.Instance.DeleteTable(id))
+            string name = tbkName.Text;
+            if (TableDAO.Instance.DeleteTable(name))
             {
                 MessageBox.Show("Thành công");
                 if (deleteTable != null)

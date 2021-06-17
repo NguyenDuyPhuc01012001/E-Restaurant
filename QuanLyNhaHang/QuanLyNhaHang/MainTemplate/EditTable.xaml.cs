@@ -31,21 +31,30 @@ namespace QuanLyNhaHang.MainTemplate
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtTable.Text))
+            string oldname = OldName.Text;
+            string newname = txtTable.Text;
+            if (TableDAO.Instance.EditTable(oldname,newname))
             {
-                MessageBox.Show("Category name must not be empty");
+                MessageBox.Show("Thành công");
+                if (edittable != null)
+                    edittable(this, new EventArgs());
+                this.Close();
             }
             else
             {
-                ableToChange = true;
-                tableName = txtTable.Text;
-                this.Close();
+                MessageBox.Show("Không thành công");
             }
         }
-
+        private event EventHandler edittable;
+        public event EventHandler Edittable
+        {
+            add { edittable += value; }
+            remove { edittable -= value; }
+        }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
     }
 }

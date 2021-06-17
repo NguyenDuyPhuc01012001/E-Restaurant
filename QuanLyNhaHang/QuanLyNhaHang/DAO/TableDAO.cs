@@ -76,15 +76,15 @@ namespace QuanLyNhaHang.DAO
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
-        public bool EditTable(string name, string status, int id)
+        public bool EditTable(string oldname, string newname)
         {
-            string query = string.Format("UPDATE dbo.TableFood Set name = N'{0}', status = {1}, where id = {2}", name,status, id);
+            string query = string.Format("UPDATE dbo.TableFood Set name = N'{0}' where name = N'{1}'", newname,oldname);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
-        public bool DeleteTable(int id)
+        public bool DeleteTable(string name)
         {
-            string query = string.Format("Delete dbo.TableFood where id = {0}", id);
+            string query = string.Format("Delete dbo.TableFood where name = N'{0}'", name);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
