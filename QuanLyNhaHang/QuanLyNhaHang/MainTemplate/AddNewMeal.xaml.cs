@@ -28,7 +28,17 @@ namespace QuanLyNhaHang
             LoadCategory();
         }
 
+        List<FoodDTO> SearchFoodByName(string name)
+        {
+            List<FoodDTO> listFoodDTO = FoodDAO.Instance.SearchFoodByName(name);
 
+            return listFoodDTO;
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+           
+        }
 
         #region events
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -63,6 +73,7 @@ namespace QuanLyNhaHang
  
                 if (addMeal != null)
                     addMeal(this, new EventArgs());
+                this.Close();
                 
             }
             else
