@@ -97,24 +97,5 @@ namespace QuanLyNhaHang
         }
 
         #endregion
-
-        private void ChooseImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            string link="";
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
-            openFileDialog.ShowDialog();
-            bool? diaglogOK = openFileDialog.ShowDialog();
-            if (diaglogOK == true)
-            {
-                link = openFileDialog.FileName;
-
-                Image.Source = new BitmapImage(new Uri(link));
-                Imageicon.Visibility = Visibility.Hidden;
-
-                
-            }   
-
-        }
     }
 }

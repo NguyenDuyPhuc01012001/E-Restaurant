@@ -103,19 +103,19 @@ namespace QuanLyNhaHang
                 switch (position)
                 {
                     case 0:
-                        MainMenu managerForm = new MainMenu();
+                        ManagerForm managerForm = new ManagerForm();
                         this.Hide();
                         managerForm.ShowDialog();
                         this.Show();
                         break;
                     case 1:
-                        TableManagement staffForm = new TableManagement();
+                        WaiterForm waiterForm = new WaiterForm();
                         this.Hide();
-                        staffForm.ShowDialog();
+                        waiterForm.ShowDialog();
                         this.Show();
                         break;
                     case 2:
-                        ChangeMealStatus chefForm = new ChangeMealStatus();
+                        ChefForm chefForm = new ChefForm();
                         this.Hide();
                         chefForm.ShowDialog();
                         this.Show();
