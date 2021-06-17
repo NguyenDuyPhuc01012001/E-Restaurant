@@ -17,16 +17,16 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Image Source="Assets/restaurant.png" Width="100" Height="100" VerticalAlignment="Top" Margin="125,10,125,0" RenderTransformOrigin="0.55,-0.25" >
+        <Image Source="/MainTemplate/restaurant.png" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center" >
         </Image>
-        <Rectangle Width="280" Height="240" Fill="White" VerticalAlignment="Bottom" Margin="0,100" RadiusX="15" RadiusY="15">
+        <Rectangle Width="280" Height="200" Fill="White" VerticalAlignment="Bottom" Margin="0,100" RadiusX="15" RadiusY="15">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
         </Rectangle>
         <Grid Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,100">
             <TextBlock Text="LOGIN" HorizontalAlignment="Center" 
-                       VerticalAlignment="Top" Margin="5" 
+                       VerticalAlignment="Top" Margin="0,69,0,0" 
                         Foreground="Gray" FontSize="18" 
                        FontWeight="Bold"></TextBlock>
             <Grid VerticalAlignment="Center" Margin="10,0,0,0" >
@@ -52,7 +52,6 @@
                         <materialDesign:PackIcon x:Name="passwordShow" Kind="EyeOff" VerticalAlignment="Center" Width="15" Height="23" HorizontalAlignment="Center"/>
                     </Button>
                 </Canvas>
-                <CheckBox Content="Remember Password" FontSize="15" Grid.Row="2" Margin="0,40,0,0" TabIndex="3"/>
             </Grid>
 
         </Grid>
@@ -60,6 +59,5 @@
                 Width="150" Content="LOGIN" Background="#FFF36521" 
                 BorderBrush="#FFF3B021"
                 Click="Login_Click" IsDefault="True" TabIndex="4"></Button>
-        <TextBlock Text="FORGOT YOUR PASSWORD?" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="50" FontSize="15" Foreground="Gray" FontWeight="Bold" Cursor="Hand"></TextBlock>
     </Grid>
 </Window>

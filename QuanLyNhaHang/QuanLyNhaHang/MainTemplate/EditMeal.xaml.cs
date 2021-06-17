@@ -34,10 +34,6 @@ namespace QuanLyNhaHang.MainTemplate
         }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-
-            
-         
-
             string name = txtNameMeal.Text;
             int categoryID = 2;
             string category = cmbCategory.Text;

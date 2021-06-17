@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Xuan Thai\Downloads\Github Repo\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\
+C:\Users\Asus\Downloads\Git\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\
 QuanLyNhaHang
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-C:\Users\Xuan Thai\Downloads\Github Repo\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\App.xaml
-44969696709
+C:\Users\Asus\Downloads\Git\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\App.xaml
+401091131977
 
-63-456362477
-1981077593026
-ChangeMealStatusCard.xaml;ChangeMealStatusManager.xaml;MainTemplate\AddNewMeal.xaml;MainTemplate\AddNewStaff.xaml;MainTemplate\AddNewTable.xaml;MainTemplate\BillTemplate.xaml;MainTemplate\ChangeMealStatus.xaml;MainTemplate\ChangePassword.xaml;MainTemplate\ChangeTableStatus.xaml;MainTemplate\EditMeal.xaml;MainTemplate\EditTable.xaml;MainTemplate\ErrorBox.xaml;MainTemplate\Login.xaml;MainTemplate\MainMenu.xaml;MainTemplate\ModifyCategory.xaml;MainTemplate\TableManagement.xaml;SearchBox.xaml;UI\Account\AccountCard.xaml;UI\Account\AccountManager.xaml;UI\ButtonManager.xaml;UI\Category\CategoryCard.xaml;UI\Category\CategoryManager.xaml;UI\Meal\MealButton.xaml;UI\Meal\MealCard.xaml;UI\Meal\MealManager.xaml;UI\Report\CartesianChart.xaml;UI\Report\CompareWithLastMonthCard.xaml;UI\Report\ReportManager.xaml;UI\Report\TotalProfitCard.xaml;UI\Report\UserRatingCard.xaml;UI\Staff\EmployeeCard.xaml;UI\Staff\StaffManager.xaml;UI\Table\MealPicker\AdditionalNote.xaml;UI\Table\MealPicker\SelectCategory.xaml;UI\Table\MealPicker\SelectMeal.xaml;UI\Table\MealPicker\SelectQuantity.xaml;UI\Table\MealStatus\MealStatusCard.xaml;UI\Table\MealStatus\MealStatusManager.xaml;UI\Table\TableCard.xaml;UI\Table\TableManager.xaml;UI\Table\TableMangager\DiscountField.xaml;UI\Table\TableMangager\SelectTable.xaml;UI\Table\TableMangager\Table.xaml;UI\Table\TableMangager\TableRow.xaml;
+59-523741804
+1982003932181
+MainTemplate\AddNewMeal.xaml;MainTemplate\AddNewStaff.xaml;MainTemplate\AddNewTable.xaml;MainTemplate\BillTemplate.xaml;MainTemplate\ChangePassword.xaml;MainTemplate\ChefForm.xaml;MainTemplate\EditMeal.xaml;MainTemplate\EditTable.xaml;MainTemplate\Login.xaml;MainTemplate\ManagerForm.xaml;MainTemplate\ModifyCategory.xaml;MainTemplate\WaiterForm.xaml;UI\Account\AccountCard.xaml;UI\Account\AccountManager.xaml;UI\ButtonManager.xaml;UI\Category\CategoryCard.xaml;UI\Category\CategoryManager.xaml;UI\Chef\ChangeMealStatusCard.xaml;UI\Chef\ChangeMealStatusManager.xaml;UI\MealPicker\AdditionalNote.xaml;UI\MealPicker\SelectCategory.xaml;UI\MealPicker\SelectQuantity.xaml;UI\MealStatus\MealStatusCard.xaml;UI\MealStatus\MealStatusManager.xaml;UI\Meal\MealButton.xaml;UI\Meal\MealCard.xaml;UI\Meal\MealManager.xaml;UI\Report\CartesianChart.xaml;UI\Report\CompareWithLastMonthCard.xaml;UI\Report\ReportManager.xaml;UI\Report\TotalProfitCard.xaml;UI\Report\UserRatingCard.xaml;UI\SearchBox.xaml;UI\Staff\EmployeeCard.xaml;UI\Staff\StaffManager.xaml;UI\TableManager\DiscountField.xaml;UI\TableManager\SelectTable.xaml;UI\TableManager\Table.xaml;UI\Table\TableCard.xaml;UI\Table\TableManager.xaml;
 
-False
+True
 

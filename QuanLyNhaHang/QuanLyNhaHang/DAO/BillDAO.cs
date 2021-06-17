@@ -55,10 +55,9 @@ namespace QuanLyNhaHang.DAO
         {
             DataProvider.Instance.ExecuteNonQuery("exec USP_InsertBill @idTable", new object[] { id });
         }
-        public void CheckOut(int id)
+        public void CheckOut(int id,int totalPrice,int discount)
         {
-            string query = "UPDATE dbo.Bill SET status = 1 WHERE id = " + id;
-            DataProvider.Instance.ExecuteNonQuery(query);
+            DataProvider.Instance.ExecuteNonQuery("EXEC dbo.USP_CheckOutBill @idTable , @totalPrice , @discount ", new object[] { id,totalPrice,discount });
         }
         public void UpdateDiscount(int id, int discount)
         {

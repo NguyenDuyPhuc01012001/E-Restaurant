@@ -1,9 +1,10 @@
 ﻿Create database ERSystem
-go
+GO 
 USE ERSystem
 GO
+set dateformat DMY
+GO 
 
-set dateformat dmy
 CREATE TABLE Staff
 (
 	id INT IDENTITY PRIMARY KEY,
@@ -35,10 +36,6 @@ CREATE TABLE TableFood
 	status VARCHAR(100) NOT NULL DEFAULT N'Empty'	-- Empty || Using
 )
 GO
-SET IDENTITY_INSERT TableFood On
-INSERT TableFood (id,name,status) VALUES (1,'Năm','Trống')
-INSERT TableFood (id,name,status) VALUES (2,'BA','Full')
-
 
 CREATE TABLE FoodCategory
 (
@@ -47,10 +44,6 @@ CREATE TABLE FoodCategory
 )
 GO
 
-Insert into FoodCategory values ('avc')
-select * from FoodCategory
-select * from FoodCategory fc where fc.name like N'%ả%'
-
 CREATE TABLE Food
 (
 	id INT IDENTITY PRIMARY KEY,
@@ -58,23 +51,6 @@ CREATE TABLE Food
 	idCategory INT NOT NULL,
 	price FLOAT NOT NULL DEFAULT 0
 )
-
-SELECT * FROM Food
-SELECT * FROM FoodCategory
-
-	ALTER TABLE Food 
-	ADD CONSTRAINT FK_idCategory
-	FOREIGN KEY (idCategory) 
-	REFERENCES FoodCategory (id)
-
-
-select FoodCategory.id from FoodCategory where FoodCategory.name = N'Nước'
-
-
-INSERT dbo.Food ( name, idCategory, price )
-VALUES  ( N'Mojt', 9, 12000)
-
-set IDENTITY_INSERT Food OFF
  
 CREATE TABLE Book
 (
@@ -97,7 +73,7 @@ CREATE TABLE Bill
 
 	FOREIGN KEY (idTable) REFERENCES dbo.TableFood(id)
 )
-select * from TableFood
+GO 
 
 CREATE TABLE BillInfo
 (
@@ -240,9 +216,6 @@ INSERT dbo.FoodCategory ( name )
 VALUES  ( N'Nước' )
 GO
 
-
-
-
 -- thêm món ăn
 INSERT dbo.Food ( name, idCategory, price )
 VALUES  ( N'Mực một nắng nước sa tế', 1 , 120000)
@@ -259,11 +232,6 @@ VALUES  ( N'7Up', 4, 15000)
 INSERT dbo.Food ( name, idCategory, price )
 VALUES  ( N'Cafe', 4, 12000)
 GO
-
-Select food.id from Food where food.name = 'Cafe'
-Delete from Food where food.id = 17
-
-INSERT TableFood (name,id,status)
 
 --Thêm bàn
 DECLARE @i INT = 1
@@ -388,9 +356,10 @@ BEGIN
 	 0,
 	 0
 	 )
-
+	 UPDATE dbo.TableFood
+	 SET status='Using'
+	 WHERE id=@idTable
 END
-
 GO
 
 CREATE PROC USP_InsertBillInfo
@@ -430,7 +399,6 @@ VALUES  ( @idBill, -- idBill - int
 	END
 END
 GO
-
 
 CREATE PROC USP_SwitchTable
 @idTable1 INT, @idTable2 int
@@ -529,28 +497,38 @@ BEGIN
 END
 GO
 
+CREATE PROC USP_CheckOutBill
+@idTable INT, @totalPrice INT, @discount INT
+AS
+BEGIN
+     UPDATE dbo.Bill
+	 SET DateCheckOut=GETDATE(), status=1, totalPrice=@totalPrice,discount=@discount
+	 WHERE idTable=@idTable AND status=0
 
+	 UPDATE dbo.TableFood
+	 SET status='Empty'
+	 WHERE id=@idTable
+END
+GO
 
 --UPDATE BILL
-
 ALTER TABLE dbo.bill
 ADD discount INT 
-
+GO
 UPDATE dbo.Bill set discount=0
-
 
 --UPDATE BILLINFO
 ALTER TABLE dbo.BillInfo
 ADD description NVARCHAR(100)
 
-
 ALTER TABLE dbo.BillInfo
 ADD status INT 
-
+GO 
+UPDATE dbo.BillInfo set status=0
 
 --UPDATE STAFF
 ALTER TABLE STAFF
 ALTER COLUMN sex INT
 
-
-
+SELECT * FROM dbo.BillInfo
+SELECT * FROM dbo.Bill
