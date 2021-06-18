@@ -22,7 +22,6 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class WaiterForm : Window
     {
-        int tableID;
         public WaiterForm()
         {
             InitializeComponent();
@@ -137,7 +136,7 @@ namespace QuanLyNhaHang
         #region event
         private void BtnTable_Click(object sender, RoutedEventArgs e)
         {
-            tableID = ((sender as Button).Tag as TableDTO).ID;
+            int tableID = ((sender as Button).Tag as TableDTO).ID;
             spmealstatus.Tag = (sender as Button).Tag;
 
             LoadMealStatus(tableID);

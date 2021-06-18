@@ -36,7 +36,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="3" VerticalAlignment="Top" Height="16">
 
-                <TextBlock Text="Status"/>
+                <TextBlock Text="Position"/>
                 <materialDesign:PackIcon  Kind="ArrowBottom" Foreground="Red"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="4" VerticalAlignment="Top" Height="16">

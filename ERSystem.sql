@@ -17,6 +17,7 @@ CREATE TABLE Staff
 )
 GO
 
+
 CREATE TABLE Account
 (
 	id INT IDENTITY PRIMARY KEY,
@@ -337,7 +338,6 @@ BEGIN
 END
 GO
 
-
 CREATE PROC USP_InsertBill
 @idTable INT
 AS
@@ -361,6 +361,31 @@ BEGIN
 	 WHERE id=@idTable
 END
 GO
+
+CREATE PROC USP_InsertStaff
+@name NVARCHAR(100),@sex INT,@email NVARCHAR(100), @phone VARCHAR(10), @salary INT,@position INT
+AS
+BEGIN
+     INSERT INTO dbo.Staff
+(
+    name,
+    sex,
+    email,
+    phone,
+    salary,
+    position
+)
+VALUES
+(   @name,
+    @sex,
+    @email, 
+    @phone, 
+    @salary, 
+    @position 
+    )
+END
+GO
+
 
 CREATE PROC USP_InsertBillInfo
 @idBill INT, @idFood INT, @count INT,@des NVARCHAR(100)

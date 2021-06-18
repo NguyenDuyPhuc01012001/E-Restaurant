@@ -18,19 +18,20 @@ namespace QuanLyNhaHang
     /// <summary>
     /// Interaction logic for EmployeeCard.xaml
     /// </summary>
-    public partial class EmployeeCard : UserControl
+    public partial class StaffCard : UserControl
     {
-        public EmployeeCard()
+        public StaffCard()
         {
             InitializeComponent();
         }
 
-        private void addButton_MouseEnter(object sender, MouseEventArgs e)
+
+        private void editButton_MouseEnter(object sender, MouseEventArgs e)
         {
             addIcon.Foreground = Brushes.Green;
         }
 
-        private void addButton_MouseLeave(object sender, MouseEventArgs e)
+        private void editButton_MouseLeave(object sender, MouseEventArgs e)
         {
             addIcon.Foreground = Brushes.White;
         }
@@ -45,5 +46,24 @@ namespace QuanLyNhaHang
             deleteIcon.Foreground = Brushes.White;
         }
 
+        public void SetText(string name, int salary , int position)
+        {
+            nameTxtBox.Text = name;
+
+            salaryTxtBox.Text = salary.ToString() + "VND";
+
+            switch(position)
+            {
+                case 0:
+                    positionTxtBox.Text = "Manager";
+                    break;
+                case 1:
+                    positionTxtBox.Text = "Waiter";
+                    break;
+                case 2:
+                    positionTxtBox.Text = "Chef";
+                    break;
+            }            
+        }
     }
 }

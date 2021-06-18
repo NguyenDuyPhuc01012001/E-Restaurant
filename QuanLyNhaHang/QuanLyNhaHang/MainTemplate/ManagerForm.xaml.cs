@@ -180,11 +180,23 @@ namespace QuanLyNhaHang
         }
         private void IncludeStaffList()
         {
-            ///<summary>
-            /// This function load staff list from SQL
-            ///</summary>
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaff();
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name,staff.Salary,staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
 
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
         }
+
+
         #endregion
 
         #region Meal
@@ -602,6 +614,30 @@ namespace QuanLyNhaHang
                     addNewTable.ShowDialog();
                     break;
             }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            EditStaff editStaff = new EditStaff(staff.Id);
+            editStaff.ShowDialog();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Delete staff will delete account. Do you want to countinue?", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
+            {
+                return;
+            }
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            AccountDAO.Instance.DeleteAccountByIdStaff(staff.Id);
+            if (StaffDAO.Instance.DeleteStaff(staff.Id))
+            {
+                MessageBox.Show("Delete staff successful");
+            }
+            else
+                MessageBox.Show("Delete staff fail");
+            IncludeStaffList();
         }
         #endregion
 

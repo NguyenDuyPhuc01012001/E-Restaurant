@@ -1,4 +1,5 @@
 ﻿using QuanLyNhaHang.DAO;
+using QuanLyNhaHang.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace QuanLyNhaHang
             InitializeComponent();
         }
 
+
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             string name = txtNameEmployee.Text;
@@ -34,27 +36,24 @@ namespace QuanLyNhaHang
             string salary = txtSalaryEmployee.Text;
             int position = cmbPoition.SelectedIndex;
             int sex = Convert.ToInt32(rdoMale.IsChecked.Value);
-            int idStaff;
 
-            if (name == null || UserName == null || email == null || phone == null || salary == null || position == null || sex == null)
+            if (name == null || UserName == null || email == null || phone == null || salary == null  )
                 MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //AddStaff
 
-            //AddAcount
-            idStaff = AccountDAO.Instance.GetIDStaffByPhone(phone);
-            if (idStaff != null)
+            if (StaffDAO.Instance.CheckPhoneExist(phone) == 0 && StaffDAO.Instance.CheckEmailExist(email) == 0)
             {
-                if (AccountDAO.Instance.InsertAccount(UserName, idStaff))
-                {
-                    MessageBox.Show("Create successful \n Default password: 123456");
-                }
-                else
-                    MessageBox.Show("Create fail");
+                StaffDAO.Instance.InsertStaff(name, sex, email, phone,Int32.Parse(salary), position);
+
+                AccountDAO.Instance.InsertAccount(UserName, StaffDAO.Instance.GetMaxIdStaff());
+
+                MessageBox.Show("Add new staff successfuly");
             }
             else
-                MessageBox.Show("Create fail");
+                MessageBox.Show("Phone or Email is exist");
+
             this.Close();
         }
+       
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

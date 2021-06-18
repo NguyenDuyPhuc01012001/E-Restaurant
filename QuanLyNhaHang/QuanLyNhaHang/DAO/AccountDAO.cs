@@ -32,16 +32,19 @@ namespace QuanLyNhaHang.DAO
             return result.Rows.Count > 0;
         }
 
-        public AccountDTO GetAccountByUserName(string userName)
+        public AccountDTO GetAccountByIdUser(int id)
         {
-            string query = "SELECT * FROM Account WHERE userName = '" + userName + "'";
-            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { userName });
-            foreach (DataRow item in data.Rows)
+            string query = "SELECT * FROM Account WHERE idStaff = " + id ;
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+            if (data.Rows.Count > 0)
             {
-                return new AccountDTO(item);
+                AccountDTO account = new AccountDTO(data.Rows[0]);
+                return account;
             }
             return null;
         }
+
+        
 
         public int GetPositionByUserName(string userName)
         {
@@ -71,13 +74,6 @@ namespace QuanLyNhaHang.DAO
             return accounts;
         }
 
-        public int GetIDStaffByPhone(string phone)
-        {
-            string query = string.Format("SELECT id FROM dbo.Staff WHERE phone='{0}'", phone);
-            int id = DataProvider.Instance.ExecuteNonQuery(query);
-            return id;
-        }
-
         public int GetIDStaffByUserName(string username)
         {
             string query = string.Format("SELECT id FROM dbo.Staff WHERE userName='{0}'", username);
@@ -99,6 +95,11 @@ namespace QuanLyNhaHang.DAO
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;
+        }
+
+        public void DeleteAccountByIdStaff(int id)
+        {
+            DataProvider.Instance.ExecuteNonQuery("Delete dbo.Account where idStaff = "+ id);
         }
 
         public bool ResetPassword(string userName)
