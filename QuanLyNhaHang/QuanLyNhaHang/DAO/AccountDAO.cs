@@ -110,6 +110,12 @@ namespace QuanLyNhaHang.DAO
             return result > 0;
         }
 
+        public void EditUsernameByIdStaff(int idStaff,string username)
+        {
+            string query = string.Format("UPDATE dbo.Account SET userName = '{0}' where idStaff = {1}", username,idStaff);
+            DataProvider.Instance.ExecuteNonQuery(query);
+        }
+
         public List<AccountDTO> GetAccount_PositionListAscending(string username)
         {
             List<AccountDTO> accountList = new List<AccountDTO>();
@@ -271,6 +277,21 @@ namespace QuanLyNhaHang.DAO
                 accounts.Add(account);
             }
             return accounts;
+        }
+
+        public int CheckUsernamelExist(string username)
+        {
+
+            string query = string.Format("select * from Account where username = '{0}'", username);
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            if (data.Rows.Count > 0)
+            {
+                AccountDTO account = new AccountDTO(data.Rows[0]);
+                return account.IDStaff;
+            }
+            return 0;
         }
     }
 }

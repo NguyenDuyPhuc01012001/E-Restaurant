@@ -42,11 +42,18 @@ namespace QuanLyNhaHang
 
             if (StaffDAO.Instance.CheckPhoneExist(phone) == 0 && StaffDAO.Instance.CheckEmailExist(email) == 0)
             {
-                StaffDAO.Instance.InsertStaff(name, sex, email, phone,Int32.Parse(salary), position);
+                if (AccountDAO.Instance.CheckUsernamelExist(UserName)==0)
+                {
+                    StaffDAO.Instance.InsertStaff(name, sex, email, phone, Int32.Parse(salary), position);
 
-                AccountDAO.Instance.InsertAccount(UserName, StaffDAO.Instance.GetMaxIdStaff());
+                    AccountDAO.Instance.InsertAccount(UserName, StaffDAO.Instance.GetMaxIdStaff());
 
-                MessageBox.Show("Add new staff successfuly");
+                    MessageBox.Show("Add new staff successfuly");
+                }
+                else
+                    MessageBox.Show("Username is exist");
+
+
             }
             else
                 MessageBox.Show("Phone or Email is exist");

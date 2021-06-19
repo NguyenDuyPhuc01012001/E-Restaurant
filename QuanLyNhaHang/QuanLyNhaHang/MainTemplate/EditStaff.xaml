@@ -153,9 +153,15 @@
                         UpdateSourceTrigger="PropertyChanged">
                         </Binding>
                     </ComboBox.Text>
-                    <ComboBoxItem Content="Manager"/>
-                    <ComboBoxItem Content="Waiter"/>
-                    <ComboBoxItem Content="Chef"/>
+                    <ComboBoxItem>
+                        Manager 
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Waiter
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Chef
+                    </ComboBoxItem>
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel />

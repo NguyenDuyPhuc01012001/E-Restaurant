@@ -93,9 +93,10 @@ namespace QuanLyNhaHang.DAO
             return 0;
         }
 
-        public void UpdateStaff(string name, int sex, string email, string phone, int salary, int position)
+        public void EditStaff(string name, int sex, string email, string phone, int salary, int position,int id)
         {
-
+            string query = string.Format("UPDATE dbo.Staff SET name = '{0}', sex = {1} , email = '{2}' , phone = '{3}' , salary = {4} , position = {5} where id = {6}", name, sex,email,phone,salary,position,id);
+            DataProvider.Instance.ExecuteNonQuery(query);
         }
 
         public void InsertStaff(string  name,int sex, string email,string phone,int salary,int position)

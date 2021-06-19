@@ -29,7 +29,7 @@ namespace QuanLyNhaHang.MainTemplate
         {
             InitializeComponent();
             StaffDTO staff = StaffDAO.Instance.GetStaffById(id);
-            this.Tag = staff.Id;
+            this.btnConfirm.Tag = staff;
             AccountDTO account = AccountDAO.Instance.GetAccountByIdUser(staff.Id);
             txtNameEmployee.Text = staff.Name;
             txtUserNameEmployee.Text = account.UserName;
@@ -45,6 +45,7 @@ namespace QuanLyNhaHang.MainTemplate
         }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            int idStaff = ((sender as Button).Tag as StaffDTO).Id;
             string name = txtNameEmployee.Text;
             string UserName = txtUserNameEmployee.Text;
             string email = txtEmailEmployee.Text;
@@ -56,16 +57,21 @@ namespace QuanLyNhaHang.MainTemplate
             if (name == null || UserName == null || email == null || phone == null || salary == null )
                 MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            /*if ((StaffDAO.Instance.CheckPhoneExist(phone) == 0 || StaffDAO.Instance.CheckPhoneExist(phone) == idStaff) && (StaffDAO.Instance.CheckEmailExist(email) == 0||StaffDAO.Instance.CheckEmailExist(email) == idStaff))
+            if ((StaffDAO.Instance.CheckPhoneExist(phone) == 0 || StaffDAO.Instance.CheckPhoneExist(phone) == idStaff) && (StaffDAO.Instance.CheckEmailExist(email) == 0 || StaffDAO.Instance.CheckEmailExist(email) == idStaff))
             {
-                *//*StaffDAO.Instance.InsertStaff(name, sex, email, phone,Int32.Parse(salary), position);
+                if (AccountDAO.Instance.CheckUsernamelExist(UserName) == 0|| AccountDAO.Instance.CheckUsernamelExist(UserName) == idStaff)
+                {
+                    StaffDAO.Instance.EditStaff(name, sex, email, phone, Int32.Parse(salary), position,idStaff);
 
-                AccountDAO.Instance.InsertAccount(UserName, StaffDAO.Instance.GetMaxIdStaff());*//*
+                    AccountDAO.Instance.EditUsernameByIdStaff(idStaff,UserName);
 
-                MessageBox.Show("Edit staff successfuly");
+                    MessageBox.Show("Edit staff successfuly");
+                }
+                else
+                    MessageBox.Show("Username is exist");
             }
             else
-                MessageBox.Show("Phone or Email is exist");*/
+                MessageBox.Show("Phone or Email is exist");
 
             this.Close();
         }

@@ -129,7 +129,12 @@ namespace QuanLyNhaHang
             {
                 price += billInfo.TotalPrice;
             }
-            Price.Text = price.ToString() + " VND";
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(tableID);
+            int discount = BillDAO.Instance.GetDiscount(idBill);
+
+            float total = price * (100 - discount) / 100;
+
+            Price.Text = total.ToString() + " VND";
         }
         #endregion
 
@@ -199,8 +204,9 @@ namespace QuanLyNhaHang
             {
                 dis = 0;
             }
-            LoadPrice(table.ID);
             BillDAO.Instance.UpdateDiscount(idBill, dis);
+            LoadPrice(table.ID);
+
         }
 
         private void exportBillBtn_Click(object sender, RoutedEventArgs e)
@@ -243,11 +249,10 @@ namespace QuanLyNhaHang
                 return;
 
             CategoryDTO selected = cb.SelectedItem as CategoryDTO;
-
+            cb.Tag = selected;
             id = selected.Id;
 
             LoadFoodListByCategory(id);
-
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {

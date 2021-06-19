@@ -425,7 +425,7 @@ VALUES  ( @idBill, -- idBill - int
 END
 GO
 
-CREATE PROC USP_SwitchTable
+Create PROC USP_SwitchTable
 @idTable1 INT, @idTable2 int
 AS 
 BEGIN
@@ -436,10 +436,14 @@ BEGIN
 	DECLARE @isFirstTablEmpty INT = 1
 	DECLARE @isSecondTablEmpty INT = 1
 	
+	DECLARE @discountTbl1 INT = 0
+	DECLARE @discountTbl2 INT = 0
 	
 	SELECT @idSecondBill = id FROM dbo.Bill WHERE idTable = @idTable2 AND status = 0
 	SELECT @idFirstBill = id FROM dbo.Bill WHERE idTable = @idTable1 AND status = 0
 	
+	SELECT @discountTbl1 = discount FROM dbo.Bill WHERE idTable = @idTable1 AND status = 0
+	SELECT @discountTbl2 = discount FROM dbo.Bill WHERE idTable = @idTable2 AND status = 0
 
 	PRINT @idFirstBill
 	PRINT @idSecondBill
@@ -503,24 +507,33 @@ BEGIN
 	UPDATE dbo.BillInfo SET idBill = @idSecondBill WHERE idBill = @idFirstBill
 	
 	UPDATE dbo.BillInfo SET idBill = @idFirstBill WHERE id IN (SELECT * FROM IDBillInfoTable)
+
+	UPDATE dbo.Bill SET discount = @discountTbl2 WHERE id = @idFirstBill
+
+	UPDATE dbo.Bill SET discount = @discountTbl1 WHERE id = @idSecondBill
 	
 	DROP TABLE IDBillInfoTable
 	
 	PRINT @isFirstTablEmpty
 	PRINT @isSecondTablEmpty
+	PRINT @discountTbl1
+	PRINT @discountTbl2
 	PRINT '----------4'
 	IF (@isFirstTablEmpty = 0)
 	BEGIN
+		PRINT '1'
 	    DELETE dbo.Bill WHERE idTable=@idTable2
 		UPDATE dbo.TableFood SET status = N'Empty' WHERE id = @idTable2
 	END
 	IF (@isSecondTablEmpty = 0)
 	BEGIN
+		PRINT'2'
 	    DELETE dbo.Bill WHERE idTable=@idTable1
 		UPDATE dbo.TableFood SET status = N'Empty' WHERE id = @idTable1
 	END
 END
 GO
+
 
 CREATE PROC USP_CheckOutBill
 @idTable INT, @totalPrice INT, @discount INT
@@ -555,5 +568,3 @@ UPDATE dbo.BillInfo set status=0
 ALTER TABLE STAFF
 ALTER COLUMN sex INT
 
-SELECT * FROM dbo.BillInfo
-SELECT * FROM dbo.Bill
