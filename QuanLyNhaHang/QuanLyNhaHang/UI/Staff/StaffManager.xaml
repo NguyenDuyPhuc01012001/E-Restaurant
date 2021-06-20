@@ -27,17 +27,23 @@
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top" Height="16">
 
                 <TextBlock Text="Employee"/>
-                <materialDesign:PackIcon  Kind="ArrowBottom" Foreground="Red"/>
+                <Button Name="btnSortName" Height="18" Width="auto" Margin="5,0,0,0" Background="Transparent" Click="btnSortName_Click">
+                    <materialDesign:PackIcon Name="nameSortIcon" Kind="ArrowBottom" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Top" Height="16">
 
                 <TextBlock Text="Salary"/>
-                <materialDesign:PackIcon  Kind="ArrowBottom" Foreground="Red"/>
+                <Button Name="btnSortSalary" Height="18" Width="auto" Margin="5,0,0,0" Background="Transparent" Click="btnSortSalary_Click">
+                    <materialDesign:PackIcon Name="salarySortIcon" Kind="ArrowBottom" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="3" VerticalAlignment="Top" Height="16">
 
                 <TextBlock Text="Position"/>
-                <materialDesign:PackIcon  Kind="ArrowBottom" Foreground="Red"/>
+                <Button Name="btnSortPosition" Height="18" Width="auto" Margin="5,0,0,0" Background="Transparent" Click="btnSortPosition_Click">
+                    <materialDesign:PackIcon Name="positionSortIcon" Kind="ArrowBottom" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="4" VerticalAlignment="Top" Height="16">
 

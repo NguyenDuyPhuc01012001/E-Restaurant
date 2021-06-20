@@ -176,8 +176,18 @@ namespace QuanLyNhaHang
         #region Staff
         private void IncludeStaffManagerTable()
         {
-            ManagerFieldHolder.Children.Add(new StaffManager());
+            StaffManager staffManager = new StaffManager();
+            ManagerFieldHolder.Children.Add(staffManager);
+            sortStaffNameClickCount = 0;
+            sortStaffSalaryClickCount = 0;
+            sortStaffPositionClickCount = 0;
+            staffManager.btnSortName.Click += BtnSortName_Click;
+            staffManager.btnSortSalary.Click += BtnSortSalary_Click;
+            staffManager.btnSortPosition.Click += BtnSortPosition_Click;
         }
+
+       
+
         private void IncludeStaffList()
         {
             ListHolder.Children.Clear();
@@ -195,6 +205,135 @@ namespace QuanLyNhaHang
                 ListHolder.Children.Add(card);
             }
         }
+        private void IncludeStaffListByName(string name)
+        {
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaffByName(name);
+
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+
+        private void IncludeStaffListByNameAsc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaffByNameAscending(name);
+
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeStaffListByNameDesc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaffByNameDescending(name);
+
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeStaffListBySalaryAsc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaffBySalaryAscending(name);
+
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeStaffListBySalaryDesc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaffBySalaryDescending(name);
+
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+
+        private void IncludeStaffListByPositionAsc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaffByPositionAscending(name);
+
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeStaffListByPositionDesc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<StaffDTO> staffList = StaffDAO.Instance.GetListStaffByPositionDescending(name);
+
+            foreach (StaffDTO staff in staffList)
+            {
+                StaffCard card = new StaffCard();
+                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.editButton.Tag = staff;
+                card.deleteButton.Tag = staff;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+
 
 
         #endregion
@@ -426,7 +565,6 @@ namespace QuanLyNhaHang
             //caegoryButtonClickCount % 2 != 0 : sort ascending
             if (categoryButtonClickCount % 2 == 0)
             {
-
                 IncludeCategoryListDescending(searchTxb.Text);
             }
             else
@@ -557,6 +695,9 @@ namespace QuanLyNhaHang
             {
                 switch (index)
                 {
+                    case 1:
+                        IncludeStaffListByName(searchTxb.Text);
+                        break;
                     case 3:
                         IncludeCategoryListByName(searchTxb.Text);
                         break;
@@ -587,6 +728,7 @@ namespace QuanLyNhaHang
                 }
             }
         }
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -615,7 +757,48 @@ namespace QuanLyNhaHang
                     break;
             }
         }
+        private void BtnSortPosition_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortStaffPositionClickCount % 2 == 0)
+            {
+                IncludeStaffListByPositionAsc(searchTxb.Text);
+            }
+            else
+            {
+                IncludeStaffListByPositionDesc(searchTxb.Text);
+            }
 
+            sortStaffPositionClickCount++;
+        }
+
+        private void BtnSortSalary_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortStaffSalaryClickCount % 2 == 0)
+            {
+                IncludeStaffListBySalaryAsc(searchTxb.Text);
+            }
+            else
+            {
+                IncludeStaffListBySalaryDesc(searchTxb.Text);
+            }
+
+            sortStaffSalaryClickCount++;
+        }
+
+        private void BtnSortName_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortStaffNameClickCount % 2 == 0)
+            {
+                IncludeStaffListByNameAsc(searchTxb.Text);
+            }
+            else
+            {
+                IncludeStaffListByNameDesc(searchTxb.Text);
+            }
+
+            sortStaffNameClickCount++;
+
+        }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             StaffDTO staff = (sender as Button).Tag as StaffDTO;
@@ -643,6 +826,12 @@ namespace QuanLyNhaHang
 
         #region Field
         public Func<ChartPoint, string> PointLabel { get; set; }
+
+        private int sortStaffNameClickCount = 0;
+
+        private int sortStaffSalaryClickCount = 0;
+
+        private int sortStaffPositionClickCount = 0;
 
         private int categoryButtonClickCount = 0;
 

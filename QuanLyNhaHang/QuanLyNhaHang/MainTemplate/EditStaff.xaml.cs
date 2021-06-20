@@ -54,26 +54,28 @@ namespace QuanLyNhaHang.MainTemplate
             int position = cmbPoition.SelectedIndex;
             int sex = Convert.ToInt32(rdoMale.IsChecked.Value);
 
-            if (name == null || UserName == null || email == null || phone == null || salary == null )
+            if (name == null || UserName == null || email == null || phone == null || salary == null || position == -1)
                 MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            if ((StaffDAO.Instance.CheckPhoneExist(phone) == 0 || StaffDAO.Instance.CheckPhoneExist(phone) == idStaff) && (StaffDAO.Instance.CheckEmailExist(email) == 0 || StaffDAO.Instance.CheckEmailExist(email) == idStaff))
+            else
             {
-                if (AccountDAO.Instance.CheckUsernamelExist(UserName) == 0|| AccountDAO.Instance.CheckUsernamelExist(UserName) == idStaff)
+                if ((StaffDAO.Instance.CheckPhoneExist(phone) == 0 || StaffDAO.Instance.CheckPhoneExist(phone) == idStaff) && (StaffDAO.Instance.CheckEmailExist(email) == 0 || StaffDAO.Instance.CheckEmailExist(email) == idStaff))
                 {
-                    StaffDAO.Instance.EditStaff(name, sex, email, phone, Int32.Parse(salary), position,idStaff);
+                    if (AccountDAO.Instance.CheckUsernamelExist(UserName) == 0 || AccountDAO.Instance.CheckUsernamelExist(UserName) == idStaff)
+                    {
+                        StaffDAO.Instance.EditStaff(name, sex, email, phone, Int32.Parse(salary), position, idStaff);
 
-                    AccountDAO.Instance.EditUsernameByIdStaff(idStaff,UserName);
+                        AccountDAO.Instance.EditUsernameByIdStaff(idStaff, UserName);
 
-                    MessageBox.Show("Edit staff successfuly");
+                        MessageBox.Show("Edit staff successfuly");
+                    }
+                    else
+                        MessageBox.Show("Username is exist");
                 }
                 else
-                    MessageBox.Show("Username is exist");
-            }
-            else
-                MessageBox.Show("Phone or Email is exist");
+                    MessageBox.Show("Phone or Email is exist");
 
-            this.Close();
+                this.Close();
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
