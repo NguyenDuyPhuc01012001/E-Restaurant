@@ -70,7 +70,7 @@ namespace QuanLyNhaHang
             }
             catch
             {
-                MessageBox.Show("Cannot delete this category because there is at least one food belong to this category");
+                MessageBox.Show("This category cannot be deleted because at least one food belongs to this category", "Error while deleting");
             }
 
         }
