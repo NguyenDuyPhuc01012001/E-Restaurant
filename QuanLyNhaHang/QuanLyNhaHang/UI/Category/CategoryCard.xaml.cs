@@ -63,13 +63,14 @@ namespace QuanLyNhaHang
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(tbkID.Text);
-            if (CategoryDAO.Instance.DeleteCategory(id))
+            try
             {
+                CategoryDAO.Instance.DeleteCategory(id);
                 MessageBox.Show("Delete category succesfully");
             }
-            else
+            catch
             {
-                MessageBox.Show("Delete category failed");
+                MessageBox.Show("Cannot delete this category because there is at least one food belong to this category");
             }
 
         }
