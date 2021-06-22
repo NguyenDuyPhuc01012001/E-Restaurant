@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.DTO
 {
-    class StaffDTO
+    public class StaffDTO
     {
         private int id;
         private String name;

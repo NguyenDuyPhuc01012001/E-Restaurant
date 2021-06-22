@@ -185,9 +185,6 @@ namespace QuanLyNhaHang
             staffManager.btnSortSalary.Click += BtnSortSalary_Click;
             staffManager.btnSortPosition.Click += BtnSortPosition_Click;
         }
-
-       
-
         private void IncludeStaffList()
         {
             ListHolder.Children.Clear();
@@ -223,7 +220,6 @@ namespace QuanLyNhaHang
                 ListHolder.Children.Add(card);
             }
         }
-
         private void IncludeStaffListByNameAsc(string name)
         {
             ListHolder.Children.Clear();
@@ -296,7 +292,6 @@ namespace QuanLyNhaHang
                 ListHolder.Children.Add(card);
             }
         }
-
         private void IncludeStaffListByPositionAsc(string name)
         {
             ListHolder.Children.Clear();
@@ -333,9 +328,6 @@ namespace QuanLyNhaHang
                 ListHolder.Children.Add(card);
             }
         }
-
-
-
         #endregion
 
         #region Meal
@@ -371,18 +363,12 @@ namespace QuanLyNhaHang
 
             foreach (AccountDTO item in accountList)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
-
         private void IncludeAccountListByUserName(string username)
         {
             ListHolder.Children.Clear();
@@ -390,14 +376,9 @@ namespace QuanLyNhaHang
 
             foreach (AccountDTO item in accountList)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
@@ -407,14 +388,9 @@ namespace QuanLyNhaHang
             List<AccountDTO> accounts = AccountDAO.Instance.GetAccount_PositionListAscending(text);
             foreach (AccountDTO item in accounts)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
@@ -424,14 +400,9 @@ namespace QuanLyNhaHang
             List<AccountDTO> accounts = AccountDAO.Instance.GetAccount_PositionListDescending(text);
             foreach (AccountDTO item in accounts)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
@@ -441,14 +412,9 @@ namespace QuanLyNhaHang
             List<AccountDTO> accounts = AccountDAO.Instance.GetAccount_UsernameListAscending(text);
             foreach (AccountDTO item in accounts)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
@@ -458,14 +424,9 @@ namespace QuanLyNhaHang
             List<AccountDTO> accounts = AccountDAO.Instance.GetAccount_UsernameListDescending(text);
             foreach (AccountDTO item in accounts)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
@@ -475,14 +436,9 @@ namespace QuanLyNhaHang
             List<AccountDTO> accounts = AccountDAO.Instance.GetAccount_OwnerListAscending(text);
             foreach (AccountDTO item in accounts)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
@@ -492,14 +448,9 @@ namespace QuanLyNhaHang
             List<AccountDTO> accounts = AccountDAO.Instance.GetAccount_OwnerListDescending(text);
             foreach (AccountDTO item in accounts)
             {
-                /// <example>
-                /// StaffDTO staff= StaffDAO().Instance.GetInfoAccount(item.IDStaff);
-                /// AccountCard acc = new AccountCard();
-                /// acc.SetText(item.UserName, staff.Name, staff.Position);
-                /// </example>
-
+                StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
-                acc.SetText(item.UserName, "me", 0);
+                acc.SetText(item.UserName, staff.Name, staff.Position);
                 ListHolder.Children.Add(acc);
             }
         }
@@ -513,7 +464,7 @@ namespace QuanLyNhaHang
             foreach (TableDTO table in tables)
             {
                 TableCard tableCard = new TableCard();
-                tableCard.SetText(table.ID, table.Status);
+                tableCard.SetText(table.Name, table.Status);
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -524,7 +475,7 @@ namespace QuanLyNhaHang
             foreach (TableDTO table in tables)
             {
                 TableCard tableCard = new TableCard();
-                tableCard.SetText(table.ID, table.Status);
+                tableCard.SetText(table.Name, table.Status);
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -539,7 +490,7 @@ namespace QuanLyNhaHang
             foreach (TableDTO table in tableList)
             {
                 TableCard tableCard = new TableCard();
-                tableCard.SetText(table.ID, table.Status);
+                tableCard.SetText(table.Name, table.Status);
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -728,7 +679,6 @@ namespace QuanLyNhaHang
                 }
             }
         }
-
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -770,7 +720,6 @@ namespace QuanLyNhaHang
 
             sortStaffPositionClickCount++;
         }
-
         private void BtnSortSalary_Click(object sender, RoutedEventArgs e)
         {
             if (sortStaffSalaryClickCount % 2 == 0)
@@ -784,7 +733,6 @@ namespace QuanLyNhaHang
 
             sortStaffSalaryClickCount++;
         }
-
         private void BtnSortName_Click(object sender, RoutedEventArgs e)
         {
             if (sortStaffNameClickCount % 2 == 0)
@@ -805,7 +753,6 @@ namespace QuanLyNhaHang
             EditStaff editStaff = new EditStaff(staff.Id);
             editStaff.ShowDialog();
         }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Delete staff will delete account. Do you want to countinue?", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)

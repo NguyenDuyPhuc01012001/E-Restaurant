@@ -80,7 +80,7 @@ namespace QuanLyNhaHang
                     txbWorkingPosition.Text = "Waiter";
                     break;
                 case 2:
-                    txbWorkingPosition.Text = "Staff";
+                    txbWorkingPosition.Text = "Chef";
                     break;
             }
         }

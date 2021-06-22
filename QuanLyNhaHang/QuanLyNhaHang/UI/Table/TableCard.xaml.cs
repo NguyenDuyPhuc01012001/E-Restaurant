@@ -47,9 +47,9 @@ namespace QuanLyNhaHang
             addIcon.Foreground = Brushes.White;
         }
 
-        public void SetText(int name, string status)
+        public void SetText(string name, string status)
         {
-            tbkName.Text = name.ToString();
+            tbkName.Text = name;
             tbkStatus.Text = status;
         }
 

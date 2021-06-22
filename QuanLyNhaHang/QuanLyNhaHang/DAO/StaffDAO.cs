@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.DAO
 {
-    class StaffDAO
+    public class StaffDAO
     {
         private static StaffDAO instance;
 
