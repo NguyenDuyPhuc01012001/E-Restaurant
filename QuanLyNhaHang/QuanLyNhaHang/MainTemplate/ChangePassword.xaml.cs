@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using QuanLyNhaHang.DAO;
 
 namespace QuanLyNhaHang
 {
@@ -23,15 +24,35 @@ namespace QuanLyNhaHang
         {
             InitializeComponent();
         }
-
+        private event EventHandler changePassword;
+        public event EventHandler changePassworD
+        {
+            add { changePassword += value; }
+            remove { changePassword -= value; }
+        }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            string username = txtUserNameEmployee.Text;
+            string password = txtPasswordEmployee.Password;
+            string cfpassword = txtConfirmPassword.Password;
+            if(password == cfpassword)
+            {
+                if (AccountDAO.Instance.ChangePassword(username,password,cfpassword))
+                {
+                    MessageBox.Show("Thành công");
 
+                    if (changePassword != null)
+                        changePassword(this, new EventArgs());
+                    this.Close();
+
+                }
+                else
+                {
+                    MessageBox.Show("Không thành công");
+                }
+            }
         }
 
-        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }
