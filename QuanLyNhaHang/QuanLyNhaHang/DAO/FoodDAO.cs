@@ -112,7 +112,7 @@ namespace QuanLyNhaHang.DAO
             }
             return food;
         }
-        public List<FoodDTO> GetListCategoryByNameDescending(string name)
+        public List<FoodDTO> GetListFoodByNameDescending(string name)
         {
             List<FoodDTO> food = new List<FoodDTO>();
             if (string.IsNullOrWhiteSpace(name))
@@ -128,6 +128,110 @@ namespace QuanLyNhaHang.DAO
             else
             {
                 string query = string.Format("select * from Food f where f.name like N'%{0}%' order by f.name desc", name);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+
+            }
+            return food;
+        }
+        public List<FoodDTO> GetListFoodByidCategoryAscending(string name)
+        {
+            List<FoodDTO> food = new List<FoodDTO>();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                string query = "select * from Food f order by f.idCategory asc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+            }
+            else
+            {
+                string query = string.Format("select * from Food f where f.name like N'%{0}%' order by f.idCategory asc", name);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+
+            }
+            return food;
+        }
+        public List<FoodDTO> GetListFoodByidCategoryDescending(string name)
+        {
+            List<FoodDTO> food = new List<FoodDTO>();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                string query = "select * from Food f order by f.idCategory desc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+            }
+            else
+            {
+                string query = string.Format("select * from Food f where f.name like N'%{0}%' order by f.idCategory desc", name);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+
+            }
+            return food;
+        }
+        public List<FoodDTO> GetListFoodByPriceAscending(string name)
+        {
+            List<FoodDTO> food = new List<FoodDTO>();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                string query = "select * from Food f order by f.price asc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+            }
+            else
+            {
+                string query = string.Format("select * from Food f where f.name like N'%{0}%' order by f.price asc", name);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+
+            }
+            return food;
+        }
+        public List<FoodDTO> GetListFoodByPriceDescending(string name)
+        {
+            List<FoodDTO> food = new List<FoodDTO>();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                string query = "select * from Food f order by f.price desc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+            }
+            else
+            {
+                string query = string.Format("select * from Food f where f.name like N'%{0}%' order by f.price desc", name);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
                 foreach (DataRow item in data.Rows)
                 {

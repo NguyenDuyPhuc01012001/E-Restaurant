@@ -39,7 +39,7 @@ namespace QuanLyNhaHang
             {
                 if (AccountDAO.Instance.ChangePassword(username,password,cfpassword))
                 {
-                    MessageBox.Show("Thành công");
+                    MessageBox.Show("Successfully");
 
                     if (changePassword != null)
                         changePassword(this, new EventArgs());
@@ -48,11 +48,18 @@ namespace QuanLyNhaHang
                 }
                 else
                 {
-                    MessageBox.Show("Không thành công");
+                    MessageBox.Show("Failed");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Password unmatched!");
             }
         }
 
-
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

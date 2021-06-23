@@ -198,7 +198,7 @@
                     StaysOpen="False">
                     <StackPanel Width="150">
                         <Button Content="Account detail" />
-                        <Button Content="Change password" />
+                        <Button Content="Change password" Name="ChangepasswordButton" Click="ChangepasswordButton_Click" Cursor="Hand" />
                         <Separator />
                         <Button
                             x:Name="LogoutButton"

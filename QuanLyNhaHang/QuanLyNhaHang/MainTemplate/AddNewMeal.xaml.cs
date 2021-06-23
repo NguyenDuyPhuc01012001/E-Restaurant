@@ -69,7 +69,7 @@ namespace QuanLyNhaHang
 
             if (FoodDAO.Instance.AddMeal(name,categoryID, price))
             {
-                MessageBox.Show("Thành công");
+                MessageBox.Show("Add New Meal Successfully");
  
                 if (addMeal != null)
                     addMeal(this, new EventArgs());
@@ -78,7 +78,7 @@ namespace QuanLyNhaHang
             }
             else
             {
-                MessageBox.Show("Không thành công");
+                MessageBox.Show("Add New Meal Failed");
             }
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)

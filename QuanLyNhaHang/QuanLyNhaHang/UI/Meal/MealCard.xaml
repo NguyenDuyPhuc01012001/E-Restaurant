@@ -90,11 +90,11 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Button
-                        x:Name="addButton"
+                        x:Name="editButton"
                         Grid.Column="0"
                         Background="Gray"
                         BorderBrush="Gray"
-                        Click="addButton_Click"
+                        Click="editButton_Click"
                         MouseEnter="addButton_MouseEnter"
                         MouseLeave="addButton_MouseLeave">
                         <materialDesign:PackIcon
