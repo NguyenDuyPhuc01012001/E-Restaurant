@@ -334,6 +334,14 @@ namespace QuanLyNhaHang
         private void IncludeMealManagerTable()
         {
             ManagerFieldHolder.Children.Add(new MealManager());
+            MealManager mealManager = new MealManager();
+            ManagerFieldHolder.Children.Add(mealManager);
+            sortStaffNameClickCount = 0;
+            sortStaffSalaryClickCount = 0;
+            sortStaffPositionClickCount = 0;
+            mealManager.btnSortName.Click += BtnSortMealName_Click;
+            mealManager.btnSortCategory.Click += BtnSortMealCategory_Click;
+            mealManager.btnSortPrice.Click += BtnSortMealPrice_Click;
         }
         private void IncludeFoodList()
         {
@@ -347,6 +355,146 @@ namespace QuanLyNhaHang
                 MealCard meal = new MealCard();
                 meal.SetText(food.Name, category, food.Price, quantity);
                 ListHolder.Children.Add(meal);
+            }
+        }
+        private void IncludeFoodListByName(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.SearchFoodByName(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByNameAsc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByNameAscending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByNameDesc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByNameDescending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByCategoryAsc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByidCategoryAscending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByCategoryDesc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByidCategoryDescending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByPriceAsc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByPriceAscending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByPriceDesc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByPriceDescending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
             }
         }
         #endregion
@@ -679,6 +827,11 @@ namespace QuanLyNhaHang
                 }
             }
         }
+        private void ChangepasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword();
+            changePassword.ShowDialog();
+        }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -707,6 +860,46 @@ namespace QuanLyNhaHang
                     break;
             }
         }
+        private void BtnSortMealPrice_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortMealPriceClickCount % 2 == 0)
+            {
+                IncludeFoodListByPriceAsc(searchTxb.Text);
+            }
+            else
+            {
+                IncludeFoodListByPriceDesc(searchTxb.Text);
+            }
+
+            sortMealPriceClickCount++;
+        }
+        private void BtnSortMealCategory_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortMealCategoryClickCount % 2 == 0)
+            {
+                IncludeFoodListByCategoryAsc(searchTxb.Text);
+            }
+            else
+            {
+                IncludeFoodListByCategoryDesc(searchTxb.Text);
+            }
+
+            sortMealCategoryClickCount++;
+        }
+        private void BtnSortMealName_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortMealNameClickCount % 2 == 0)
+            {
+                IncludeFoodListByNameAsc(searchTxb.Text);
+            }
+            else
+            {
+                IncludeFoodListByNameDesc(searchTxb.Text);
+            }
+
+            sortMealNameClickCount++;
+        }
+
         private void BtnSortPosition_Click(object sender, RoutedEventArgs e)
         {
             if (sortStaffPositionClickCount % 2 == 0)
@@ -789,6 +982,13 @@ namespace QuanLyNhaHang
         private int Account_OwnerButtonClickCount = 0;
 
         private int Account_PositionButtonClickCount = 0;
+
+        private int sortMealPriceClickCount = 0;
+
+        private int sortMealNameClickCount = 0;
+
+        private int sortMealCategoryClickCount = 0;
+
 
         #endregion
 

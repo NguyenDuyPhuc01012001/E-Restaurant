@@ -71,16 +71,7 @@ namespace QuanLyNhaHang
             this.orderQuantity.Text = orderQuantity.ToString();
         }
 
-        private void addButton_Click(object sender, RoutedEventArgs e)
-        {
-            nameFood = mealName.Text;
-         
-            EditMeal editmeal = new EditMeal();
-            editmeal.txtNameMeal.Text = nameFood;
-            editmeal.ShowDialog();
-            
-           
-        }
+
 
 
 
@@ -122,5 +113,17 @@ namespace QuanLyNhaHang
                 MessageBox.Show("Không thành công");
             }
         }
+
+        private void editButton_Click(object sender, RoutedEventArgs e)
+        {
+            nameFood = mealName.Text;
+
+            EditMeal editmeal = new EditMeal();
+            editmeal.txtNameMeal.Text = nameFood;
+            editmeal.ShowDialog();
+
+        }
+
+
     }
 }

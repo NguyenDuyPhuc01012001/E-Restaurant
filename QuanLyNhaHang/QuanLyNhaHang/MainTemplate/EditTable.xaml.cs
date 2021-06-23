@@ -35,14 +35,14 @@ namespace QuanLyNhaHang.MainTemplate
             string newname = txtTable.Text;
             if (TableDAO.Instance.EditTable(oldname,newname))
             {
-                MessageBox.Show("Thành công");
+                MessageBox.Show("Edit Table Successfully");
                 if (edittable != null)
                     edittable(this, new EventArgs());
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Không thành công");
+                MessageBox.Show("Add Table Failed");
             }
         }
         private event EventHandler edittable;

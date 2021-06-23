@@ -25,5 +25,47 @@ namespace QuanLyNhaHang
             InitializeComponent();
 
         }
+
+        private void btnSortPrice_Click(object sender, RoutedEventArgs e)
+        {
+            if (priceSortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            {
+                priceSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
+                priceSortIcon.Foreground = Brushes.Green;
+            }
+            else
+            {
+                priceSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
+                priceSortIcon.Foreground = Brushes.Red;
+            }
+        }
+
+        private void btnSortCategory_Click(object sender, RoutedEventArgs e)
+        {
+            if (categorySortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            {
+                categorySortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
+                categorySortIcon.Foreground = Brushes.Green;
+            }
+            else
+            {
+                categorySortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
+                categorySortIcon.Foreground = Brushes.Red;
+            }
+        }
+
+        private void btnSortName_Click(object sender, RoutedEventArgs e)
+        {
+            if (nameSortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            {
+                nameSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
+                nameSortIcon.Foreground = Brushes.Green;
+            }
+            else
+            {
+                nameSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
+                nameSortIcon.Foreground = Brushes.Red;
+            }
+        }
     }
 }

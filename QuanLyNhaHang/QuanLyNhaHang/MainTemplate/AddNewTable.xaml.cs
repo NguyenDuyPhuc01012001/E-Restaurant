@@ -32,12 +32,12 @@ namespace QuanLyNhaHang.MainTemplate
                 string name = txtNameTable.Text;
                 if (TableDAO.Instance.AddTable(name))
                 {
-                    MessageBox.Show("Add new category succesfully");
+                    MessageBox.Show("Add New Table Successfully");
 
                 }
                 else
                 {
-                    MessageBox.Show("Add new category failed");
+                    MessageBox.Show("Add New Table Failed");
                 }
             }
         }
