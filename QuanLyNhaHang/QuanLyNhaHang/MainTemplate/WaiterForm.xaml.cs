@@ -22,9 +22,13 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class WaiterForm : Window
     {
-        public WaiterForm()
+        int staffID;
+        public WaiterForm(int id)
         {
             InitializeComponent();
+
+            tblName.Text = StaffDAO.Instance.GetNameById(id);
+            staffID = id;
             Load();
         }
 
@@ -157,24 +161,40 @@ namespace QuanLyNhaHang
 
         private void confirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            TableDTO table = spmealstatus.Tag as TableDTO;
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.iD);
-            int idFood = (wpFood.Tag as FoodDTO).Id;
-            int count = Int16.Parse(txbQuantity.Text);
-            string description = addtionalNoteTextbox.Text;
-            if (idBill == -1)
+            try
             {
-                BillDAO.Instance.InsertBill(table.ID);
-                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood, count, description);
+                TableDTO table = spmealstatus.Tag as TableDTO;
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.iD);
+                int idFood = (wpFood.Tag as FoodDTO).Id;
+                int count = Int16.Parse(txbQuantity.Text);
+                string description = addtionalNoteTextbox.Text;
+                if (idBill == -1)
+                {
+                    BillDAO.Instance.InsertBill(table.ID);
+                    BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood, count, description);
+                }
+                else
+                {
+                    int idBillInfo = BillInfoDAO.Instance.GetBillInfo(idBill, idFood);
+                    BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count, description);
+                }
+                LoadMealStatus(table.ID);
+                LoadTable();
+                LoadPrice(table.ID);
             }
-            else
+            catch (NullReferenceException nullExcept)
             {
-                int idBillInfo = BillInfoDAO.Instance.GetBillInfo(idBill, idFood);
-                BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count, description);
+                MessageBox.Show("Please select table", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            LoadMealStatus(table.ID);
-            LoadTable();
-            LoadPrice(table.ID);
+            catch (FormatException formatExcept)
+            {
+                MessageBox.Show("Please input quantity", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
         }
 
         private void changeTableBtn_Click(object sender, RoutedEventArgs e)
@@ -230,7 +250,7 @@ namespace QuanLyNhaHang
             if (idBill != -1)
             {
                 MessageBox.Show("Do you want check out bill for " + table.Name, "Notify");
-                BillTemplate bill = new BillTemplate(table.iD);
+                BillTemplate bill = new BillTemplate(table.iD,staffID);
                 bill.Show();
                 BillDAO.Instance.CheckOut(table.ID, total , dis);
                 //update table status

@@ -28,9 +28,11 @@ namespace QuanLyNhaHang
             InitializeComponent();
 
         }
-        public BillTemplate(int id)
+        public BillTemplate(int id, int ID)
         {
             InitializeComponent();
+
+            staffID.Text = "Staff ID: "+ID.ToString();
             ShowBill(id);
         }
         private void ShowBill(int id)
@@ -103,14 +105,13 @@ namespace QuanLyNhaHang
                 e.Column.Header = "Name";
                 e.Column.DisplayIndex = 0;
             }
+            else if (headername == "Price")
+            {
+                e.Column.DisplayIndex = 1;
+            }
             else if (headername == "Count")
             {
                 e.Column.Header = "Quantity";
-                e.Column.DisplayIndex = 1;
-            }
-            else if (headername == "FoodName")
-            {
-                e.Column.Header = "Name";
                 e.Column.DisplayIndex = 2;
             }
             else if (headername == "TotalPrice")

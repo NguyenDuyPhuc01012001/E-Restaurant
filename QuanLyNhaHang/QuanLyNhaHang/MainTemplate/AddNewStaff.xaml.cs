@@ -29,36 +29,45 @@ namespace QuanLyNhaHang
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            string name = txtNameEmployee.Text;
-            string UserName = txtUserNameEmployee.Text;
-            string email = txtEmailEmployee.Text;
-            string phone = txtPhoneEmployee.Text;
-            string salary = txtSalaryEmployee.Text;
-            int position = cmbPoition.SelectedIndex;
-            int sex = Convert.ToInt32(rdoMale.IsChecked.Value);
-
-            if (name == null || UserName == null || email == null || phone == null || salary == null  )
-                MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            if (StaffDAO.Instance.CheckPhoneExist(phone) == 0 && StaffDAO.Instance.CheckEmailExist(email) == 0)
+            try
             {
-                if (AccountDAO.Instance.CheckUsernamelExist(UserName)==0)
+                string name = txtNameEmployee.Text;
+                string UserName = txtUserNameEmployee.Text;
+                string email = txtEmailEmployee.Text;
+                string phone = txtPhoneEmployee.Text;
+                string salary = txtSalaryEmployee.Text;
+                int position = cmbPoition.SelectedIndex;
+                int sex = Convert.ToInt32(rdoMale.IsChecked.Value);
+
+                if (name == null || UserName == null || email == null || phone == null || salary == null)
+                    MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                if (StaffDAO.Instance.CheckPhoneExist(phone) == 0 && StaffDAO.Instance.CheckEmailExist(email) == 0)
                 {
-                    StaffDAO.Instance.InsertStaff(name, sex, email, phone, Int32.Parse(salary), position);
+                    if (AccountDAO.Instance.CheckUsernamelExist(UserName) == 0)
+                    {
+                        StaffDAO.Instance.InsertStaff(name, sex, email, phone, Int32.Parse(salary), position);
 
-                    AccountDAO.Instance.InsertAccount(UserName, StaffDAO.Instance.GetMaxIdStaff());
+                        AccountDAO.Instance.InsertAccount(UserName, StaffDAO.Instance.GetMaxIdStaff());
 
-                    MessageBox.Show("Add new staff successfuly");
+                        MessageBox.Show("Add new staff successfuly");
+
+                        this.Close();
+                    }
+                    else
+                        MessageBox.Show("Username is exist");
                 }
                 else
-                    MessageBox.Show("Username is exist");
-
-
+                    MessageBox.Show("Phone or Email is exist");
             }
-            else
-                MessageBox.Show("Phone or Email is exist");
-
-            this.Close();
+            catch (FormatException formatExcept)
+            {
+                MessageBox.Show("Please fill all field", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
        
 

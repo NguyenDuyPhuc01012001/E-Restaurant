@@ -44,8 +44,6 @@ namespace QuanLyNhaHang.DAO
             return null;
         }
 
-        
-
         public int GetPositionByUserName(string userName)
         {
             string query = "exec USP_GetPositionByUserName @userName";
@@ -76,8 +74,8 @@ namespace QuanLyNhaHang.DAO
 
         public int GetIDStaffByUserName(string username)
         {
-            string query = string.Format("SELECT id FROM dbo.Staff WHERE userName='{0}'", username);
-            int id = DataProvider.Instance.ExecuteNonQuery(query);
+            string query = "exec USP_GetIdByUserName @userName";
+            int id = (int)DataProvider.Instance.ExecuteScalar(query, new object[] { username });
             return id;
         }
 

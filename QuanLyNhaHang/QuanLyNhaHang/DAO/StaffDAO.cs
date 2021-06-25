@@ -40,6 +40,7 @@ namespace QuanLyNhaHang.DAO
 
             return listStaff;
         }
+
         public List<StaffDTO> GetListStaffByName(string name)
         {
             List<StaffDTO> listStaff = new List<StaffDTO>();
@@ -52,6 +53,7 @@ namespace QuanLyNhaHang.DAO
             }
             return listStaff;
         }
+
         public StaffDTO GetStaffById(int id)
         {
 
@@ -286,6 +288,13 @@ namespace QuanLyNhaHang.DAO
             {
                 return 1;
             }
+        }
+
+        public string GetNameById(int id)
+        {
+            string query = "SELECT name FROM Staff WHERE id = "+id;
+            string name = DataProvider.Instance.ExecuteScalar(query).ToString();
+            return name;
         }
     }
 }

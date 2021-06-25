@@ -16,10 +16,10 @@
             CornerRadius="10">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
                 </Grid.ColumnDefinitions>
 
 

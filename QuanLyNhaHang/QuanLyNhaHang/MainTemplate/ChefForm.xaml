@@ -20,7 +20,7 @@
                 <TextBlock Text="Change meal status" FontSize="35" Foreground="BlanchedAlmond" 
                        HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text=" Chef" Foreground="White" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                    <TextBlock x:Name="tblName" Text=" Chef" Foreground="White" VerticalAlignment="Center" FontSize="18"></TextBlock>
                     <materialDesign:PopupBox  Margin="5" PlacementMode="BottomAndAlignRightEdges" 
                                           StaysOpen="False" Foreground="White">
                         <StackPanel Width="150">

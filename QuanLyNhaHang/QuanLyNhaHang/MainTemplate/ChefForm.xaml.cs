@@ -21,9 +21,11 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class ChefForm : Window
     {
-        public ChefForm()
+        public ChefForm(int id)
         {
             InitializeComponent();
+
+            tblName.Text = StaffDAO.Instance.GetNameById(id);
             LoadMealStatus();
         }
 

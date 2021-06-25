@@ -24,7 +24,7 @@
             </CheckBox>
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top" Height="16">
 
-                <TextBlock Text="Order"/>
+                <TextBlock Text="Name"/>
                 
             </StackPanel>
             

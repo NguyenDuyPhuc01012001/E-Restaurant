@@ -187,6 +187,7 @@
                 Text="Restaurant management" />
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBlock
+                    x:Name="tblName"
                     VerticalAlignment="Center"
                     FontSize="18"
                     Foreground="White"

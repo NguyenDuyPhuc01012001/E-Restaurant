@@ -68,6 +68,7 @@ namespace QuanLyNhaHang
         }
         bool Login(string username, string password) { return AccountDAO.Instance.Login(username, password); }
         int GetPosition(string username) { return AccountDAO.Instance.GetPositionByUserName(username); }
+        int GetId(string username) { return AccountDAO.Instance.GetIDStaffByUserName(username); }
         #endregion
 
         #region Event
@@ -76,7 +77,6 @@ namespace QuanLyNhaHang
             if (passwordShow.Kind == MaterialDesignThemes.Wpf.PackIconKind.EyeOff)
             {
                 ShowPassword();
-
             }
             else
                 HidePassword();
@@ -100,22 +100,23 @@ namespace QuanLyNhaHang
             if (Login(userName, password))
             {
                 int position = GetPosition(userName);
+                int id = GetId(userName);
                 switch (position)
                 {
                     case 0:
-                        ManagerForm managerForm = new ManagerForm();
+                        ManagerForm managerForm = new ManagerForm(id);
                         this.Hide();
                         managerForm.ShowDialog();
                         this.Show();
                         break;
                     case 1:
-                        WaiterForm waiterForm = new WaiterForm();
+                        WaiterForm waiterForm = new WaiterForm(id);
                         this.Hide();
                         waiterForm.ShowDialog();
                         this.Show();
                         break;
                     case 2:
-                        ChefForm chefForm = new ChefForm();
+                        ChefForm chefForm = new ChefForm(id);
                         this.Hide();
                         chefForm.ShowDialog();
                         this.Show();

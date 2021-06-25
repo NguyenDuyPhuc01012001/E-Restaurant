@@ -24,9 +24,11 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class ManagerForm : Window
     {
-        public ManagerForm()
+        public ManagerForm(int id)
         {
             InitializeComponent();
+
+            tblName.Text = StaffDAO.Instance.GetNameById(id);
             SetReportPage();
         }
 
@@ -61,6 +63,9 @@ namespace QuanLyNhaHang
         {
             DisableGridAssistant();
             EnableGridPrincipal();
+
+            SearchBoxContainer.Visibility = Visibility.Visible;
+            AddButton.Visibility = Visibility.Visible;
         }
         private void SetGridAssistant()
         {
@@ -72,7 +77,6 @@ namespace QuanLyNhaHang
             SetGridAssistantToDefault();
             SetGridAssistant();
             IncludeReportManager();
-
         }
         private void SetStaffPage()
         {
@@ -101,6 +105,7 @@ namespace QuanLyNhaHang
             SetGridPrincipal();
             IncludeTableManager();
             IncludeTableList();
+            SearchBoxContainer.Visibility = Visibility.Hidden;
         }
         private void SetAccountManagerPage()
         {
@@ -108,6 +113,7 @@ namespace QuanLyNhaHang
             SetGridPrincipal();
             IncludeAccountManager();
             IncludeAccountList();
+            AddButton.Visibility = Visibility.Hidden;
         }
         #endregion
 
