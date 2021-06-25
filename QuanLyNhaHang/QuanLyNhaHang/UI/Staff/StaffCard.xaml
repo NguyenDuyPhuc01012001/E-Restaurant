@@ -35,7 +35,7 @@
                 <StackPanel Name="employeePosition" Grid.Column="3" Orientation="Horizontal" Margin="5">
                     <TextBlock x:Name="positionTxtBox" Text="Chef" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                 </StackPanel>
-        <Grid Grid.Column="4">
+                <Grid Grid.Column="4" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

@@ -87,17 +87,12 @@ namespace QuanLyNhaHang.DAO
             return result > 0;
         }
 
-        public bool DeleteAccount(string userName)
+        public bool DeleteAccountByIdStaff(int id)
         {
-            string query = string.Format("Delete dbo.Account where userName = {0}", userName);
+            string query = "Delete dbo.Account where idStaff = " + id;
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;
-        }
-
-        public void DeleteAccountByIdStaff(int id)
-        {
-            DataProvider.Instance.ExecuteNonQuery("Delete dbo.Account where idStaff = "+ id);
         }
 
         public bool ResetPassword(string userName)

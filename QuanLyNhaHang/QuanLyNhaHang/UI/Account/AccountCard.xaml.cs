@@ -23,6 +23,12 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class AccountCard : UserControl
     {
+        private event EventHandler deleteAccount;
+        public event EventHandler DeleteAccount
+        {
+            add { deleteAccount += value; }
+            remove { deleteAccount -= value; }
+        }
         public AccountCard()
         {
             InitializeComponent();
@@ -59,9 +65,13 @@ namespace QuanLyNhaHang
             //delete staff
 
             //delete account
-            if (AccountDAO.Instance.DeleteAccount(username))
+            if (AccountDAO.Instance.DeleteAccountByIdStaff(idStaff)&&StaffDAO.Instance.DeleteStaff(idStaff))
             {
                 MessageBox.Show("Delete account successful");
+                if (deleteAccount != null)
+                {
+                    deleteAccount(this, new EventArgs());
+                }
             }
             else
                 MessageBox.Show("Delete account fail");

@@ -50,7 +50,7 @@ namespace QuanLyNhaHang
         {
             nameTxtBox.Text = name;
 
-            salaryTxtBox.Text = salary.ToString() + "VND";
+            salaryTxtBox.Text = salary.ToString() + " VND";
 
             switch(position)
             {

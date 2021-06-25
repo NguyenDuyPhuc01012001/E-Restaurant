@@ -520,6 +520,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -533,6 +534,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -545,6 +547,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -557,6 +560,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -569,6 +573,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -581,6 +586,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -593,6 +599,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -605,6 +612,7 @@ namespace QuanLyNhaHang
                 StaffDTO staff = StaffDAO.Instance.GetStaffById(item.IDStaff);
                 AccountCard acc = new AccountCard();
                 acc.SetText(item.UserName, staff.Name, staff.Position);
+                acc.DeleteAccount += Acc_DeleteAccount;
                 ListHolder.Children.Add(acc);
             }
         }
@@ -905,7 +913,6 @@ namespace QuanLyNhaHang
 
             sortMealNameClickCount++;
         }
-
         private void BtnSortPosition_Click(object sender, RoutedEventArgs e)
         {
             if (sortStaffPositionClickCount % 2 == 0)
@@ -968,6 +975,11 @@ namespace QuanLyNhaHang
                 MessageBox.Show("Delete staff fail");
             IncludeStaffList();
         }
+
+        private void Acc_DeleteAccount(object sender, EventArgs e)
+        {
+            IncludeAccountList();
+        }
         #endregion
 
         #region Field
@@ -994,10 +1006,6 @@ namespace QuanLyNhaHang
         private int sortMealNameClickCount = 0;
 
         private int sortMealCategoryClickCount = 0;
-
-
         #endregion
-
-
     }
 }

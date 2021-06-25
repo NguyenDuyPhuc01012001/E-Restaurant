@@ -51,6 +51,7 @@ namespace QuanLyNhaHang
             if (String.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Category name must not be empty");
+                return;
             }
             
             switch (funtion)
