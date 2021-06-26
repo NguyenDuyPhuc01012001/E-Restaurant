@@ -33,6 +33,7 @@ namespace QuanLyNhaHang
             InitializeComponent();
 
             tblName.Text = StaffDAO.Instance.GetNameById(id);
+            InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
             SetReportPage();
         }
 
@@ -52,6 +53,8 @@ namespace QuanLyNhaHang
         {
             SetCategoryPage();
         }
+
+
         #endregion
 
         #region Set
@@ -887,6 +890,7 @@ namespace QuanLyNhaHang
             {
                 case 1:
                     AddNewStaff addNewStaff = new AddNewStaff();
+                    addNewStaff.btnConfirm.Click += BtnConfirm_Click;
                     addNewStaff.ShowDialog();
                     break;
                 case 2:
@@ -904,6 +908,9 @@ namespace QuanLyNhaHang
                     break;
             }
         }
+
+       
+
         private void BtnSortMealPrice_Click(object sender, RoutedEventArgs e)
         {
             if (sortMealPriceClickCount % 2 == 0)
@@ -992,7 +999,7 @@ namespace QuanLyNhaHang
                     StaffDTO staff = (sender as Button).Tag as StaffDTO;
                     EditStaff editStaff = new EditStaff(staff.Id);
                     editStaff.ShowDialog();
-                    IncludeStaffList();
+                    SetStaffPage();
                     break;
                 case 3:
                     EditCategory(sender, e);
@@ -1018,14 +1025,33 @@ namespace QuanLyNhaHang
                     }
                     else
                         MessageBox.Show("Delete staff fail");
-                    IncludeStaffList();
+                    SetStaffPage();
                     break;
                 case 3:
                     DeleteCategory(sender, e);
                     break;
             }
         }
-        
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            InfoStaff infoStaff = new InfoStaff(staff.Id);
+            infoStaff.btnConfirm.Tag = staff;
+            infoStaff.btnConfirm.Click += BtnConfirm_Click1; ;
+            infoStaff.ShowDialog();
+        }
+
+        private void BtnConfirm_Click1(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
+        }
+
+        private void BtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            SetStaffPage();
+        }
+
         private void Acc_DeleteAccount(object sender, EventArgs e)
         {
             IncludeAccountList();

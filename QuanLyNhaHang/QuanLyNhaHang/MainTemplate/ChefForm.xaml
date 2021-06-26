@@ -24,7 +24,10 @@
                     <materialDesign:PopupBox  Margin="5" PlacementMode="BottomAndAlignRightEdges" 
                                           StaysOpen="False" Foreground="White">
                         <StackPanel Width="150">
-                            <Button Content="Account detail"></Button>
+                            <Button 
+                            x:Name="InfoButton"
+                            Content="Info Staff" 
+                            Click="InfoButton_Click"/>
                             <Button Content="Change password"></Button>
                             <Separator/>
                             <Button x:Name="LogoutButton" Content="Logout" 

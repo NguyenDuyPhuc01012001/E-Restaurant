@@ -13,6 +13,9 @@
     <Compile Update="MainTemplate\EditStaff.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MainTemplate\InfoStaff.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MainTemplate\ModifyCategory.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +127,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainTemplate\EditStaff.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainTemplate\InfoStaff.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainTemplate\ModifyCategory.xaml">
