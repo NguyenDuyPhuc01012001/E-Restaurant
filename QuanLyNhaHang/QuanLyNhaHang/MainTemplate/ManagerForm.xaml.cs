@@ -192,6 +192,7 @@ namespace QuanLyNhaHang
             modifyCategory.ShowDialog();
             IncludeCategoryList();
         }
+        //teaslknafsczxczxvzc
         private void DeleteCategory(object sender, RoutedEventArgs e)
         {
             CategoryDTO category = (sender as Button).Tag as CategoryDTO;
