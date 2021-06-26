@@ -51,28 +51,5 @@ namespace QuanLyNhaHang
             tbkName.Text = name;
             tbkID.Text = id.ToString();
         }
-        private void editButton_Click(object sender, RoutedEventArgs e)
-        {
-            int id = Convert.ToInt32(tbkID.Text);
-            ModifyCategory modifyCategory = new ModifyCategory("Edit", id);
-            modifyCategory.ShowDialog();
-            if(modifyCategory.isUpdate)
-                tbkName.Text = modifyCategory.Name;
-        }
-
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            int id = Convert.ToInt32(tbkID.Text);
-            try
-            {
-                CategoryDAO.Instance.DeleteCategory(id);
-                MessageBox.Show("Delete category succesfully");
-            }
-            catch
-            {
-                MessageBox.Show("This category cannot be deleted because at least one food belongs to this category", "Error while deleting");
-            }
-
-        }
     }
 }

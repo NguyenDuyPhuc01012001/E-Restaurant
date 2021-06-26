@@ -24,6 +24,10 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class ManagerForm : Window
     {
+        public ManagerForm()
+        {
+            InitializeComponent();
+        }
         public ManagerForm(int id)
         {
             InitializeComponent();
@@ -133,6 +137,10 @@ namespace QuanLyNhaHang
             foreach (CategoryDTO category in categoryList)
             {
                 CategoryCard categoryCard = new CategoryCard();
+                categoryCard.editButton.Tag = category;
+                categoryCard.deleteButton.Tag = category;
+                categoryCard.editButton.Click += EditButton_Click;
+                categoryCard.deleteButton.Click += DeleteButton_Click;
                 categoryCard.SetText(category.Id, category.Name);
                 ListHolder.Children.Add(categoryCard);
             }
@@ -176,6 +184,27 @@ namespace QuanLyNhaHang
         private void IncludeCategoryTable()
         {
             ManagerFieldHolder.Children.Add(new CategoryManager(CategoryNameSort));
+        }
+        private void EditCategory(object sender, RoutedEventArgs e)
+        {
+            CategoryDTO category = (sender as Button).Tag as CategoryDTO;
+            ModifyCategory modifyCategory = new ModifyCategory("Edit", category.Id);
+            modifyCategory.ShowDialog();
+            IncludeCategoryList();
+        }
+        private void DeleteCategory(object sender, RoutedEventArgs e)
+        {
+            CategoryDTO category = (sender as Button).Tag as CategoryDTO;
+            try
+            {
+                CategoryDAO.Instance.DeleteCategory(category.Id);
+                MessageBox.Show("Delete category succesfully");
+            }
+            catch
+            {
+                MessageBox.Show("This category cannot be deleted because at least one food belongs to this category", "Error while deleting");
+            }
+            IncludeCategoryList();
         }
         #endregion
 
@@ -955,27 +984,47 @@ namespace QuanLyNhaHang
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            StaffDTO staff = (sender as Button).Tag as StaffDTO;
-            EditStaff editStaff = new EditStaff(staff.Id);
-            editStaff.ShowDialog();
+            int index = ListViewMenu.SelectedIndex;
+            switch (index)
+            {
+                case 1:
+                    StaffDTO staff = (sender as Button).Tag as StaffDTO;
+                    EditStaff editStaff = new EditStaff(staff.Id);
+                    editStaff.ShowDialog();
+                    IncludeStaffList();
+                    break;
+                case 3:
+                    EditCategory(sender, e);
+                    break;
+            }
         }
+        
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Delete staff will delete account. Do you want to countinue?", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
+            int index = ListViewMenu.SelectedIndex;
+            switch (index)
             {
-                return;
+                case 1:
+                    if (MessageBox.Show("Delete staff will delete account. Do you want to countinue?", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
+                    {
+                        return;
+                    }
+                    StaffDTO staff = (sender as Button).Tag as StaffDTO;
+                    AccountDAO.Instance.DeleteAccountByIdStaff(staff.Id);
+                    if (StaffDAO.Instance.DeleteStaff(staff.Id))
+                    {
+                        MessageBox.Show("Delete staff successful");
+                    }
+                    else
+                        MessageBox.Show("Delete staff fail");
+                    IncludeStaffList();
+                    break;
+                case 3:
+                    DeleteCategory(sender, e);
+                    break;
             }
-            StaffDTO staff = (sender as Button).Tag as StaffDTO;
-            AccountDAO.Instance.DeleteAccountByIdStaff(staff.Id);
-            if (StaffDAO.Instance.DeleteStaff(staff.Id))
-            {
-                MessageBox.Show("Delete staff successful");
-            }
-            else
-                MessageBox.Show("Delete staff fail");
-            IncludeStaffList();
         }
-
+        
         private void Acc_DeleteAccount(object sender, EventArgs e)
         {
             IncludeAccountList();

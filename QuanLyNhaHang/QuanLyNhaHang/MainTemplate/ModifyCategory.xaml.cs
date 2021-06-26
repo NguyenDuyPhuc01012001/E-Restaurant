@@ -22,7 +22,7 @@ namespace QuanLyNhaHang
     
     public partial class ModifyCategory : Window
     {
-        private string funtion;
+        private string function;
         private int id;
         private event EventHandler modify;
         private string name;
@@ -35,10 +35,10 @@ namespace QuanLyNhaHang
             add { modify += value; }
             remove { modify -= value; }
         }
-        public ModifyCategory(string funtion, int id)
+        public ModifyCategory(string function, int id)
         {
             InitializeComponent();
-            this.funtion = funtion;
+            this.function = function;
             this.id = id;
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,7 @@ namespace QuanLyNhaHang
                 return;
             }
             
-            switch (funtion)
+            switch (function)
             {
                 case "Add":
                     AddCategory();
