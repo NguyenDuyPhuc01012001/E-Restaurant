@@ -231,7 +231,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name,staff.Salary,staff.Position);
+                card.SetText(staff.Name,staff.Salary,staff.Position,staff.Email,staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -249,7 +249,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -267,7 +267,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -285,7 +285,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -303,7 +303,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -321,7 +321,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -339,7 +339,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -357,7 +357,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 

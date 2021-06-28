@@ -46,7 +46,7 @@ namespace QuanLyNhaHang
             deleteIcon.Foreground = Brushes.White;
         }
 
-        public void SetText(string name, int salary , int position)
+        public void SetText(string name, int salary , int position, string mail, string phone)
         {
             nameTxtBox.Text = name;
 
@@ -63,7 +63,10 @@ namespace QuanLyNhaHang
                 case 2:
                     positionTxtBox.Text = "Chef";
                     break;
-            }            
+            }
+
+            mailTxtBox.Text = mail;
+            phoneTxtBox.Text = phone;
         }
     }
 }
