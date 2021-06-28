@@ -144,7 +144,7 @@ namespace QuanLyNhaHang.MainTemplate {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;component/maintemplate/addnewtable.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;V1.0.0.0;component/maintemplate/addnewtable.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MainTemplate\AddNewTable.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

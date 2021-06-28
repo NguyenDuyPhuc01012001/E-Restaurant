@@ -50,7 +50,6 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="4">
                 <TextBlock Text="Order quantity"/>
-                <materialDesign:PackIcon  Kind="ArrowBottom" Foreground="Red"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="5" VerticalAlignment="Top" Height="16">
 

@@ -20,51 +20,61 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class MealManager : UserControl
     {
+        public RoutedEventHandler eventSortByName;
+        public RoutedEventHandler eventSortByPrice;
+        public RoutedEventHandler eventSortByCategory;
         public MealManager()
         {
             InitializeComponent();
 
         }
+        public MealManager(RoutedEventHandler eventSortByPrice, RoutedEventHandler eventSortByName, RoutedEventHandler eventSortByCategory)
+        {
+            this.eventSortByCategory = eventSortByCategory;
+            this.eventSortByName = eventSortByName;
+            this.eventSortByPrice = eventSortByPrice;
+            InitializeComponent();
+        }
 
         private void btnSortPrice_Click(object sender, RoutedEventArgs e)
         {
-            if (priceSortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            ToggleIconStatus(priceSortIcon);
+            if (eventSortByPrice != null)
             {
-                priceSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
-                priceSortIcon.Foreground = Brushes.Green;
-            }
-            else
-            {
-                priceSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
-                priceSortIcon.Foreground = Brushes.Red;
+                eventSortByPrice(this, e);
             }
         }
 
         private void btnSortCategory_Click(object sender, RoutedEventArgs e)
         {
-            if (categorySortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            ToggleIconStatus(categorySortIcon);
+            if (eventSortByCategory != null)
             {
-                categorySortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
-                categorySortIcon.Foreground = Brushes.Green;
-            }
-            else
-            {
-                categorySortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
-                categorySortIcon.Foreground = Brushes.Red;
+                eventSortByCategory(this, e);
             }
         }
 
         private void btnSortName_Click(object sender, RoutedEventArgs e)
         {
-            if (nameSortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            ToggleIconStatus(nameSortIcon);
+            if (eventSortByName != null)
             {
-                nameSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
-                nameSortIcon.Foreground = Brushes.Green;
+                eventSortByName(this, e);
+            }
+        }
+
+
+        private void ToggleIconStatus(MaterialDesignThemes.Wpf.PackIcon btn)
+        {
+            if (btn.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            {
+                btn.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
+                btn.Foreground = Brushes.Green;
             }
             else
             {
-                nameSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
-                nameSortIcon.Foreground = Brushes.Red;
+                btn.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
+                btn.Foreground = Brushes.Red;
             }
         }
     }

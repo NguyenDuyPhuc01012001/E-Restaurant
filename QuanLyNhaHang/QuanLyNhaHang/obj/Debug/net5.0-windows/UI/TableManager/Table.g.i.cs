@@ -80,7 +80,7 @@ namespace QuanLyNhaHang {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;component/ui/tablemanager/table.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;V1.0.0.0;component/ui/tablemanager/table.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\UI\TableManager\Table.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
