@@ -59,14 +59,14 @@ namespace QuanLyNhaHang.MainTemplate
 
             if (FoodDAO.Instance.EditMeal(name, categoryID, price))
             {
-                MessageBox.Show("Thành công");
+                MessageBox.Show("Successfully");
                 if (editMeal != null)
                     editMeal(this, new EventArgs());
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Không thành công");
+                MessageBox.Show("Failed");
             }
         }
 

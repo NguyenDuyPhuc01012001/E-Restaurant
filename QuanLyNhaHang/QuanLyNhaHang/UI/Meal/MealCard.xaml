@@ -116,9 +116,8 @@
                         Grid.Column="2"
                         Background="Gray"
                         BorderBrush="Gray"
-                        Click="deleteButton_Click"
                         MouseEnter="deleteButton_MouseEnter"
-                        MouseLeave="deleteButton_MouseLeave">
+                        MouseLeave="deleteButton_MouseLeave" Click="deleteButton_Click">
                         <materialDesign:PackIcon
                             x:Name="deleteIcon"
                             Foreground="White"

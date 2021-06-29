@@ -1231,3 +1231,5 @@ E:\DOAN\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTe
 E:\DOAN\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTemplate\InfoStaff.baml
 C:\Users\Asus\Downloads\Git\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTemplate\InfoStaff.g.cs
 C:\Users\Asus\Downloads\Git\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTemplate\InfoStaff.baml
+C:\Users\Xuan Thai\Downloads\Github Repo\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTemplate\InfoStaff.g.cs
+C:\Users\Xuan Thai\Downloads\Github Repo\E-Restaurant\QuanLyNhaHang\QuanLyNhaHang\obj\Debug\net5.0-windows\MainTemplate\InfoStaff.baml

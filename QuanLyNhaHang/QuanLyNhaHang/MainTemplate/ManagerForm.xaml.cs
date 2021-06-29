@@ -210,6 +210,8 @@ namespace QuanLyNhaHang
             }
             IncludeCategoryList();
         }
+
+
         #endregion
 
         #region Staff
@@ -393,6 +395,11 @@ namespace QuanLyNhaHang
 
                 MealCard meal = new MealCard();
                 meal.SetText(food.Name, category, food.Price, quantity);
+                meal.editButton.Tag = food;
+                meal.deleteButton.Tag = food;
+
+                meal.editButton.Click += EditButton_Click;
+                meal.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(meal);
             }
         }
@@ -686,6 +693,11 @@ namespace QuanLyNhaHang
             {
                 TableCard tableCard = new TableCard();
                 tableCard.SetText(table.Name, table.Status);
+                tableCard.editButton.Tag = table;
+                tableCard.deleteButton.Tag = table;
+
+                tableCard.editButton.Click += EditButton_Click;
+                tableCard.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -1003,6 +1015,12 @@ namespace QuanLyNhaHang
                     editStaff.ShowDialog();
                     SetStaffPage();
                     break;
+                case 2:
+                    SetMealPage();
+                    break;
+                case 4:
+                    SetTableManagerPage();
+                    break;
                 case 3:
                     EditCategory(sender, e);
                     break;
@@ -1028,6 +1046,13 @@ namespace QuanLyNhaHang
                     else
                         MessageBox.Show("Delete staff fail");
                     SetStaffPage();
+                    break;
+                case 2:
+                    FoodDTO food = (sender as Button).Tag as FoodDTO;           
+                    SetMealPage();
+                    break;
+                case 4:
+                    SetTableManagerPage();
                     break;
                 case 3:
                     DeleteCategory(sender, e);

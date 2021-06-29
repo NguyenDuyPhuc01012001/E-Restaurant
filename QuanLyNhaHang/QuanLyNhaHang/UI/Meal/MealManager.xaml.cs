@@ -23,11 +23,15 @@ namespace QuanLyNhaHang
         public RoutedEventHandler eventSortByName;
         public RoutedEventHandler eventSortByPrice;
         public RoutedEventHandler eventSortByCategory;
+           
+
         public MealManager()
         {
             InitializeComponent();
 
         }
+
+
         public MealManager(RoutedEventHandler eventSortByPrice, RoutedEventHandler eventSortByName, RoutedEventHandler eventSortByCategory)
         {
             this.eventSortByCategory = eventSortByCategory;
