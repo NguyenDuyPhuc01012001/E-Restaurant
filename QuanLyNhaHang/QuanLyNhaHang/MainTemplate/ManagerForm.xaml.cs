@@ -895,6 +895,7 @@ namespace QuanLyNhaHang
                     break;
                 case 2:
                     AddNewMeal addNewMeal = new AddNewMeal();
+                    addNewMeal.btnConfirm.Click += MealBtnConfirm_Click;
                     addNewMeal.ShowDialog();
                     break;
                 case 3:
@@ -904,6 +905,7 @@ namespace QuanLyNhaHang
                     break;
                 case 4:
                     AddNewTable addNewTable = new AddNewTable();
+                    addNewTable.btnConfirm.Click += TableBtnConfirm_Click;
                     addNewTable.ShowDialog();
                     break;
             }
@@ -1050,6 +1052,14 @@ namespace QuanLyNhaHang
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
             SetStaffPage();
+        }
+        private void MealBtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            SetMealPage();
+        }
+        private void TableBtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            SetTableManagerPage();
         }
 
         private void Acc_DeleteAccount(object sender, EventArgs e)
