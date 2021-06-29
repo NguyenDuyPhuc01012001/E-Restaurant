@@ -104,13 +104,13 @@ namespace QuanLyNhaHang
             string name = mealName.Text;
             if (FoodDAO.Instance.DeleteMeal(name))
             {
-                MessageBox.Show("Thành công");
+                MessageBox.Show("Successfully");
                 if (deleteMeal != null)
                     deleteMeal(this, new EventArgs());
             }
             else
             {
-                MessageBox.Show("Không thành công");
+                MessageBox.Show("Failed");
             }
         }
 
