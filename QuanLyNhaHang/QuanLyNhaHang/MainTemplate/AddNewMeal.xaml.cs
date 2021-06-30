@@ -45,32 +45,34 @@ namespace QuanLyNhaHang
         {
             string name = txtNameMeal.Text;
             string category = cmbCategory.Text;
-            //int categoryID = CategoryDAO.Instance.GetIDCategoryByName(category);
+            //int categoryIDaaa = CategoryDAO.Instance.GetIDCategoryByName(category);
+            int categoryidd = (cmbCategory.SelectedItem as CategoryDTO).Id;
             float price = float.Parse(txtPriceMeal.Text);
-            int categoryID = 1 ;
-            switch (category)
-            {
-                case "Hải sản":
-                    categoryID = 1;
-                    break;
-                case "Lâm sản":
-                    categoryID = 3;
-                    break;
-                case "Nông sản":
-                    categoryID = 2;
-                    break;
-                case "Nước":
-                    categoryID = 4;
-                    break;
-                default:
-                    break;
-            }
-          
+            //int categoryID = 1;
+            //switch (category)
+            //{
+            //    case "Hải sản":
+            //        categoryID = 1;
+            //        break;
+            //    case "Lâm sản":
+            //        categoryID = 3;
+            //        break;
+            //    case "Nông sản":
+            //        categoryID = 2;
+            //        break;
+            //    case "Nước":
+            //        categoryID = 4;
+            //        break;
+            //    default:
+            //        break;
+            //}
 
-            if (FoodDAO.Instance.AddMeal(name,categoryID, price))
+
+            if (FoodDAO.Instance.AddMeal(name,categoryidd, price))
             {
+                //MessageBox.Show(categoryidd.ToString());
                 MessageBox.Show("Add New Meal Successfully");
- 
+
                 if (addMeal != null)
                     addMeal(this, new EventArgs());
                 this.Close();

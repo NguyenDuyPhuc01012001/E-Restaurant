@@ -193,7 +193,7 @@ namespace QuanLyNhaHang {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;component/maintemplate/waiterform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;V1.0.0.0;component/maintemplate/waiterform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MainTemplate\WaiterForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

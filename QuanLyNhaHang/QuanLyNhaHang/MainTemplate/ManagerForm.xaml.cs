@@ -667,6 +667,11 @@ namespace QuanLyNhaHang
             {
                 TableCard tableCard = new TableCard();
                 tableCard.SetText(table.Name, table.Status);
+                tableCard.editButton.Tag = table;
+                tableCard.deleteButton.Tag = table;
+
+                tableCard.editButton.Click += EditButton_Click;
+                tableCard.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -678,6 +683,11 @@ namespace QuanLyNhaHang
             {
                 TableCard tableCard = new TableCard();
                 tableCard.SetText(table.Name, table.Status);
+                tableCard.editButton.Tag = table;
+                tableCard.deleteButton.Tag = table;
+
+                tableCard.editButton.Click += EditButton_Click;
+                tableCard.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(tableCard);
             }
         }

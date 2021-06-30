@@ -15,7 +15,11 @@ CREATE TABLE Staff
 	salary int NOT NULL,
 	position INT NOT NULL  DEFAULT 0 -- 0: manager && 1: waiter && 2: chef
 )
-GO
+	GO
+
+
+select id from FoodCategory where name = N'Nông sản'
+
 
 CREATE TABLE Account
 (

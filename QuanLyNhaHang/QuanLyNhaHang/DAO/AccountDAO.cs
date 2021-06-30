@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,9 +27,18 @@ namespace QuanLyNhaHang.DAO
 
         public bool Login(string username, string password)
         {
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(password);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+            string hasPass = "";
+
+            foreach (byte item in hasData)
+            {
+                hasPass += item;
+            }
 
             string query = "EXEC USP_Login @UserName , @PassWord";
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { username, password });
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { username, hasPass });
             return result.Rows.Count > 0;
         }
 
@@ -97,7 +107,7 @@ namespace QuanLyNhaHang.DAO
 
         public bool ResetPassword(string userName)
         {
-            string query = string.Format("UPDATE dbo.Account SET passWord = '123456' where userName = '{0}'", userName);
+            string query = string.Format("UPDATE dbo.Account SET passWord = '2251022057731868917119086224872421513662' where userName = '{0}'", userName);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;

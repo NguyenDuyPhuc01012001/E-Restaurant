@@ -70,7 +70,7 @@ namespace QuanLyNhaHang
 
         private void ToggleIconStatus(MaterialDesignThemes.Wpf.PackIcon btn)
         {
-            if (btn.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            if (btn.Foreground == Brushes.Red)
             {
                 btn.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
                 btn.Foreground = Brushes.Green;
