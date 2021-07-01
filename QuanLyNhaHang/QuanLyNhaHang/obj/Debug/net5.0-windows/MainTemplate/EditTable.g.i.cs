@@ -136,7 +136,7 @@ namespace QuanLyNhaHang.MainTemplate {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;component/maintemplate/edittable.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;V1.0.0.0;component/maintemplate/edittable.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MainTemplate\EditTable.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
