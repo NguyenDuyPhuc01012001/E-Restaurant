@@ -15,7 +15,11 @@ CREATE TABLE Staff
 	salary int NOT NULL,
 	position INT NOT NULL  DEFAULT 0 -- 0: manager && 1: waiter && 2: chef
 )
-GO
+	GO
+
+
+select id from FoodCategory where name = N'Nông sản'
+
 
 CREATE TABLE Account
 (
@@ -51,13 +55,26 @@ CREATE TABLE Food
 	idCategory INT NOT NULL,
 	price FLOAT NOT NULL DEFAULT 0
 )
+ 
+CREATE TABLE Book
+(
+	id INT IDENTITY PRIMARY KEY,
+	name NVARCHAR(100) NOT NULL DEFAULT N'Chưa đặt tên',
+	phone NVARCHAR(10) NOT NULL DEFAULT N'0123456789',
+	dateCheckIn DATE NOT NULL DEFAULT GETDATE(),
+	idTable INT NOT NULL,
+	FOREIGN KEY (idTable) REFERENCES dbo.TableFood(id)
+)
 GO
+
+ALTER TABLE dbo.Food 
+ADD Orderquantity int
 
 CREATE TABLE Bill
 (
 	id INT IDENTITY PRIMARY KEY,
-	DateCheckIn DATETIME NOT NULL DEFAULT GETDATE(),
-	DateCheckOut DATETIME,
+	DateCheckIn DATE NOT NULL DEFAULT GETDATE(),
+	DateCheckOut DATE,
 	idTable INT NOT NULL,
 	status INT NOT NULL DEFAULT 0 -- 1: đã thanh toán && 0: chưa thanh toán	
 
@@ -557,12 +574,3 @@ UPDATE dbo.BillInfo set status=0
 ALTER TABLE STAFF
 ALTER COLUMN sex INT
 
--- new 
-CREATE PROC USP_GetIdByUserName
-@userName varchar(100)
-AS 
-BEGIN
-	SELECT Staff.id FROM dbo.Account INNER JOIN dbo.Staff ON Staff.id = Account.idStaff
-	WHERE UserName = @userName COLLATE SQL_Latin1_General_CP1_CS_AS
-END
-GO

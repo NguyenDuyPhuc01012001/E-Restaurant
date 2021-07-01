@@ -1,5 +1,6 @@
 ﻿using QuanLyNhaHang.DAO;
 using QuanLyNhaHang.DTO;
+using QuanLyNhaHang.MainTemplate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +29,8 @@ namespace QuanLyNhaHang
         public ChefForm(int id)
         {
             InitializeComponent();
-
             tblName.Text = StaffDAO.Instance.GetNameById(id);
+            InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
             LoadMealStatus();
         }
 
@@ -52,6 +53,20 @@ namespace QuanLyNhaHang
                 spMealStatusChef.Children.Add(card);
             }
                
+        }
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            InfoStaff infoStaff = new InfoStaff(staff.Id);
+            infoStaff.btnConfirm.Tag = staff;
+            infoStaff.btnConfirm.Click += BtnConfirm_Click;
+            infoStaff.ShowDialog();
+        }
+
+        private void BtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
         }
 
         private void CbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -33,6 +33,7 @@ namespace QuanLyNhaHang
             InitializeComponent();
 
             tblName.Text = StaffDAO.Instance.GetNameById(id);
+            InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
             SetReportPage();
         }
 
@@ -52,6 +53,8 @@ namespace QuanLyNhaHang
         {
             SetCategoryPage();
         }
+
+
         #endregion
 
         #region Set
@@ -207,6 +210,8 @@ namespace QuanLyNhaHang
             }
             IncludeCategoryList();
         }
+
+
         #endregion
 
         #region Staff
@@ -228,7 +233,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name,staff.Salary,staff.Position);
+                card.SetText(staff.Name,staff.Salary,staff.Position,staff.Email,staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -246,7 +251,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -264,7 +269,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -282,7 +287,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -300,7 +305,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -318,7 +323,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -336,7 +341,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -354,7 +359,7 @@ namespace QuanLyNhaHang
             foreach (StaffDTO staff in staffList)
             {
                 StaffCard card = new StaffCard();
-                card.SetText(staff.Name, staff.Salary, staff.Position);
+                card.SetText(staff.Name, staff.Salary, staff.Position, staff.Email, staff.Phone);
                 card.editButton.Tag = staff;
                 card.deleteButton.Tag = staff;
 
@@ -390,6 +395,11 @@ namespace QuanLyNhaHang
 
                 MealCard meal = new MealCard();
                 meal.SetText(food.Name, category, food.Price, quantity);
+                meal.editButton.Tag = food;
+                meal.deleteButton.Tag = food;
+
+                meal.editButton.Click += EditButton_Click;
+                meal.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(meal);
             }
         }
@@ -657,6 +667,11 @@ namespace QuanLyNhaHang
             {
                 TableCard tableCard = new TableCard();
                 tableCard.SetText(table.Name, table.Status);
+                tableCard.editButton.Tag = table;
+                tableCard.deleteButton.Tag = table;
+
+                tableCard.editButton.Click += EditButton_Click;
+                tableCard.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -668,6 +683,11 @@ namespace QuanLyNhaHang
             {
                 TableCard tableCard = new TableCard();
                 tableCard.SetText(table.Name, table.Status);
+                tableCard.editButton.Tag = table;
+                tableCard.deleteButton.Tag = table;
+
+                tableCard.editButton.Click += EditButton_Click;
+                tableCard.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -683,6 +703,11 @@ namespace QuanLyNhaHang
             {
                 TableCard tableCard = new TableCard();
                 tableCard.SetText(table.Name, table.Status);
+                tableCard.editButton.Tag = table;
+                tableCard.deleteButton.Tag = table;
+
+                tableCard.editButton.Click += EditButton_Click;
+                tableCard.deleteButton.Click += DeleteButton_Click;
                 ListHolder.Children.Add(tableCard);
             }
         }
@@ -887,10 +912,12 @@ namespace QuanLyNhaHang
             {
                 case 1:
                     AddNewStaff addNewStaff = new AddNewStaff();
+                    addNewStaff.btnConfirm.Click += BtnConfirm_Click;
                     addNewStaff.ShowDialog();
                     break;
                 case 2:
                     AddNewMeal addNewMeal = new AddNewMeal();
+                    addNewMeal.btnConfirm.Click += MealBtnConfirm_Click;
                     addNewMeal.ShowDialog();
                     break;
                 case 3:
@@ -900,10 +927,14 @@ namespace QuanLyNhaHang
                     break;
                 case 4:
                     AddNewTable addNewTable = new AddNewTable();
+                    addNewTable.btnConfirm.Click += TableBtnConfirm_Click;
                     addNewTable.ShowDialog();
                     break;
             }
         }
+
+       
+
         private void BtnSortMealPrice_Click(object sender, RoutedEventArgs e)
         {
             if (sortMealPriceClickCount % 2 == 0)
@@ -992,7 +1023,13 @@ namespace QuanLyNhaHang
                     StaffDTO staff = (sender as Button).Tag as StaffDTO;
                     EditStaff editStaff = new EditStaff(staff.Id);
                     editStaff.ShowDialog();
-                    IncludeStaffList();
+                    SetStaffPage();
+                    break;
+                case 2:
+                    SetMealPage();
+                    break;
+                case 4:
+                    SetTableManagerPage();
                     break;
                 case 3:
                     EditCategory(sender, e);
@@ -1018,14 +1055,48 @@ namespace QuanLyNhaHang
                     }
                     else
                         MessageBox.Show("Delete staff fail");
-                    IncludeStaffList();
+                    SetStaffPage();
+                    break;
+                case 2:
+                    FoodDTO food = (sender as Button).Tag as FoodDTO;           
+                    SetMealPage();
+                    break;
+                case 4:
+                    SetTableManagerPage();
                     break;
                 case 3:
                     DeleteCategory(sender, e);
                     break;
             }
         }
-        
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            InfoStaff infoStaff = new InfoStaff(staff.Id);
+            infoStaff.btnConfirm.Tag = staff;
+            infoStaff.btnConfirm.Click += BtnConfirm_Click1; ;
+            infoStaff.ShowDialog();
+        }
+
+        private void BtnConfirm_Click1(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
+        }
+
+        private void BtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            SetStaffPage();
+        }
+        private void MealBtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            SetMealPage();
+        }
+        private void TableBtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            SetTableManagerPage();
+        }
+
         private void Acc_DeleteAccount(object sender, EventArgs e)
         {
             IncludeAccountList();

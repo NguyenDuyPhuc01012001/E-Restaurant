@@ -48,7 +48,10 @@
                     PlacementMode="BottomAndAlignRightEdges"
                     StaysOpen="False">
                     <StackPanel Width="150">
-                        <Button Content="Account detail" />
+                        <Button
+                            x:Name="InfoButton"
+                            Content="Info Staff" 
+                            Click="InfoButton_Click"/>
                         <Button Content="Change password" />
                         <Separator />
                         <Button

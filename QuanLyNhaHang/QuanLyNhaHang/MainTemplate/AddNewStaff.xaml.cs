@@ -29,8 +29,6 @@ namespace QuanLyNhaHang
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
                 string name = txtNameEmployee.Text;
                 string UserName = txtUserNameEmployee.Text;
                 string email = txtEmailEmployee.Text;
@@ -39,9 +37,9 @@ namespace QuanLyNhaHang
                 int position = cmbPoition.SelectedIndex;
                 int sex = Convert.ToInt32(rdoMale.IsChecked.Value);
 
-                if (name == null || UserName == null || email == null || phone == null || salary == null)
-                    MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
+            if (name == null || UserName == null || email == null || phone == null || salary == null || position == -1)
+                MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            else {
                 if (StaffDAO.Instance.CheckPhoneExist(phone) == 0 && StaffDAO.Instance.CheckEmailExist(email) == 0)
                 {
                     if (AccountDAO.Instance.CheckUsernamelExist(UserName) == 0)
@@ -59,14 +57,6 @@ namespace QuanLyNhaHang
                 }
                 else
                     MessageBox.Show("Phone or Email is exist");
-            }
-            catch (FormatException formatExcept)
-            {
-                MessageBox.Show("Please fill all field", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            catch (Exception except)
-            {
-                MessageBox.Show(except.ToString(), "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
        

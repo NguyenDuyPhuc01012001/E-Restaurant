@@ -16,6 +16,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <CheckBox Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <CheckBox.Resources>
@@ -46,6 +48,16 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="4" VerticalAlignment="Top" Height="16">
+
+                <TextBlock Text="Mail"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="5" VerticalAlignment="Top" Height="16">
+
+                <TextBlock Text="Phone"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="6" VerticalAlignment="Top" Height="16">
 
                 <TextBlock Text="Manage"/>
 

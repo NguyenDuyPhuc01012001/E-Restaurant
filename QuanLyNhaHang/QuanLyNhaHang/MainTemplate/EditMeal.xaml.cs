@@ -35,38 +35,38 @@ namespace QuanLyNhaHang.MainTemplate
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             string name = txtNameMeal.Text;
-            int categoryID = 2;
+            int categoryID = (cmbCategory.SelectedItem as CategoryDTO).Id;
             string category = cmbCategory.Text;
             float price = float.Parse(txtPriceMeal.Text);
-            switch (category)
-            {
-                case "Hải sản":
-                    categoryID = 1;
-                    break;
-                case "Lâm sản":
-                    categoryID = 3;
-                    break;
-                case "Nông sản":
-                    categoryID = 2;
-                    break;
-                case "Nước":
-                    categoryID = 4;
-                    break;
-                default:
-                    break;
-            }
+            //switch (category)
+            //{
+            //    case "Hải sản":
+            //        categoryID = 1;
+            //        break;
+            //    case "Lâm sản":
+            //        categoryID = 3;
+            //        break;
+            //    case "Nông sản":
+            //        categoryID = 2;
+            //        break;
+            //    case "Nước":
+            //        categoryID = 4;
+            //        break;
+            //    default:
+            //        break;
+            //}
 
 
             if (FoodDAO.Instance.EditMeal(name, categoryID, price))
             {
-                MessageBox.Show("Thành công");
+                MessageBox.Show("Successfully");
                 if (editMeal != null)
                     editMeal(this, new EventArgs());
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Không thành công");
+                MessageBox.Show("Failed");
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using QuanLyNhaHang.DAO;
 using QuanLyNhaHang.DTO;
+using QuanLyNhaHang.MainTemplate;
 using QuanLyNhaHang.UI.Meal;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,8 @@ namespace QuanLyNhaHang
         public WaiterForm(int id)
         {
             InitializeComponent();
-
             tblName.Text = StaffDAO.Instance.GetNameById(id);
+            InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
             staffID = id;
             Load();
         }
@@ -278,7 +279,22 @@ namespace QuanLyNhaHang
 
             LoadFoodListByCategory(id);
         }
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            InfoStaff infoStaff = new InfoStaff(staff.Id);
+            infoStaff.btnConfirm.Tag = staff;
+            infoStaff.btnConfirm.Click += BtnConfirm_Click;
+            infoStaff.ShowDialog();
+        }
+
+        private void BtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            StaffDTO staff = (sender as Button).Tag as StaffDTO;
+            tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
+        }
+
+            private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
