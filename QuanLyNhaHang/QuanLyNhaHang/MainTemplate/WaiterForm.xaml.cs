@@ -23,6 +23,10 @@ namespace QuanLyNhaHang
     public partial class WaiterForm : Window
     {
         int staffID;
+        public WaiterForm()
+        {
+            InitializeComponent();
+        }
         public WaiterForm(int id)
         {
             InitializeComponent();

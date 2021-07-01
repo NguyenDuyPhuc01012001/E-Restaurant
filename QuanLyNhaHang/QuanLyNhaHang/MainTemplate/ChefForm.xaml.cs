@@ -21,6 +21,10 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class ChefForm : Window
     {
+        public ChefForm()
+        {
+            InitializeComponent();
+        }
         public ChefForm(int id)
         {
             InitializeComponent();

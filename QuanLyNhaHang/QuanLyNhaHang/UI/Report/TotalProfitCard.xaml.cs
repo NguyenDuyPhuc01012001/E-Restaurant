@@ -34,7 +34,7 @@ namespace QuanLyNhaHang
             List<BillInfoDTO> list = BillInfoDAO.Instance.GetListRevenue(currentMonth);
             foreach (BillInfoDTO report in list)
             {
-                totalProfit += (report.Price * report.Count) ;
+                totalProfit += report.Price * report.Count;
             }
             return totalProfit;
         }
@@ -44,7 +44,7 @@ namespace QuanLyNhaHang
             List<BillInfoDTO> list = BillInfoDAO.Instance.GetListRevenue(month, year);
             foreach(BillInfoDTO report in list)
             {
-                totalProfit += (report.Price*report.Count);
+                totalProfit += report.Price * report.Count;
             }    
             return totalProfit;
         }
