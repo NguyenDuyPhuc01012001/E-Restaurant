@@ -63,8 +63,8 @@ namespace QuanLyNhaHang.DAO
 
         public bool ChangePassword(string userName, string password, string newPass)
         {
-            string query = "exec USP_UpdateAccount @userName , @password , @newPassword";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName, password, newPass });
+            string query = "exec USP_UpdateAccount @userName  , @password , @newPassword";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName,  password, newPass });
 
             return result > 0;
         }

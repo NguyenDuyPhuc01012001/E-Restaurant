@@ -185,6 +185,14 @@
                 FontSize="35"
                 Foreground="BlanchedAlmond"
                 Text="Restaurant management" />
+            <TextBlock
+                x:Name="passwordSave"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="35"
+                Foreground="BlanchedAlmond"
+                Visibility="Hidden"
+                Text="asd" />
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBlock
                     x:Name="tblName"
@@ -192,6 +200,7 @@
                     FontSize="18"
                     Foreground="White"
                     Text=" Admin" />
+                
                 <materialDesign:PopupBox
                     Margin="5"
                     Foreground="White"
