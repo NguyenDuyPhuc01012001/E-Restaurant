@@ -374,7 +374,6 @@ namespace QuanLyNhaHang
         #region Meal
         private void IncludeMealManagerTable()
         {
-            ManagerFieldHolder.Children.Add(new MealManager());
             MealManager mealManager = new MealManager();
             ManagerFieldHolder.Children.Add(mealManager);
             sortStaffNameClickCount = 0;
@@ -899,6 +898,7 @@ namespace QuanLyNhaHang
         private void ChangepasswordButton_Click(object sender, RoutedEventArgs e)
         {
             ChangePassword changePassword = new ChangePassword();
+            changePassword.txtUserNameEmployee.Text = passwordSave.Text;
             changePassword.ShowDialog();
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)

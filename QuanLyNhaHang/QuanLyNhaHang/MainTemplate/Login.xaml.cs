@@ -106,6 +106,7 @@ namespace QuanLyNhaHang
                     case 0:
                         ManagerForm managerForm = new ManagerForm(id);
                         this.Hide();
+                        managerForm.passwordSave.Text = userName;
                         managerForm.ShowDialog();
                         this.Show();
                         break;
