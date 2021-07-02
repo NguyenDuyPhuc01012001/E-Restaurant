@@ -17,8 +17,7 @@ CREATE TABLE Staff
 )
 	GO
 
-
-select id from FoodCategory where name = N'Nông sản'
+select username from Account,Staff where Account.idStaff = Staff.id and Staff.id = '1'
 
 
 CREATE TABLE Account
@@ -31,7 +30,9 @@ CREATE TABLE Account
 	FOREIGN KEY (idStaff) REFERENCES dbo.Staff(id)
 )
 GO
+Select food.id from Food where food.name = N'Motjj'
 
+UPDATE dbo.Food SET name = N'Midone', idCategory = 1, price = 44444  WHERE id = 44
 
 CREATE TABLE TableFood
 (
@@ -574,3 +575,14 @@ UPDATE dbo.BillInfo set status=0
 ALTER TABLE STAFF
 ALTER COLUMN sex INT
 
+Select Food.id from Food where [name] =  N'Motjj'
+
+-- new 
+CREATE PROC USP_GetIdByUserName
+@userName varchar(100)
+AS 
+BEGIN
+	SELECT Staff.id FROM dbo.Account INNER JOIN dbo.Staff ON Staff.id = Account.idStaff
+	WHERE UserName = @userName COLLATE SQL_Latin1_General_CP1_CS_AS
+END
+GO

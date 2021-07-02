@@ -19,6 +19,14 @@
                 </Grid.Effect>
                 <TextBlock Text="Change meal status" FontSize="35" Foreground="BlanchedAlmond" 
                        HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                <TextBlock
+                x:Name="passwordSave"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="35"
+                Foreground="BlanchedAlmond"
+                Visibility="Hidden"
+                Text="asd" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock x:Name="tblName" Text=" Chef" Foreground="White" VerticalAlignment="Center" FontSize="18"></TextBlock>
                     <materialDesign:PopupBox  Margin="5" PlacementMode="BottomAndAlignRightEdges" 
@@ -28,7 +36,10 @@
                             x:Name="InfoButton"
                             Content="Info Staff" 
                             Click="InfoButton_Click"/>
-                            <Button Content="Change password"></Button>
+                            <Button Content="Change password" 
+                                    Name="ChangepasswordButton" 
+                                Click="ChangepasswordButton_Click" 
+                                Cursor="Hand" ></Button>
                             <Separator/>
                             <Button x:Name="LogoutButton" Content="Logout" 
                                 Click="LogoutButton_Click" Cursor="Hand"></Button>

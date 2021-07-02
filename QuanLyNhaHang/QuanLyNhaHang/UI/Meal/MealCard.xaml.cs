@@ -27,6 +27,7 @@ namespace QuanLyNhaHang
     {
         private string nameFood;
 
+
         public string NameFood
         {
             get { return nameFood; }
@@ -117,9 +118,9 @@ namespace QuanLyNhaHang
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
             nameFood = mealName.Text;
-
-            EditMeal editmeal = new EditMeal();
-            editmeal.txtNameMeal.Text = nameFood;
+           
+            EditMeal editmeal = new EditMeal(mealName.Text);
+           
             editmeal.ShowDialog();
 
         }

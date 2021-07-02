@@ -24,6 +24,7 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class ManagerForm : Window
     {
+        private int staffID;
         public ManagerForm()
         {
             InitializeComponent();
@@ -34,6 +35,7 @@ namespace QuanLyNhaHang
 
             tblName.Text = StaffDAO.Instance.GetNameById(id);
             InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
+            staffID = id;
             SetReportPage();
         }
 
@@ -382,6 +384,7 @@ namespace QuanLyNhaHang
             mealManager.btnSortName.Click += BtnSortMealName_Click;
             mealManager.btnSortCategory.Click += BtnSortMealCategory_Click;
             mealManager.btnSortPrice.Click += BtnSortMealPrice_Click;
+            mealManager.btnSortQuantity.Click += BtnSortMealQuantity_Click;
         }
         private void IncludeFoodList()
         {
@@ -392,7 +395,10 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
 
+
                 MealCard meal = new MealCard();
+  
+
                 meal.SetText(food.Name, category, food.Price, quantity);
                 meal.editButton.Tag = food;
                 meal.deleteButton.Tag = food;
@@ -412,6 +418,7 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
                 MealCard card = new MealCard();
+
                 card.SetText(food.Name, category, food.Price, quantity);
                 card.editButton.Tag = food;
                 card.deleteButton.Tag = food;
@@ -432,6 +439,7 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
                 MealCard card = new MealCard();
+
                 card.SetText(food.Name, category, food.Price, quantity);
                 card.editButton.Tag = food;
                 card.deleteButton.Tag = food;
@@ -452,6 +460,7 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
                 MealCard card = new MealCard();
+
                 card.SetText(food.Name, category, food.Price, quantity);
                 card.editButton.Tag = food;
                 card.deleteButton.Tag = food;
@@ -472,6 +481,7 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
                 MealCard card = new MealCard();
+
                 card.SetText(food.Name, category, food.Price, quantity);
                 card.editButton.Tag = food;
                 card.deleteButton.Tag = food;
@@ -492,6 +502,7 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
                 MealCard card = new MealCard();
+
                 card.SetText(food.Name, category, food.Price, quantity);
                 card.editButton.Tag = food;
                 card.deleteButton.Tag = food;
@@ -512,6 +523,49 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
                 MealCard card = new MealCard();
+
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByQuantityDesc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByQuantityDescending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+
+                card.SetText(food.Name, category, food.Price, quantity);
+                card.editButton.Tag = food;
+                card.deleteButton.Tag = food;
+
+                card.editButton.Click += EditButton_Click;
+                card.deleteButton.Click += DeleteButton_Click;
+
+                ListHolder.Children.Add(card);
+            }
+        }
+        private void IncludeFoodListByQuantityAsc(string name)
+        {
+            ListHolder.Children.Clear();
+            List<FoodDTO> foodlist = FoodDAO.Instance.GetListFoodByQuantityAscending(name);
+
+            foreach (FoodDTO food in foodlist)
+            {
+                string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+                int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
+                MealCard card = new MealCard();
+
                 card.SetText(food.Name, category, food.Price, quantity);
                 card.editButton.Tag = food;
                 card.deleteButton.Tag = food;
@@ -532,6 +586,7 @@ namespace QuanLyNhaHang
                 string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                 int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
                 MealCard card = new MealCard();
+
                 card.SetText(food.Name, category, food.Price, quantity);
                 card.editButton.Tag = food;
                 card.deleteButton.Tag = food;
@@ -897,8 +952,9 @@ namespace QuanLyNhaHang
         }
         private void ChangepasswordButton_Click(object sender, RoutedEventArgs e)
         {
+
             ChangePassword changePassword = new ChangePassword();
-            changePassword.txtUserNameEmployee.Text = passwordSave.Text;
+            changePassword.txtUserNameEmployee.Text = StaffDAO.Instance.GetUserNameById(staffID);
             changePassword.ShowDialog();
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -933,7 +989,20 @@ namespace QuanLyNhaHang
             }
         }
 
-       
+        
+            private void BtnSortMealQuantity_Click(object sender, RoutedEventArgs e)
+        {
+            if (sortMealQuantityClickCount % 2 == 0)
+            {
+                IncludeFoodListByQuantityAsc(searchTxb.Text);
+            }
+            else
+            {
+                IncludeFoodListByQuantityDesc(searchTxb.Text);
+            }
+
+            sortMealQuantityClickCount++;
+        }
 
         private void BtnSortMealPrice_Click(object sender, RoutedEventArgs e)
         {
@@ -1127,6 +1196,8 @@ namespace QuanLyNhaHang
         private int sortMealNameClickCount = 0;
 
         private int sortMealCategoryClickCount = 0;
+
+        private int sortMealQuantityClickCount = 0;
         #endregion
     }
 }

@@ -242,6 +242,69 @@ namespace QuanLyNhaHang.DAO
             }
             return food;
         }
+        public List<FoodDTO> GetListFoodByQuantityDescending(string name)
+        {
+            List<FoodDTO> food = new List<FoodDTO>();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                string query = "select Food.id,Food.idCategory,Food.name,Food.price "+
+                                "from Food, BillInfo "+
+                                "where BillInfo.idFood = Food.id Group by Food.id order by sum(BillInfo.count) desc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+            }
+            else
+            {
+                string query = "select Food.id,Food.idCategory,Food.name,Food.price " +
+                                "from Food, BillInfo " +
+                                "where BillInfo.idFood = Food.id and Food.name like N'%" + name + "%'+ " +
+                                "Group by Food.id order by sum(BillInfo.count) desc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+
+            }
+            return food;
+        }
+
+        public List<FoodDTO> GetListFoodByQuantityAscending(string name)
+        {
+            List<FoodDTO> food = new List<FoodDTO>();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                string query = "select Food.id,Food.idCategory,Food.name,Food.price " +
+                                "from Food, BillInfo " +
+                                "where BillInfo.idFood = Food.id Group by Food.id order by sum(BillInfo.count) asc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+            }
+            else
+            {
+                string query = "select Food.id,Food.idCategory,Food.name,Food.price " +
+                                "from Food, BillInfo " +
+                                "where BillInfo.idFood = Food.id and Food.name like N'%" + name + "%'+ " +
+                                "Group by Food.id order by sum(BillInfo.count) asc";
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+                foreach (DataRow item in data.Rows)
+                {
+                    FoodDTO foood = new FoodDTO(item);
+                    food.Add(foood);
+                }
+
+            }
+            return food;
+        }
 
         public bool AddMeal(string name,int idCategory, float price)
         {
@@ -251,9 +314,9 @@ namespace QuanLyNhaHang.DAO
             return result > 0;
         }
 
-        public bool EditMeal(string name, int idCategory, float price)
+        public bool EditMeal(int id, string name, int idCategory, float price)
         {
-            string query = string.Format("UPDATE dbo.Food SET price = {0}, idCategory={1} WHERE name = N'{2}'", price, idCategory, name);
+            string query = string.Format("UPDATE dbo.Food SET name = N'{0}', idCategory = {1}, price = {2} WHERE id = {3}", name, idCategory, price, id);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;

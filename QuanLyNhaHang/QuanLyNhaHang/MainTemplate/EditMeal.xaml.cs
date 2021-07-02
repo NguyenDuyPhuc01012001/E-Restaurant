@@ -21,10 +21,13 @@ namespace QuanLyNhaHang.MainTemplate
     /// </summary>
     public partial class EditMeal : Window
     {
-        public EditMeal()
+        private string FoodName;
+
+        public EditMeal(string foodName)
         {
             InitializeComponent();
             LoadCategory();
+            this.FoodName = foodName;
         }
         private event EventHandler editMeal;
         public event EventHandler editmeal
@@ -34,10 +37,15 @@ namespace QuanLyNhaHang.MainTemplate
         }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            int id = FoodDAO.Instance.GetIDFoodByName(FoodName);
+            
+            //MessageBox.Show(FoodName);
+            //MessageBox.Show(id.ToString());
             string name = txtNameMeal.Text;
             int categoryID = (cmbCategory.SelectedItem as CategoryDTO).Id;
             string category = cmbCategory.Text;
             float price = float.Parse(txtPriceMeal.Text);
+            
             //switch (category)
             //{
             //    case "Hải sản":
@@ -57,7 +65,7 @@ namespace QuanLyNhaHang.MainTemplate
             //}
 
 
-            if (FoodDAO.Instance.EditMeal(name, categoryID, price))
+            if (FoodDAO.Instance.EditMeal(id,name, categoryID, price))
             {
                 MessageBox.Show("Successfully");
                 if (editMeal != null)
