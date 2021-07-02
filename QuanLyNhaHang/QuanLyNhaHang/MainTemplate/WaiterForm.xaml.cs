@@ -299,5 +299,12 @@ namespace QuanLyNhaHang
             this.Close();
         }
         #endregion
+
+        private void ChangepasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword();
+            changePassword.txtUserNameEmployee.Text = StaffDAO.Instance.GetUserNameById(staffID);
+            changePassword.ShowDialog();
+        }
     }
 }

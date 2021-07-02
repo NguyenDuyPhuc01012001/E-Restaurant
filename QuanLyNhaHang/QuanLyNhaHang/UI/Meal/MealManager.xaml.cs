@@ -85,6 +85,20 @@ namespace QuanLyNhaHang
             }
         }
 
+        private void btnSortQuantity_Click(object sender, RoutedEventArgs e)
+        {
+            if (quantitySortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
+            {
+                quantitySortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
+                quantitySortIcon.Foreground = Brushes.Green;
+            }
+            else
+            {
+                quantitySortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
+                quantitySortIcon.Foreground = Brushes.Red;
+            }
+        }
+
 
         //private void ToggleIconStatus(MaterialDesignThemes.Wpf.PackIcon btn)
         //{
