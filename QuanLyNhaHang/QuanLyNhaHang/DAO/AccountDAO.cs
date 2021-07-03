@@ -113,11 +113,6 @@ namespace QuanLyNhaHang.DAO
             return result > 0;
         }
 
-        public void EditUsernameByIdStaff(int idStaff,string username)
-        {
-            string query = string.Format("UPDATE dbo.Account SET userName = '{0}' where idStaff = {1}", username,idStaff);
-            DataProvider.Instance.ExecuteNonQuery(query);
-        }
 
         public List<AccountDTO> GetAccount_PositionListAscending(string username)
         {

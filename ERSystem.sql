@@ -5,6 +5,7 @@ GO
 set dateformat DMY
 GO 
 
+
 CREATE TABLE Staff
 (
 	id INT IDENTITY PRIMARY KEY,
@@ -17,7 +18,6 @@ CREATE TABLE Staff
 )
 	GO
 
-select username from Account,Staff where Account.idStaff = Staff.id and Staff.id = '1'
 
 
 CREATE TABLE Account
@@ -25,14 +25,11 @@ CREATE TABLE Account
 	id INT IDENTITY PRIMARY KEY,
 	idStaff INT NOT NULL UNIQUE,
 	userName VARCHAR(100) UNIQUE,	
-	passWord VARCHAR(1000) NOT NULL DEFAULT '123456',
+	passWord VARCHAR(1000) NOT NULL DEFAULT '2251022057731868917119086224872421513662' --PASSWORD: '123456' ENCODE
 
 	FOREIGN KEY (idStaff) REFERENCES dbo.Staff(id)
 )
 GO
-Select food.id from Food where food.name = N'Motjj'
-
-UPDATE dbo.Food SET name = N'Midone', idCategory = 1, price = 44444  WHERE id = 44
 
 CREATE TABLE TableFood
 (
@@ -57,17 +54,6 @@ CREATE TABLE Food
 	price FLOAT NOT NULL DEFAULT 0
 )
  
-CREATE TABLE Book
-(
-	id INT IDENTITY PRIMARY KEY,
-	name NVARCHAR(100) NOT NULL DEFAULT N'Chưa đặt tên',
-	phone NVARCHAR(10) NOT NULL DEFAULT N'0123456789',
-	dateCheckIn DATE NOT NULL DEFAULT GETDATE(),
-	idTable INT NOT NULL,
-	FOREIGN KEY (idTable) REFERENCES dbo.TableFood(id)
-)
-GO
-
 ALTER TABLE dbo.Food 
 ADD Orderquantity int
 
@@ -77,6 +63,7 @@ CREATE TABLE Bill
 	DateCheckIn DATE NOT NULL DEFAULT GETDATE(),
 	DateCheckOut DATE,
 	idTable INT NOT NULL,
+	discount INT DEFAULT 0,
 	status INT NOT NULL DEFAULT 0 -- 1: đã thanh toán && 0: chưa thanh toán	
 
 	FOREIGN KEY (idTable) REFERENCES dbo.TableFood(id)
@@ -88,7 +75,9 @@ CREATE TABLE BillInfo
 	id INT IDENTITY PRIMARY KEY,
 	idBill INT NOT NULL,
 	idFood INT NOT NULL,
-	count INT NOT NULL DEFAULT 0
+	description NVARCHAR(100),
+	count INT NOT NULL DEFAULT 0,
+	status INT DEFAULT 0
 	
 	FOREIGN KEY (idBill) REFERENCES dbo.Bill(id),
 	FOREIGN KEY (idFood) REFERENCES dbo.Food(id)
@@ -133,8 +122,6 @@ VALUES
     1     -- position - int
     )
 GO
-
-
 
 
 INSERT INTO dbo.Staff
@@ -325,7 +312,9 @@ VALUES  ( 3, -- idBill - int
           )   
 GO
 
+
 --Procedure
+
 CREATE PROC USP_Login
 @userName varchar(100), @passWord varchar(100)
 AS
@@ -336,6 +325,7 @@ BEGIN
 END
 GO
 
+
 CREATE PROC USP_GetPositionByUserName
 @userName varchar(100)
 AS 
@@ -344,6 +334,7 @@ BEGIN
 	WHERE UserName = @userName COLLATE SQL_Latin1_General_CP1_CS_AS
 END
 GO
+
 
 CREATE PROC USP_InsertBill
 @idTable INT
@@ -368,6 +359,7 @@ BEGIN
 	 WHERE id=@idTable
 END
 GO
+
 
 CREATE PROC USP_InsertStaff
 @name NVARCHAR(100),@sex INT,@email NVARCHAR(100), @phone VARCHAR(10), @salary INT,@position INT
@@ -431,6 +423,7 @@ VALUES  ( @idBill, -- idBill - int
 	END
 END
 GO
+
 
 Create PROC USP_SwitchTable
 @idTable1 INT, @idTable2 int
@@ -556,28 +549,7 @@ BEGIN
 END
 GO
 
---UPDATE BILL
-ALTER TABLE dbo.bill
-ADD discount INT 
-GO
-UPDATE dbo.Bill set discount=0
 
---UPDATE BILLINFO
-ALTER TABLE dbo.BillInfo
-ADD description NVARCHAR(100)
-
-ALTER TABLE dbo.BillInfo
-ADD status INT 
-GO 
-UPDATE dbo.BillInfo set status=0
-
---UPDATE STAFF
-ALTER TABLE STAFF
-ALTER COLUMN sex INT
-
-Select Food.id from Food where [name] =  N'Motjj'
-
--- new 
 CREATE PROC USP_GetIdByUserName
 @userName varchar(100)
 AS 
@@ -586,3 +558,9 @@ BEGIN
 	WHERE UserName = @userName COLLATE SQL_Latin1_General_CP1_CS_AS
 END
 GO
+
+
+
+
+
+

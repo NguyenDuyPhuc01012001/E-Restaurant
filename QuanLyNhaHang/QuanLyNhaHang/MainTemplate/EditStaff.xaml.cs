@@ -32,7 +32,7 @@ namespace QuanLyNhaHang.MainTemplate
             this.btnConfirm.Tag = staff;
             AccountDTO account = AccountDAO.Instance.GetAccountByIdUser(staff.Id);
             txtNameEmployee.Text = staff.Name;
-            //txtUserNameEmployee.Text = account.UserName;
+            txtUserNameEmployee.Text = account.UserName;
             txtEmailEmployee.Text = staff.Email;
             txtPhoneEmployee.Text = staff.Phone;
             txtSalaryEmployee.Text = staff.Salary.ToString();
@@ -63,8 +63,6 @@ namespace QuanLyNhaHang.MainTemplate
                     if (AccountDAO.Instance.CheckUsernamelExist(UserName) == 0 || AccountDAO.Instance.CheckUsernamelExist(UserName) == idStaff)
                     {
                         StaffDAO.Instance.EditStaff(name, sex, email, phone, Int32.Parse(salary), position, idStaff);
-
-                        AccountDAO.Instance.EditUsernameByIdStaff(idStaff, UserName);
 
                         MessageBox.Show("Edit staff successfuly");
                     }

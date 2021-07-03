@@ -77,8 +77,6 @@ namespace QuanLyNhaHang.MainTemplate
                     {
                         StaffDAO.Instance.EditStaff(name, sex, email, phone, staff.Salary, staff.Position, idStaff);
 
-                        AccountDAO.Instance.EditUsernameByIdStaff(idStaff, UserName);
-
                         MessageBox.Show("Edit staff successfuly");
                     }
                     else
