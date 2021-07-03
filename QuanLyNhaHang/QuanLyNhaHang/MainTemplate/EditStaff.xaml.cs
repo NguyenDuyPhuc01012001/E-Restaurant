@@ -32,7 +32,7 @@ namespace QuanLyNhaHang.MainTemplate
             this.btnConfirm.Tag = staff;
             AccountDTO account = AccountDAO.Instance.GetAccountByIdUser(staff.Id);
             txtNameEmployee.Text = staff.Name;
-            txtUserNameEmployee.Text = account.UserName;
+            //txtUserNameEmployee.Text = account.UserName;
             txtEmailEmployee.Text = staff.Email;
             txtPhoneEmployee.Text = staff.Phone;
             txtSalaryEmployee.Text = staff.Salary.ToString();
