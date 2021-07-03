@@ -63,9 +63,18 @@ namespace QuanLyNhaHang.DAO
 
         public bool ChangePassword(string userName, string password)
         {
-            string query = string.Format("Update Account Set password = N'{0}' Where username = N'{1}' ", password,userName);
-            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(password);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
 
+            string hasPass = "";
+
+            foreach (byte item in hasData)
+            {
+                hasPass += item;
+            }
+            string query = string.Format("Update Account Set password = N'{0}' Where username = N'{1}' ", hasPass,userName);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            
             return result > 0;
         }
 
