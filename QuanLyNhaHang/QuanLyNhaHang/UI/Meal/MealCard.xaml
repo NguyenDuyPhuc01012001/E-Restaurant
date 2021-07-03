@@ -37,6 +37,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Left"
                     Orientation="Horizontal">
+                  
                     <TextBlock
                         x:Name="mealName"
                         Margin="10,0,10,0"

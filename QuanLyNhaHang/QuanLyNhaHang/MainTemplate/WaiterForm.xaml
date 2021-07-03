@@ -30,8 +30,16 @@
                     Color="#FFACACAC" />
             </Grid.Effect>
             <TextBlock
+                x:Name="passwordSave"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                FontSize="35"
+                Foreground="BlanchedAlmond"
+                Visibility="Hidden"
+                Text="asd" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
                 FontSize="35"
                 Foreground="BlanchedAlmond"
                 Text="Waiter's form" />
@@ -52,7 +60,10 @@
                             x:Name="InfoButton"
                             Content="Info Staff" 
                             Click="InfoButton_Click"/>
-                        <Button Content="Change password" />
+                        <Button Content="Change password" 
+                                Name="ChangepasswordButton" 
+                                Click="ChangepasswordButton_Click" 
+                                Cursor="Hand" />
                         <Separator />
                         <Button
                             x:Name="LogoutButton"

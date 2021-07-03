@@ -22,6 +22,7 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class ChefForm : Window
     {
+        private int staffID;
         public ChefForm()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace QuanLyNhaHang
             InitializeComponent();
             tblName.Text = StaffDAO.Instance.GetNameById(id);
             InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
+            staffID = id;
             LoadMealStatus();
         }
 
@@ -75,6 +77,13 @@ namespace QuanLyNhaHang
             int idBillInfo = ((sender as ComboBox).Tag as BillInfoDTO).Id;
             int status = (sender as ComboBox).SelectedIndex;
             BillInfoDAO.Instance.UpdateStatus(idBillInfo, status);
+        }
+
+        private void ChangepasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword();
+            changePassword.txtUserNameEmployee.Text = StaffDAO.Instance.GetUserNameById(staffID);
+            changePassword.ShowDialog();
         }
     }
 }

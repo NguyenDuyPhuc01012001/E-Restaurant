@@ -296,5 +296,11 @@ namespace QuanLyNhaHang.DAO
             string name = DataProvider.Instance.ExecuteScalar(query).ToString();
             return name;
         }
+        public string GetUserNameById(int id)
+        {
+            string query = "select username from Account, Staff where Account.idStaff = Staff.id and Staff.id = " + id;
+            string name = DataProvider.Instance.ExecuteScalar(query).ToString();
+            return name;
+        }
     }
 }

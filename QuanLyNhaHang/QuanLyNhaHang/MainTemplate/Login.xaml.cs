@@ -106,18 +106,21 @@ namespace QuanLyNhaHang
                     case 0:
                         ManagerForm managerForm = new ManagerForm(id);
                         this.Hide();
+                        
                         managerForm.ShowDialog();
                         this.Show();
                         break;
                     case 1:
                         WaiterForm waiterForm = new WaiterForm(id);
                         this.Hide();
+                       
                         waiterForm.ShowDialog();
                         this.Show();
                         break;
                     case 2:
                         ChefForm chefForm = new ChefForm(id);
                         this.Hide();
+                        
                         chefForm.ShowDialog();
                         this.Show();
                         break;
