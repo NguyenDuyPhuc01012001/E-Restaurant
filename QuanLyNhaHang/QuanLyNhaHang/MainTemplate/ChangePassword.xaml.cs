@@ -37,7 +37,7 @@ namespace QuanLyNhaHang
             string cfpassword = txtConfirmPassword.Password;
             if(password == cfpassword)
             {
-                if (AccountDAO.Instance.ChangePassword(username,password,cfpassword))
+                if (AccountDAO.Instance.ChangePassword(username,password))
                 {
                     MessageBox.Show("Successfully");
 
@@ -53,7 +53,7 @@ namespace QuanLyNhaHang
             }
             else
             {
-                MessageBox.Show("Password unmatched!");
+                MessageBox.Show("Password didn't match!!");
             }
         }
 

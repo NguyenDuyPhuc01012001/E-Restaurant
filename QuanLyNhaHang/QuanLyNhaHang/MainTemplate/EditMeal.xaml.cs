@@ -23,11 +23,21 @@ namespace QuanLyNhaHang.MainTemplate
     {
         private string FoodName;
 
+
         public EditMeal(string foodName)
         {
             InitializeComponent();
             LoadCategory();
             this.FoodName = foodName;
+
+            int idd = FoodDAO.Instance.GetIDFoodByName(FoodName);
+            FoodDTO food = FoodDAO.Instance.GetFoodById(idd);
+
+            txtNameMeal.Text = food.Name;
+            txtPriceMeal.Text = food.Price.ToString();
+            //cmbCategory.SelectedItem = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+            
+    
         }
         private event EventHandler editMeal;
         public event EventHandler editmeal

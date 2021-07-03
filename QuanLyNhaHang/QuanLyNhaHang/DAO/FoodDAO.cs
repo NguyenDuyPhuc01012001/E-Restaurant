@@ -333,8 +333,23 @@ namespace QuanLyNhaHang.DAO
         public int GetIDFoodByName(string name)
         {
             string query = string.Format("Select food.id from Food where food.name = N'{0}'", name);
-            int id = DataProvider.Instance.ExecuteNonQuery(query);
+            int id = (int)DataProvider.Instance.ExecuteScalar(query);
             return id;
+        }
+
+        public FoodDTO GetFoodById(int id)
+        {
+
+            string query = "select * from Food where id = " + id;
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            if (data.Rows.Count > 0)
+            {
+                FoodDTO food = new FoodDTO(data.Rows[0]);
+                return food;
+            }
+            return null;
         }
     }
 }
