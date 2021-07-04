@@ -22,22 +22,25 @@ namespace QuanLyNhaHang.MainTemplate
     public partial class EditMeal : Window
     {
         private string FoodName;
-
-
         public EditMeal(string foodName)
         {
             InitializeComponent();
-            LoadCategory();
-            this.FoodName = foodName;
+            try
+            {
+                LoadCategory();
+                this.FoodName = foodName;
 
-            int idd = FoodDAO.Instance.GetIDFoodByName(FoodName);
-            FoodDTO food = FoodDAO.Instance.GetFoodById(idd);
+                int idd = FoodDAO.Instance.GetIDFoodByName(FoodName);
+                FoodDTO food = FoodDAO.Instance.GetFoodById(idd);
 
-            txtNameMeal.Text = food.Name;
-            txtPriceMeal.Text = food.Price.ToString();
-            //cmbCategory.SelectedItem = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
-            
-    
+                txtNameMeal.Text = food.Name;
+                txtPriceMeal.Text = food.Price.ToString();
+                //cmbCategory.SelectedItem = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private event EventHandler editMeal;
         public event EventHandler editmeal
@@ -47,44 +50,29 @@ namespace QuanLyNhaHang.MainTemplate
         }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            int id = FoodDAO.Instance.GetIDFoodByName(FoodName);
-            
-            //MessageBox.Show(FoodName);
-            //MessageBox.Show(id.ToString());
-            string name = txtNameMeal.Text;
-            int categoryID = (cmbCategory.SelectedItem as CategoryDTO).Id;
-            string category = cmbCategory.Text;
-            float price = float.Parse(txtPriceMeal.Text);
-            
-            //switch (category)
-            //{
-            //    case "Hải sản":
-            //        categoryID = 1;
-            //        break;
-            //    case "Lâm sản":
-            //        categoryID = 3;
-            //        break;
-            //    case "Nông sản":
-            //        categoryID = 2;
-            //        break;
-            //    case "Nước":
-            //        categoryID = 4;
-            //        break;
-            //    default:
-            //        break;
-            //}
-
-
-            if (FoodDAO.Instance.EditMeal(id,name, categoryID, price))
+            try
             {
-                MessageBox.Show("Successfully");
-                if (editMeal != null)
-                    editMeal(this, new EventArgs());
-                this.Close();
+                int id = FoodDAO.Instance.GetIDFoodByName(FoodName);
+                string name = txtNameMeal.Text;
+                int categoryID = (cmbCategory.SelectedItem as CategoryDTO).Id;
+                string category = cmbCategory.Text;
+                float price = float.Parse(txtPriceMeal.Text);
+
+                if (FoodDAO.Instance.EditMeal(id, name, categoryID, price))
+                {
+                    MessageBox.Show("Successfully");
+                    if (editMeal != null)
+                        editMeal(this, new EventArgs());
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Failed");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Failed");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -95,9 +83,16 @@ namespace QuanLyNhaHang.MainTemplate
 
         void LoadCategory()
         {
-            List<CategoryDTO> listCategory = CategoryDAO.Instance.GetListCategory();
-            cmbCategory.ItemsSource = listCategory;
-            cmbCategory.DisplayMemberPath = "Name";
+            try
+            {
+                List<CategoryDTO> listCategory = CategoryDAO.Instance.GetListCategory();
+                cmbCategory.ItemsSource = listCategory;
+                cmbCategory.DisplayMemberPath = "Name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

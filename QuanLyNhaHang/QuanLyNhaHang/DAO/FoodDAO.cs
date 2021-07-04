@@ -248,8 +248,9 @@ namespace QuanLyNhaHang.DAO
             if (string.IsNullOrWhiteSpace(name))
             {
                 string query = "select Food.id,Food.idCategory,Food.name,Food.price "+
-                                "from Food, BillInfo "+
-                                "where BillInfo.idFood = Food.id Group by Food.id order by sum(BillInfo.count) desc";
+                                "FROM Food LEFT JOIN dbo.BillInfo ON BillInfo.idFood = Food.id " +
+                                "Group by Food.id,Food.idCategory,Food.name,Food.price " +
+                                "order by sum(BillInfo.count) desc";
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
                 foreach (DataRow item in data.Rows)
                 {
@@ -260,9 +261,10 @@ namespace QuanLyNhaHang.DAO
             else
             {
                 string query = "select Food.id,Food.idCategory,Food.name,Food.price " +
-                                "from Food, BillInfo " +
-                                "where BillInfo.idFood = Food.id and Food.name like N'%" + name + "%'+ " +
-                                "Group by Food.id order by sum(BillInfo.count) desc";
+                                "FROM Food LEFT JOIN dbo.BillInfo ON BillInfo.idFood = Food.id " +
+                                "where Food.name like N'%" + name + "%'+ " +
+                                "Group by Food.id,Food.idCategory,Food.name,Food.price " +
+                                "order by sum(BillInfo.count) desc";
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
                 foreach (DataRow item in data.Rows)
                 {
@@ -280,8 +282,9 @@ namespace QuanLyNhaHang.DAO
             if (string.IsNullOrWhiteSpace(name))
             {
                 string query = "select Food.id,Food.idCategory,Food.name,Food.price " +
-                                "from Food, BillInfo " +
-                                "where BillInfo.idFood = Food.id Group by Food.id order by sum(BillInfo.count) asc";
+                                "FROM Food LEFT JOIN dbo.BillInfo ON BillInfo.idFood = Food.id " +
+                                "Group by Food.id,Food.idCategory,Food.name,Food.price "+
+                                "order by sum(BillInfo.count) asc";
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
                 foreach (DataRow item in data.Rows)
                 {
@@ -292,9 +295,10 @@ namespace QuanLyNhaHang.DAO
             else
             {
                 string query = "select Food.id,Food.idCategory,Food.name,Food.price " +
-                                "from Food, BillInfo " +
-                                "where BillInfo.idFood = Food.id and Food.name like N'%" + name + "%'+ " +
-                                "Group by Food.id order by sum(BillInfo.count) asc";
+                                "FROM Food LEFT JOIN dbo.BillInfo ON BillInfo.idFood = Food.id " +
+                                "where Food.name like N'%" + name + "%'+ " +
+                                "Group by Food.id,Food.idCategory,Food.name,Food.price " +
+                                "order by sum(BillInfo.count) asc";
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
                 foreach (DataRow item in data.Rows)
                 {

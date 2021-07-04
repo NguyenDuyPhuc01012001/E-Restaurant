@@ -56,57 +56,78 @@ namespace QuanLyNhaHang
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Delete account will delete staff. Do you want to countinue?", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
+            try
             {
-                return;
-            }
-            string username = txbUserName.Text;
-            int idStaff = AccountDAO.Instance.GetIDStaffByUserName(username);
-            //delete staff
-
-            //delete account
-            if (AccountDAO.Instance.DeleteAccountByIdStaff(idStaff)&&StaffDAO.Instance.DeleteStaff(idStaff))
-            {
-                MessageBox.Show("Delete account successful");
-                if (deleteAccount != null)
+                if (MessageBox.Show("Delete account will delete staff. Do you want to countinue?", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
                 {
-                    deleteAccount(this, new EventArgs());
+                    return;
                 }
+                string username = txbUserName.Text;
+                int idStaff = AccountDAO.Instance.GetIDStaffByUserName(username);
+                //delete staff
+
+                //delete account
+                if (AccountDAO.Instance.DeleteAccountByIdStaff(idStaff) && StaffDAO.Instance.DeleteStaff(idStaff))
+                {
+                    MessageBox.Show("Delete account successful");
+                    if (deleteAccount != null)
+                    {
+                        deleteAccount(this, new EventArgs());
+                    }
+                }
+                else
+                    MessageBox.Show("Delete account fail");
             }
-            else
-                MessageBox.Show("Delete account fail");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void SetText(string userName, string name, int position)
         {
-            txbUserName.Text = userName;
-            txbName.Text = name;
-            switch (position)
+            try
             {
-                case 0:
-                    txbWorkingPosition.Text = "Manager";
-                    break;
-                case 1:
-                    txbWorkingPosition.Text = "Waiter";
-                    break;
-                case 2:
-                    txbWorkingPosition.Text = "Chef";
-                    break;
+                txbUserName.Text = userName;
+                txbName.Text = name;
+                switch (position)
+                {
+                    case 0:
+                        txbWorkingPosition.Text = "Manager";
+                        break;
+                    case 1:
+                        txbWorkingPosition.Text = "Waiter";
+                        break;
+                    case 2:
+                        txbWorkingPosition.Text = "Chef";
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void resetPasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            string userName = txbUserName.Text;
-            string message = "Are you sure you want to reset password of " + userName + "?";
-            string title = "Reset Password";
-            MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel);
-            if (result == MessageBoxResult.OK)
+            try
             {
-                if (AccountDAO.Instance.ResetPassword(userName))
-                    MessageBox.Show("Reset password success, new password is: 123456", "Suscess", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK);
-                else
-                    MessageBox.Show("Reset password fail", "Fail", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK);
+                string userName = txbUserName.Text;
+                string message = "Are you sure you want to reset password of " + userName + "?";
+                string title = "Reset Password";
+                MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.Cancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    if (AccountDAO.Instance.ResetPassword(userName))
+                        MessageBox.Show("Reset password success, new password is: 123456", "Suscess", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK);
+                    else
+                        MessageBox.Show("Reset password fail", "Fail", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

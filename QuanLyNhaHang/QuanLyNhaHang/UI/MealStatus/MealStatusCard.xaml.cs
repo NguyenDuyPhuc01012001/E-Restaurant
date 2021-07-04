@@ -26,13 +26,20 @@ namespace QuanLyNhaHang
         }
         public void SetText(string foodname, int count, string des, int status)
         {
-            mealOrder.Text = count.ToString();
-            name.Text = foodname;
-            mealDescription.Text = des;
-            if (status == 1)
-                mealStatus.Text = "Done";
-            else
-                mealStatus.Text = "Not done";
+            try
+            {
+                mealOrder.Text = count.ToString();
+                name.Text = foodname;
+                mealDescription.Text = des;
+                if (status == 1)
+                    mealStatus.Text = "Done";
+                else
+                    mealStatus.Text = "Not done";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

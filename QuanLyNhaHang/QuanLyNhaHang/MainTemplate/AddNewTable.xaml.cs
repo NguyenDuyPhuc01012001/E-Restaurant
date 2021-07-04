@@ -28,17 +28,21 @@ namespace QuanLyNhaHang.MainTemplate
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            try
             {
                 string name = txtNameTable.Text;
                 if (TableDAO.Instance.AddTable(name))
                 {
                     MessageBox.Show("Add New Table Successfully");
-
                 }
                 else
                 {
                     MessageBox.Show("Add New Table Failed");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -47,5 +51,4 @@ namespace QuanLyNhaHang.MainTemplate
             this.Close();
         }
     }
-    
 }

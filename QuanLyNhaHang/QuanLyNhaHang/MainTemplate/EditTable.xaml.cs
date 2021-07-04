@@ -31,18 +31,25 @@ namespace QuanLyNhaHang.MainTemplate
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            string oldname = OldName.Text;
-            string newname = txtTable.Text;
-            if (TableDAO.Instance.EditTable(oldname,newname))
+            try
             {
-                MessageBox.Show("Edit Table Successfully");
-                if (edittable != null)
-                    edittable(this, new EventArgs());
-                this.Close();
+                string oldname = OldName.Text;
+                string newname = txtTable.Text;
+                if (TableDAO.Instance.EditTable(oldname, newname))
+                {
+                    MessageBox.Show("Edit Table Successfully");
+                    if (edittable != null)
+                        edittable(this, new EventArgs());
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Add Table Failed");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Add Table Failed");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private event EventHandler edittable;
@@ -55,6 +62,5 @@ namespace QuanLyNhaHang.MainTemplate
         {
             this.Close();
         }
-
     }
 }

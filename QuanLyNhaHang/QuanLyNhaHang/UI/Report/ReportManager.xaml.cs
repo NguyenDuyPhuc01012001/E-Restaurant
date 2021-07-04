@@ -26,21 +26,28 @@ namespace QuanLyNhaHang
         {
             InitializeComponent();
             datePicker.SelectedDate = DateTime.Now;
-             
+
         }
 
         private void datePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            month = datePicker.SelectedDate.Value.Month;
-            year = datePicker.SelectedDate.Value.Year;
-            totalProfitCard.SetTotalProfitByMonthAndYear(month, year);
-            compareLastMonthCard.SetPercenProfitWithLastMonth(month, year);
-
-            if(cartesianChartContainer.Children.Count > 0)
+            try
             {
-                cartesianChartContainer.Children.Clear();
+                month = datePicker.SelectedDate.Value.Month;
+                year = datePicker.SelectedDate.Value.Year;
+                totalProfitCard.SetTotalProfitByMonthAndYear(month, year);
+                compareLastMonthCard.SetPercenProfitWithLastMonth(month, year);
 
-                cartesianChartContainer.Children.Add(new CartesianChart(year));
+                if (cartesianChartContainer.Children.Count > 0)
+                {
+                    cartesianChartContainer.Children.Clear();
+
+                    cartesianChartContainer.Children.Add(new CartesianChart(year));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

@@ -31,10 +31,17 @@ namespace QuanLyNhaHang
         public WaiterForm(int id)
         {
             InitializeComponent();
-            tblName.Text = StaffDAO.Instance.GetNameById(id);
-            InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
-            staffID = id;
-            Load();
+            try
+            {
+                tblName.Text = StaffDAO.Instance.GetNameById(id);
+                InfoButton.Tag = StaffDAO.Instance.GetStaffById(id);
+                staffID = id;
+                Load();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         #region method
@@ -45,123 +52,192 @@ namespace QuanLyNhaHang
             LoadFoodList();
             LoadCbTable();
         }
-        
+
         private void LoadTable()
         {
-            TableDAO.Instance.SetTableStatus();
-            wpTable.Children.Clear();
-            List<TableDTO> tableList = TableDAO.Instance.GetTableList();
-            for (int i = 0; i < tableList.Count; i++)
+            try
             {
                 TableDAO.Instance.SetTableStatus();
+                wpTable.Children.Clear();
+                List<TableDTO> tableList = TableDAO.Instance.GetTableList();
+                for (int i = 0; i < tableList.Count; i++)
+                {
+                    TableDAO.Instance.SetTableStatus();
+                }
+
+                foreach (TableDTO item in tableList)
+                {
+                    Table btn = new Table();
+
+                    btn.SetTest(item.Name, item.Status);
+                    btn.btnTable.Tag = item;
+
+                    btn.SetBackGround(item.Status);
+
+                    btn.btnTable.Click += BtnTable_Click;
+                    wpTable.Children.Add(btn);
+                }
             }
-
-            foreach (TableDTO item in tableList)
+            catch (Exception ex)
             {
-                Table btn = new Table();
-
-                btn.SetTest(item.Name, item.Status);
-                btn.btnTable.Tag = item;
-
-                btn.SetBackGround(item.Status);
-
-                btn.btnTable.Click += BtnTable_Click;
-                wpTable.Children.Add(btn);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void LoadFoodList()
         {
-            wpFood.Children.Clear();
-
-            List<FoodDTO> foodList = FoodDAO.Instance.GetListFood();
-            foreach (FoodDTO food in foodList)
+            try
             {
-                MealButton foodBTN = new MealButton();
-                foodBTN.SetName(food.Name);
-                foodBTN.btnMeal.Tag = food;
-                foodBTN.btnMeal.Click += BtnMeal_Click;
-                wpFood.Children.Add(foodBTN);
-            }
+                wpFood.Children.Clear();
 
+                List<FoodDTO> foodList = FoodDAO.Instance.GetListFood();
+                foreach (FoodDTO food in foodList)
+                {
+                    MealButton foodBTN = new MealButton();
+                    foodBTN.SetName(food.Name);
+                    foodBTN.btnMeal.Tag = food;
+                    foodBTN.btnMeal.Click += BtnMeal_Click;
+                    wpFood.Children.Add(foodBTN);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         void LoadCategory()
         {
-            List<CategoryDTO> listCategory = CategoryDAO.Instance.GetListCategory();
-            cbCategory.ItemsSource = listCategory;
-            cbCategory.DisplayMemberPath = "Name";
+            try
+            {
+                List<CategoryDTO> listCategory = CategoryDAO.Instance.GetListCategory();
+                cbCategory.ItemsSource = listCategory;
+                cbCategory.DisplayMemberPath = "Name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void LoadFoodListByCategory(int id)
         {
-            wpFood.Children.Clear();
-
-            List<FoodDTO> listFoodByCategory = FoodDAO.Instance.GetFoodByCategoryID(id);
-
-            foreach (FoodDTO food in listFoodByCategory)
+            try
             {
-                MealButton foodBTN = new MealButton();
-                foodBTN.SetName(food.Name);
-                foodBTN.btnMeal.Tag = food;
-                foodBTN.btnMeal.Click += BtnMeal_Click;
-                wpFood.Children.Add(foodBTN);
+                wpFood.Children.Clear();
+
+                List<FoodDTO> listFoodByCategory = FoodDAO.Instance.GetFoodByCategoryID(id);
+
+                foreach (FoodDTO food in listFoodByCategory)
+                {
+                    MealButton foodBTN = new MealButton();
+                    foodBTN.SetName(food.Name);
+                    foodBTN.btnMeal.Tag = food;
+                    foodBTN.btnMeal.Click += BtnMeal_Click;
+                    wpFood.Children.Add(foodBTN);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void LoadMealStatus(int tableID)
         {
-            List<BillInfoDTO> listBillInfo = BillInfoDAO.Instance.GetListMenuByTable(tableID);
-
-            spmealstatus.Children.Clear();
-
-            foreach (BillInfoDTO item in listBillInfo)
+            try
             {
-                MealStatusCard card = new MealStatusCard();
-                card.Tag = item;
-                card.SetText(item.FoodName, item.Count, item.Description, item.Status);
-                spmealstatus.Children.Add(card);
+                List<BillInfoDTO> listBillInfo = BillInfoDAO.Instance.GetListMenuByTable(tableID);
+
+                spmealstatus.Children.Clear();
+
+                foreach (BillInfoDTO item in listBillInfo)
+                {
+                    MealStatusCard card = new MealStatusCard();
+                    card.Tag = item;
+                    card.SetText(item.FoodName, item.Count, item.Description, item.Status);
+                    spmealstatus.Children.Add(card);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void LoadCbTable()
         {
-            List<TableDTO> tableList = TableDAO.Instance.GetTableList();
-            ucCbTable.cbTable.ItemsSource = tableList;
-            ucCbTable.cbTable.DisplayMemberPath = "Name";
+            try
+            {
+                List<TableDTO> tableList = TableDAO.Instance.GetTableList();
+                ucCbTable.cbTable.ItemsSource = tableList;
+                ucCbTable.cbTable.DisplayMemberPath = "Name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void LoadDiscount(int tableID)
         {
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(tableID);
-            discount.discountTextBox.Text = BillDAO.Instance.GetDiscount(idBill).ToString();
+            try
+            {
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(tableID);
+                discount.discountTextBox.Text = BillDAO.Instance.GetDiscount(idBill).ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void LoadPrice(int tableID)
         {
-            float price = 0;
-            List<BillInfoDTO> listBillInfo = BillInfoDAO.Instance.GetListMenuByTable(tableID);
-            foreach (BillInfoDTO billInfo in listBillInfo)
+            try
             {
-                price += billInfo.TotalPrice;
+                float price = 0;
+                List<BillInfoDTO> listBillInfo = BillInfoDAO.Instance.GetListMenuByTable(tableID);
+                foreach (BillInfoDTO billInfo in listBillInfo)
+                {
+                    price += billInfo.TotalPrice;
+                }
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(tableID);
+                int discount = BillDAO.Instance.GetDiscount(idBill);
+
+                float total = price * (100 - discount) / 100;
+
+                Price.Text = total.ToString() + " VND";
             }
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(tableID);
-            int discount = BillDAO.Instance.GetDiscount(idBill);
-
-            float total = price * (100 - discount) / 100;
-
-            Price.Text = total.ToString() + " VND";
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         #endregion
 
         #region event
         private void BtnTable_Click(object sender, RoutedEventArgs e)
         {
-            int tableID = ((sender as Button).Tag as TableDTO).ID;
-            spmealstatus.Tag = (sender as Button).Tag;
+            try
+            {
+                int tableID = ((sender as Button).Tag as TableDTO).ID;
+                spmealstatus.Tag = (sender as Button).Tag;
 
-            LoadMealStatus(tableID);
-            LoadDiscount(tableID);
-            LoadPrice(tableID);
+                LoadMealStatus(tableID);
+                LoadDiscount(tableID);
+                LoadPrice(tableID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnMeal_Click(object sender, RoutedEventArgs e)
         {
-            int mealID = ((sender as Button).Tag as FoodDTO).Id;
-            wpFood.Tag = (sender as Button).Tag;
+            try
+            {
+                int mealID = ((sender as Button).Tag as FoodDTO).Id;
+                wpFood.Tag = (sender as Button).Tag;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void confirmBtn_Click(object sender, RoutedEventArgs e)
@@ -199,102 +275,140 @@ namespace QuanLyNhaHang
             {
                 MessageBox.Show(except.ToString(), "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            
         }
 
         private void changeTableBtn_Click(object sender, RoutedEventArgs e)
         {
-            TableDTO table = spmealstatus.Tag as TableDTO;
-            int id1 = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            try
+            {
+                TableDTO table = spmealstatus.Tag as TableDTO;
+                int id1 = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
 
-            int id2 = (ucCbTable.cbTable.SelectedItem as TableDTO).ID;
+                int id2 = (ucCbTable.cbTable.SelectedItem as TableDTO).ID;
 
-            MessageBox.Show(string.Format("Do you want to switch table from {0} to {1}", table.Name, (ucCbTable.cbTable.SelectedItem as TableDTO).Name), "Notify");
-            TableDAO.Instance.SwitchTable(table.iD, id2);
-            /*TableDAO.Instance.UpdateTableStatus(table.ID);
-            TableDAO.Instance.UpdateTableStatus(id2);*/
-            LoadTable();
+                MessageBox.Show(string.Format("Do you want to switch table from {0} to {1}", table.Name, (ucCbTable.cbTable.SelectedItem as TableDTO).Name), "Notify");
+                TableDAO.Instance.SwitchTable(table.iD, id2);
+                /*TableDAO.Instance.UpdateTableStatus(table.ID);
+                TableDAO.Instance.UpdateTableStatus(id2);*/
+                LoadTable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void applyDiscountBtn_Click(object sender, RoutedEventArgs e)
-        {            
-            TableDTO table = spmealstatus.Tag as TableDTO;
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
-            int dis;
+        {
             try
             {
-                dis = Int16.Parse(discount.discountTextBox.Text);
+                TableDTO table = spmealstatus.Tag as TableDTO;
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+                int dis;
+                try
+                {
+                    dis = Int16.Parse(discount.discountTextBox.Text);
+                }
+                catch
+                {
+                    dis = 0;
+                }
+                BillDAO.Instance.UpdateDiscount(idBill, dis);
+                LoadPrice(table.ID);
             }
-            catch
+            catch (Exception ex)
             {
-                dis = 0;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            BillDAO.Instance.UpdateDiscount(idBill, dis);
-            LoadPrice(table.ID);
-
         }
 
         private void exportBillBtn_Click(object sender, RoutedEventArgs e)
         {
-            TableDTO table = spmealstatus.Tag as TableDTO;
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
-            int dis;
-            int total;
             try
             {
-                dis = Int16.Parse(discount.discountTextBox.Text);
-                total = Int32.Parse(Price.Text.Split(" ")[0]);
-            }
-            catch
-            {
-                dis = 0;
-                total = 0;
-            }
+                TableDTO table = spmealstatus.Tag as TableDTO;
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+                int dis;
+                int total;
+                try
+                {
+                    dis = Int16.Parse(discount.discountTextBox.Text);
+                    total = Int32.Parse(Price.Text.Split(" ")[0]);
+                }
+                catch
+                {
+                    dis = 0;
+                    total = 0;
+                }
 
-
-            if (idBill != -1)
-            {
-                MessageBox.Show("Do you want check out bill for " + table.Name, "Notify");
-                BillTemplate bill = new BillTemplate(table.iD,staffID);
-                bill.Show();
-                BillDAO.Instance.CheckOut(table.ID, total , dis);
-                //update table status
-                //TableDAO.Instance.UpdateTableStatus(table.ID);
+                if (idBill != -1)
+                {
+                    MessageBox.Show("Do you want check out bill for " + table.Name, "Notify");
+                    BillTemplate bill = new BillTemplate(table.iD, staffID);
+                    bill.Show();
+                    BillDAO.Instance.CheckOut(table.ID, total, dis);
+                    //update table status
+                    //TableDAO.Instance.UpdateTableStatus(table.ID);
+                }
+                spmealstatus.Children.Clear();
+                LoadTable();
+                Price.Text = "0 VND";
             }
-            spmealstatus.Children.Clear();
-            LoadTable();
-            Price.Text = "0 VND";
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void cbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                int id = 0;
+                ComboBox cb = sender as ComboBox;
+                if (cb.SelectedItem == null)
+                    return;
 
-            int id = 0;
-            ComboBox cb = sender as ComboBox;
-            if (cb.SelectedItem == null)
-                return;
+                CategoryDTO selected = cb.SelectedItem as CategoryDTO;
+                cb.Tag = selected;
+                id = selected.Id;
 
-            CategoryDTO selected = cb.SelectedItem as CategoryDTO;
-            cb.Tag = selected;
-            id = selected.Id;
-
-            LoadFoodListByCategory(id);
+                LoadFoodListByCategory(id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-            StaffDTO staff = (sender as Button).Tag as StaffDTO;
-            InfoStaff infoStaff = new InfoStaff(staff.Id);
-            infoStaff.btnConfirm.Tag = staff;
-            infoStaff.btnConfirm.Click += BtnConfirm_Click;
-            infoStaff.ShowDialog();
+            try
+            {
+                StaffDTO staff = (sender as Button).Tag as StaffDTO;
+                InfoStaff infoStaff = new InfoStaff(staff.Id);
+                infoStaff.btnConfirm.Tag = staff;
+                infoStaff.btnConfirm.Click += BtnConfirm_Click;
+                infoStaff.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            StaffDTO staff = (sender as Button).Tag as StaffDTO;
-            tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
+            try
+            {
+                StaffDTO staff = (sender as Button).Tag as StaffDTO;
+                tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-            private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -302,9 +416,16 @@ namespace QuanLyNhaHang
 
         private void ChangepasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangePassword changePassword = new ChangePassword();
-            changePassword.txtUserNameEmployee.Text = StaffDAO.Instance.GetUserNameById(staffID);
-            changePassword.ShowDialog();
+            try
+            {
+                ChangePassword changePassword = new ChangePassword();
+                changePassword.txtUserNameEmployee.Text = StaffDAO.Instance.GetUserNameById(staffID);
+                changePassword.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

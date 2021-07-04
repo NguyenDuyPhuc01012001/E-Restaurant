@@ -227,7 +227,8 @@
                     HorizontalAlignment="{Binding HorizontalAlignment, ElementName=txtNameEmployee}" 
                     VerticalContentAlignment="{Binding VerticalContentAlignment, ElementName=txtNameEmployee}"   
                     VerticalAlignment="{Binding VerticalAlignment, ElementName=txtNameEmployee}" 
-                    FontWeight="{Binding FontWeight, ElementName=txtNameEmployee}"/>
+                    FontWeight="{Binding FontWeight, ElementName=txtNameEmployee}"
+                    PreviewTextInput="OnlyNumber"/>
 
             </Grid>
             <Label
@@ -260,7 +261,8 @@
                     HorizontalAlignment="{Binding HorizontalAlignment, ElementName=txtNameEmployee}" 
                     VerticalContentAlignment="{Binding VerticalContentAlignment, ElementName=txtNameEmployee}"   
                     VerticalAlignment="{Binding VerticalAlignment, ElementName=txtNameEmployee}" 
-                    FontWeight="{Binding FontWeight, ElementName=txtNameEmployee}"/>
+                    FontWeight="{Binding FontWeight, ElementName=txtNameEmployee}"
+                    PreviewTextInput="OnlyNumber"/>
 
             </Grid>
             <Grid x:Name="grdSelection" 

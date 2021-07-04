@@ -26,8 +26,6 @@ namespace QuanLyNhaHang
     public partial class MealCard : UserControl
     {
         private string nameFood;
-
-
         public string NameFood
         {
             get { return nameFood; }
@@ -51,7 +49,6 @@ namespace QuanLyNhaHang
 
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
-
         }
 
         private void deleteButton_MouseEnter(object sender, MouseEventArgs e)
@@ -66,32 +63,18 @@ namespace QuanLyNhaHang
 
         public void SetText(string mealName, string mealCategory, float mealPrice, int orderQuantity)
         {
-            this.mealName.Text = mealName;
-            this.mealCategory.Text = mealCategory;
-            this.mealPrice.Text = mealPrice.ToString();
-            this.orderQuantity.Text = orderQuantity.ToString();
+            try
+            {
+                this.mealName.Text = mealName;
+                this.mealCategory.Text = mealCategory;
+                this.mealPrice.Text = mealPrice.ToString();
+                this.orderQuantity.Text = orderQuantity.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-
-
-
-
-        //private void deleteIcon_ContextMenuClosing(object sender, ContextMenuEventArgs e)
-        //{
-        //    //Fix: get IDfood by name, idCategory first then delete 
-        //    int id = 1;
-
-        //    if (FoodDAO.Instance.DeleteMeal(id))
-        //    {
-        //        MessageBox.Show("Thành công");
-        //        if (deleteMeal != null)
-        //            deleteMeal(this, new EventArgs());
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Không thành công");
-        //    }
-        //}
 
         private event EventHandler deleteMeal;
         public event EventHandler DeleteMeal
@@ -102,29 +85,40 @@ namespace QuanLyNhaHang
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            string name = mealName.Text;
-            if (FoodDAO.Instance.DeleteMeal(name))
+            try
             {
-                MessageBox.Show("Successfully");
-                if (deleteMeal != null)
-                    deleteMeal(this, new EventArgs());
+                string name = mealName.Text;
+                if (FoodDAO.Instance.DeleteMeal(name))
+                {
+                    MessageBox.Show("Successfully");
+                    if (deleteMeal != null)
+                        deleteMeal(this, new EventArgs());
+                }
+                else
+                {
+                    MessageBox.Show("Failed");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Failed");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            nameFood = mealName.Text;
-           
-            EditMeal editmeal = new EditMeal(mealName.Text);
-           
-            editmeal.ShowDialog();
+            try
+            {
+                nameFood = mealName.Text;
 
+                EditMeal editmeal = new EditMeal(mealName.Text);
+
+                editmeal.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-
     }
 }

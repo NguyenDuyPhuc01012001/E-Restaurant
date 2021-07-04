@@ -20,10 +20,6 @@ namespace QuanLyNhaHang
     /// </summary>
     public partial class MealManager : UserControl
     {
-        //public RoutedEventHandler eventSortByName;
-        //public RoutedEventHandler eventSortByPrice;
-        //public RoutedEventHandler eventSortByCategory;
-           
 
         public MealManager()
         {
@@ -31,19 +27,8 @@ namespace QuanLyNhaHang
 
         }
 
-
-        //public MealManager(RoutedEventHandler eventSortByPrice, RoutedEventHandler eventSortByName, RoutedEventHandler eventSortByCategory)
-        //{
-        //    this.eventSortByCategory = eventSortByCategory;
-        //    this.eventSortByName = eventSortByName;
-        //    this.eventSortByPrice = eventSortByPrice;
-        //    InitializeComponent();
-        //}
-
         private void btnSortPrice_Click(object sender, RoutedEventArgs e)
         {
-           
-             
             if (priceSortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
             {
                 priceSortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
@@ -57,8 +42,7 @@ namespace QuanLyNhaHang
         }
 
         private void btnSortCategory_Click(object sender, RoutedEventArgs e)
-        {
- 
+        { 
             if (categorySortIcon.Kind == MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom)
             {
                 categorySortIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
@@ -98,20 +82,5 @@ namespace QuanLyNhaHang
                 quantitySortIcon.Foreground = Brushes.Red;
             }
         }
-
-
-        //private void ToggleIconStatus(MaterialDesignThemes.Wpf.PackIcon btn)
-        //{
-        //    if (btn.Foreground == Brushes.Red)
-        //    {
-        //        btn.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowTop;
-        //        btn.Foreground = Brushes.Green;
-        //    }
-        //    else
-        //    {
-        //        btn.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
-        //        btn.Foreground = Brushes.Red;
-        //    }
-        //}
     }
 }

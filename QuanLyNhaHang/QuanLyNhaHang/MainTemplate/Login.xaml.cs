@@ -89,52 +89,56 @@ namespace QuanLyNhaHang
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            string userName = usernameContainer.Text;
-            string password;
-            if (txbPassword.Text != null)
-                password = txbPassword.Text;
-            else
-                return;
-
-
-            if (Login(userName, password))
+            try
             {
-                int position = GetPosition(userName);
-                int id = GetId(userName);
-                switch (position)
+                string userName = usernameContainer.Text;
+                string password;
+                if (txbPassword.Text != null)
+                    password = txbPassword.Text;
+                else
+                    return;
+
+                if (Login(userName, password))
                 {
-                    case 0:
-                        ManagerForm managerForm = new ManagerForm(id);
-                        this.Hide();
-                        
-                        managerForm.ShowDialog();
-                        this.Show();
-                        break;
-                    case 1:
-                        WaiterForm waiterForm = new WaiterForm(id);
-                        this.Hide();
-                       
-                        waiterForm.ShowDialog();
-                        this.Show();
-                        break;
-                    case 2:
-                        ChefForm chefForm = new ChefForm(id);
-                        this.Hide();
-                        
-                        chefForm.ShowDialog();
-                        this.Show();
-                        break;
-                    default:
-                        break;
+                    int position = GetPosition(userName);
+                    int id = GetId(userName);
+                    switch (position)
+                    {
+                        case 0:
+                            ManagerForm managerForm = new ManagerForm(id);
+                            this.Hide();
+
+                            managerForm.ShowDialog();
+                            this.Show();
+                            break;
+                        case 1:
+                            WaiterForm waiterForm = new WaiterForm(id);
+                            this.Hide();
+
+                            waiterForm.ShowDialog();
+                            this.Show();
+                            break;
+                        case 2:
+                            ChefForm chefForm = new ChefForm(id);
+                            this.Hide();
+
+                            chefForm.ShowDialog();
+                            this.Show();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Wrong username or password");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Wrong username or password");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
-
-
     }
 }

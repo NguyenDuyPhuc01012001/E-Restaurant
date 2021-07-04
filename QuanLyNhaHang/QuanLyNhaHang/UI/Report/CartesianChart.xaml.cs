@@ -30,8 +30,9 @@ namespace QuanLyNhaHang
         {
             InitializeComponent();
 
-
-            SeriesCollection = new SeriesCollection
+            try
+            {
+                SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
@@ -41,59 +42,83 @@ namespace QuanLyNhaHang
             };
 
 
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            Formatter = value => value.ToString("N");
-            DataContext = this;
-
+                Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+                Formatter = value => value.ToString("N");
+                DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-        
+
         public CartesianChart(int year)
         {
             InitializeComponent();
-            SeriesCollection = new SeriesCollection
+            try
+            {
+                SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
                     Title = "Profit",
                     Values = new ChartValues<float>(GetSelectedYearRevenue(year))
                 }
-                
+
             };
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            Formatter = value => value.ToString("N");
-            DataContext = this;
+                Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+                Formatter = value => value.ToString("N");
+                DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        
+
         private List<float> GetYearRevenue()
         {
             List<float> list = new List<float>();
-            for (int month = 1; month < 13; month++)
+            try
             {
-                List<BillInfoDTO> reports = BillInfoDAO.Instance.GetListRevenue(month);
-                float profit = 0;
-                foreach (BillInfoDTO report in reports)
+                for (int month = 1; month < 13; month++)
                 {
+                    List<BillInfoDTO> reports = BillInfoDAO.Instance.GetListRevenue(month);
+                    float profit = 0;
+                    foreach (BillInfoDTO report in reports)
+                    {
 
-                    profit += (report.Price * report.Count);
+                        profit += (report.Price * report.Count);
+                    }
+                    list.Add(profit);
                 }
-                list.Add(profit);
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             return list;
         }
         private List<float> GetSelectedYearRevenue(int year)
         {
             List<float> list = new List<float>();
-            for (int month = 1; month < 13; month++)
+            try
             {
-                List<BillInfoDTO> reports = BillInfoDAO.Instance.GetListRevenue(month, year);
-                float profit = 0;
-                foreach (BillInfoDTO report in reports)
+                for (int month = 1; month < 13; month++)
                 {
-                    profit += (report.Price * report.Count) ;
+                    List<BillInfoDTO> reports = BillInfoDAO.Instance.GetListRevenue(month, year);
+                    float profit = 0;
+                    foreach (BillInfoDTO report in reports)
+                    {
+                        profit += (report.Price * report.Count);
+                    }
+                    list.Add(profit);
                 }
-                list.Add(profit);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return list;
         }
@@ -105,6 +130,5 @@ namespace QuanLyNhaHang
         }
         public string[] Labels { get; set; }
         public Func<float, string> Formatter { get; set; }
-
     }
 }

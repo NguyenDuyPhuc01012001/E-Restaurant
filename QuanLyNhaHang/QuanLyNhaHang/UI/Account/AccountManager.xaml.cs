@@ -69,8 +69,6 @@ namespace QuanLyNhaHang
                 btn.Kind = MaterialDesignThemes.Wpf.PackIconKind.ArrowBottom;
                 btn.Foreground = Brushes.Red;
             }
-        }
-
-        
+        }        
     }
 }

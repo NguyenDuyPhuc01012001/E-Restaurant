@@ -31,26 +31,41 @@ namespace QuanLyNhaHang
         private float GetTotalProfit()
         {
             float totalProfit = 0;
-            List<BillInfoDTO> list = BillInfoDAO.Instance.GetListRevenue(currentMonth);
-            foreach (BillInfoDTO report in list)
+            try
             {
-                totalProfit += report.Price * report.Count;
+                List<BillInfoDTO> list = BillInfoDAO.Instance.GetListRevenue(currentMonth);
+                foreach (BillInfoDTO report in list)
+                {
+                    totalProfit += report.Price * report.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return totalProfit;
         }
         public float GetTotalProfitByMonthAndYear(int month, int year)
         {
             float totalProfit = 0;
-            List<BillInfoDTO> list = BillInfoDAO.Instance.GetListRevenue(month, year);
-            foreach(BillInfoDTO report in list)
+            try
             {
-                totalProfit += report.Price * report.Count;
-            }    
+                List<BillInfoDTO> list = BillInfoDAO.Instance.GetListRevenue(month, year);
+                foreach (BillInfoDTO report in list)
+                {
+                    totalProfit += report.Price * report.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             return totalProfit;
         }
         private void SetTotalProfit()
         {
-            tbProfit.Text = GetTotalProfit().ToString() + " VND" ;
+            tbProfit.Text = GetTotalProfit().ToString() + " VND";
         }
         public void SetTotalProfitByMonthAndYear(int month, int year)
         {

@@ -5,7 +5,6 @@ GO
 set dateformat DMY
 GO 
 
-
 CREATE TABLE Staff
 (
 	id INT IDENTITY PRIMARY KEY,
@@ -16,9 +15,7 @@ CREATE TABLE Staff
 	salary int NOT NULL,
 	position INT NOT NULL  DEFAULT 0 -- 0: manager && 1: waiter && 2: chef
 )
-	GO
-
-
+GO
 
 CREATE TABLE Account
 (
@@ -34,7 +31,7 @@ GO
 CREATE TABLE TableFood
 (
 	id INT IDENTITY PRIMARY KEY,
-	name VARCHAR(100) NOT NULL DEFAULT N'No name',
+	name VARCHAR(100) UNIQUE NOT NULL DEFAULT N'No name',
 	status VARCHAR(100) NOT NULL DEFAULT N'Empty'	-- Empty || Using
 )
 GO
@@ -49,7 +46,7 @@ GO
 CREATE TABLE Food
 (
 	id INT IDENTITY PRIMARY KEY,
-	name NVARCHAR(100) NOT NULL DEFAULT N'No name',
+	name NVARCHAR(100) UNIQUE NOT NULL DEFAULT N'No name',
 	idCategory INT NOT NULL,
 	price FLOAT NOT NULL DEFAULT 0
 )
@@ -60,10 +57,11 @@ ADD Orderquantity int
 CREATE TABLE Bill
 (
 	id INT IDENTITY PRIMARY KEY,
-	DateCheckIn DATE NOT NULL DEFAULT GETDATE(),
-	DateCheckOut DATE,
+	DateCheckIn DATETIME NOT NULL DEFAULT GETDATE(),
+	DateCheckOut DATETIME,
 	idTable INT NOT NULL,
 	discount INT DEFAULT 0,
+	totalPrice FLOAT DEFAULT 0,
 	status INT NOT NULL DEFAULT 0 -- 1: đã thanh toán && 0: chưa thanh toán	
 
 	FOREIGN KEY (idTable) REFERENCES dbo.TableFood(id)
@@ -170,7 +168,7 @@ INSERT INTO dbo.Account
 )
 VALUES  
 (
-	13,
+	1,
 	'manager'
 )
 GO
@@ -182,7 +180,7 @@ INSERT INTO dbo.Account
 )
 VALUES  
 (
-	14,
+	2,
 	'waiter'
 )
 GO
@@ -194,11 +192,10 @@ INSERT INTO dbo.Account
 )
 VALUES  
 (
-	15,
+	3,
 	'chef'
 )
 GO
-
 
 -- thêm category
 INSERT dbo.FoodCategory ( name )
@@ -294,7 +291,7 @@ VALUES  ( 1, -- idBill - int
           )
 INSERT	dbo.BillInfo
         ( idBill, idFood, count )
-VALUES  ( 6, -- idBill - int
+VALUES  ( 2, -- idBill - int
           1, -- idFood - int
           2  -- count - int
           )
@@ -312,9 +309,7 @@ VALUES  ( 3, -- idBill - int
           )   
 GO
 
-
 --Procedure
-
 CREATE PROC USP_Login
 @userName varchar(100), @passWord varchar(100)
 AS
@@ -334,7 +329,6 @@ BEGIN
 	WHERE UserName = @userName COLLATE SQL_Latin1_General_CP1_CS_AS
 END
 GO
-
 
 CREATE PROC USP_InsertBill
 @idTable INT
@@ -549,7 +543,6 @@ BEGIN
 END
 GO
 
-
 CREATE PROC USP_GetIdByUserName
 @userName varchar(100)
 AS 
@@ -558,7 +551,6 @@ BEGIN
 	WHERE UserName = @userName COLLATE SQL_Latin1_General_CP1_CS_AS
 END
 GO
-
 
 
 

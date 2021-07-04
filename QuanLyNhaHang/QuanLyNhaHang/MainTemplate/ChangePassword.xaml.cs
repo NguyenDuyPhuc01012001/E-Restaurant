@@ -32,28 +32,34 @@ namespace QuanLyNhaHang
         }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUserNameEmployee.Text;
-            string password = txtPasswordEmployee.Password;
-            string cfpassword = txtConfirmPassword.Password;
-            if(password == cfpassword)
+            try
             {
-                if (AccountDAO.Instance.ChangePassword(username,password))
+                string username = txtUserNameEmployee.Text;
+                string password = txtPasswordEmployee.Password;
+                string cfpassword = txtConfirmPassword.Password;
+                if (password == cfpassword)
                 {
-                    MessageBox.Show("Successfully");
+                    if (AccountDAO.Instance.ChangePassword(username, password))
+                    {
+                        MessageBox.Show("Successfully");
 
-                    if (changePassword != null)
-                        changePassword(this, new EventArgs());
-                    this.Close();
-
+                        if (changePassword != null)
+                            changePassword(this, new EventArgs());
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Failed");
+                    MessageBox.Show("Password didn't match!!");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Password didn't match!!");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

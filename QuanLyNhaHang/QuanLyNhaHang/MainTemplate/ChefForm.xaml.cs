@@ -43,47 +43,82 @@ namespace QuanLyNhaHang
 
         private void LoadMealStatus()
         {
-            List<BillInfoDTO> listMealStatus = BillInfoDAO.Instance.GetListMenu();
-            spMealStatusChef.Children.Clear();
-
-            foreach (BillInfoDTO item in listMealStatus)
+            try
             {
-                ChangeMealStatusCard card = new ChangeMealStatusCard();
-                card.cbStatus.Tag = item;
-                card.SetText(item.Category, item.FoodName, item.Count, item.Description, item.Status);
-                card.cbStatus.SelectionChanged += CbStatus_SelectionChanged;
-                spMealStatusChef.Children.Add(card);
+                List<BillInfoDTO> listMealStatus = BillInfoDAO.Instance.GetListMenu();
+                spMealStatusChef.Children.Clear();
+
+                foreach (BillInfoDTO item in listMealStatus)
+                {
+                    ChangeMealStatusCard card = new ChangeMealStatusCard();
+                    card.cbStatus.Tag = item;
+                    card.SetText(item.Category, item.FoodName, item.Count, item.Description, item.Status);
+                    card.cbStatus.SelectionChanged += CbStatus_SelectionChanged;
+                    spMealStatusChef.Children.Add(card);
+                }
             }
-               
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-            StaffDTO staff = (sender as Button).Tag as StaffDTO;
-            InfoStaff infoStaff = new InfoStaff(staff.Id);
-            infoStaff.btnConfirm.Tag = staff;
-            infoStaff.btnConfirm.Click += BtnConfirm_Click;
-            infoStaff.ShowDialog();
+            try
+            {
+                StaffDTO staff = (sender as Button).Tag as StaffDTO;
+                InfoStaff infoStaff = new InfoStaff(staff.Id);
+                infoStaff.btnConfirm.Tag = staff;
+                infoStaff.btnConfirm.Click += BtnConfirm_Click;
+                infoStaff.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            StaffDTO staff = (sender as Button).Tag as StaffDTO;
-            tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
+            try
+            {
+                StaffDTO staff = (sender as Button).Tag as StaffDTO;
+                tblName.Text = StaffDAO.Instance.GetNameById(staff.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void CbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            int idBillInfo = ((sender as ComboBox).Tag as BillInfoDTO).Id;
-            int status = (sender as ComboBox).SelectedIndex;
-            BillInfoDAO.Instance.UpdateStatus(idBillInfo, status);
+            try
+            {
+                int idBillInfo = ((sender as ComboBox).Tag as BillInfoDTO).Id;
+                int status = (sender as ComboBox).SelectedIndex;
+                BillInfoDAO.Instance.UpdateStatus(idBillInfo, status);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ChangepasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangePassword changePassword = new ChangePassword();
-            changePassword.txtUserNameEmployee.Text = StaffDAO.Instance.GetUserNameById(staffID);
-            changePassword.ShowDialog();
+            try
+            {
+                ChangePassword changePassword = new ChangePassword();
+                changePassword.txtUserNameEmployee.Text = StaffDAO.Instance.GetUserNameById(staffID);
+                changePassword.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

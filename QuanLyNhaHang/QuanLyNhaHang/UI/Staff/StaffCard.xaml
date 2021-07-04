@@ -11,18 +11,18 @@
 
     <Grid>
         <Border
-            Margin="0,5,0,5"
+            Margin="5"
             Background="LightGray"
             CornerRadius="10">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="140" />
                 </Grid.ColumnDefinitions>
 
                 <CheckBox
@@ -38,7 +38,7 @@
                 <StackPanel
                     x:Name="employeeBasicInfoContainer"
                     Grid.Column="1"
-                    Margin="5"
+                    Margin="5,0"
                     Orientation="Horizontal">
                     <TextBlock
                         x:Name="nameTxtBox"

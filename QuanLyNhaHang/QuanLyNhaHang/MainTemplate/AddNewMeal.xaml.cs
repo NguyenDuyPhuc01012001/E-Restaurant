@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,51 +38,37 @@ namespace QuanLyNhaHang
 
         private void Search_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         #region events
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            string name = txtNameMeal.Text;
-            string category = cmbCategory.Text;
-            //int categoryIDaaa = CategoryDAO.Instance.GetIDCategoryByName(category);
-            int categoryidd = (cmbCategory.SelectedItem as CategoryDTO).Id;
-            float price = float.Parse(txtPriceMeal.Text);
-            //int categoryID = 1;
-            //switch (category)
-            //{
-            //    case "Hải sản":
-            //        categoryID = 1;
-            //        break;
-            //    case "Lâm sản":
-            //        categoryID = 3;
-            //        break;
-            //    case "Nông sản":
-            //        categoryID = 2;
-            //        break;
-            //    case "Nước":
-            //        categoryID = 4;
-            //        break;
-            //    default:
-            //        break;
-            //}
-
-
-            if (FoodDAO.Instance.AddMeal(name,categoryidd, price))
+            try
             {
-                //MessageBox.Show(categoryidd.ToString());
-                MessageBox.Show("Add New Meal Successfully");
+                string name = txtNameMeal.Text;
+                string category = cmbCategory.Text;
+                int categoryid = (cmbCategory.SelectedItem as CategoryDTO).Id;
+                float price = float.Parse(txtPriceMeal.Text);
 
-                if (addMeal != null)
-                    addMeal(this, new EventArgs());
-                this.Close();
-                
+                if (FoodDAO.Instance.AddMeal(name, categoryid, price))
+                {
+                    MessageBox.Show("Add New Meal Successfully");
+
+                    if (addMeal != null)
+                        addMeal(this, new EventArgs());
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Add New Meal Failed");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Add New Meal Failed");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -93,22 +80,28 @@ namespace QuanLyNhaHang
             add { addMeal += value; }
             remove { addMeal -= value; }
         }
-
-
-
-
-
-
         #endregion
 
         #region Method
         void LoadCategory()
         {
-            List<CategoryDTO> listCategory = CategoryDAO.Instance.GetListCategory();
-            cmbCategory.ItemsSource = listCategory;
-            cmbCategory.DisplayMemberPath = "Name";
+            try
+            {
+                List<CategoryDTO> listCategory = CategoryDAO.Instance.GetListCategory();
+                cmbCategory.ItemsSource = listCategory;
+                cmbCategory.DisplayMemberPath = "Name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
+        private void OnlyNumber(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         #endregion
     }
 }

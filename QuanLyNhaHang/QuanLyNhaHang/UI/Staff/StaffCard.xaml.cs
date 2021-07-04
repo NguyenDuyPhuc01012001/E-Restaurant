@@ -25,7 +25,6 @@ namespace QuanLyNhaHang
             InitializeComponent();
         }
 
-
         private void editButton_MouseEnter(object sender, MouseEventArgs e)
         {
             addIcon.Foreground = Brushes.Green;
@@ -46,27 +45,34 @@ namespace QuanLyNhaHang
             deleteIcon.Foreground = Brushes.White;
         }
 
-        public void SetText(string name, int salary , int position, string mail, string phone)
+        public void SetText(string name, int salary, int position, string mail, string phone)
         {
-            nameTxtBox.Text = name;
-
-            salaryTxtBox.Text = salary.ToString() + " VND";
-
-            switch(position)
+            try
             {
-                case 0:
-                    positionTxtBox.Text = "Manager";
-                    break;
-                case 1:
-                    positionTxtBox.Text = "Waiter";
-                    break;
-                case 2:
-                    positionTxtBox.Text = "Chef";
-                    break;
-            }
+                nameTxtBox.Text = name;
 
-            mailTxtBox.Text = mail;
-            phoneTxtBox.Text = phone;
+                salaryTxtBox.Text = salary.ToString() + " VND";
+
+                switch (position)
+                {
+                    case 0:
+                        positionTxtBox.Text = "Manager";
+                        break;
+                    case 1:
+                        positionTxtBox.Text = "Waiter";
+                        break;
+                    case 2:
+                        positionTxtBox.Text = "Chef";
+                        break;
+                }
+
+                mailTxtBox.Text = mail;
+                phoneTxtBox.Text = phone;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -55,33 +55,44 @@ namespace QuanLyNhaHang
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            EditTable editTable = new EditTable();
-            editTable.OldName.Text = tbkName.Text;
-            editTable.ShowDialog();
+            try
+            {
+                EditTable editTable = new EditTable();
+                editTable.OldName.Text = tbkName.Text;
+                editTable.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private event EventHandler deleteTable;
         public event EventHandler DeleteTable
         {
             add { deleteTable += value; }
-    remove { deleteTable -= value; }
+            remove { deleteTable -= value; }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            string name = tbkName.Text;
-            if (TableDAO.Instance.DeleteTable(name))
+            try
             {
-                MessageBox.Show("Thành công");
-                if (deleteTable != null)
-                    deleteTable(this, new EventArgs());
+                string name = tbkName.Text;
+                if (TableDAO.Instance.DeleteTable(name))
+                {
+                    MessageBox.Show("Delete successful");
+                    if (deleteTable != null)
+                        deleteTable(this, new EventArgs());
+                }
+                else
+                {
+                    MessageBox.Show("Delete faile");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Không thành công");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
     }
 }
-
-

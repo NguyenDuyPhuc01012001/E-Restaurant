@@ -32,50 +32,75 @@ namespace QuanLyNhaHang
         {
             InitializeComponent();
 
-            staffID.Text = "Staff ID: "+ID.ToString();
+            staffID.Text = "Staff ID: " + ID.ToString();
             ShowBill(id);
         }
         private void ShowBill(int id)
         {
-            float subTotal = 0;
-            int discount = 0;
-            float total = 0;
-            List<BillInfoDTO> listBill = BillInfoDAO.Instance.GetListMenuByTable(id);
-            foreach (BillInfoDTO bill in listBill)
+            try
             {
-                subTotal += bill.TotalPrice;
+                float subTotal = 0;
+                int discount = 0;
+                float total = 0;
+                List<BillInfoDTO> listBill = BillInfoDAO.Instance.GetListMenuByTable(id);
+                foreach (BillInfoDTO bill in listBill)
+                {
+                    subTotal += bill.TotalPrice;
+                }
+                gridBill.ItemsSource = listBill;
+                GetDateCheckIn(id);
+                GetDateCheckOut();
+                GetUncheckedBillIDByTable(id);
+                int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(id);
+                discount = BillDAO.Instance.GetDiscount(idBill);
+                subTotalTxb.Text = "Subtotal: " + subTotal.ToString() + " VND";
+                discountTxb.Text = "Discount: " + discount.ToString() + "%";
+                total = subTotal * (100 - discount) / 100;
+                totalTxb.Text = "Total: " + total.ToString() + " VND";
             }
-            gridBill.ItemsSource = listBill;
-            GetDateCheckIn(id);
-            GetDateCheckOut();
-            GetUncheckedBillIDByTable(id);
-            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(id);
-            discount = BillDAO.Instance.GetDiscount(idBill);
-            subTotalTxb.Text = "Subtotal: " + subTotal.ToString() + " VND";
-            discountTxb.Text = "Discount: " + discount.ToString() + "%";
-            total = subTotal * (100 - discount) / 100;
-            totalTxb.Text = "Total: " + total.ToString() + " VND";
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
         private void GetUncheckedBillIDByTable(int id)
         {
-            int billID = BillDAO.Instance.GetUncheckBillIDByTableID(id);
-            invoiceID.Text = "Invoice number " + billID.ToString();
-            invoice.Text = "Invoice #" + billID.ToString();
+            try
+            {
+                int billID = BillDAO.Instance.GetUncheckBillIDByTableID(id);
+                invoiceID.Text = "Invoice number " + billID.ToString();
+                invoice.Text = "Invoice #" + billID.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void GetDateCheckOut()
         {
-            string dateCheckOut = BillDAO.Instance.GetDateCheckOut();
-            dateCheckOutTxb.Text = dateCheckOut;
+            try
+            {
+                string dateCheckOut = BillDAO.Instance.GetDateCheckOut();
+                dateCheckOutTxb.Text = dateCheckOut;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
         private void GetDateCheckIn(int id)
         {
-            string dateCheckIn = BillDAO.Instance.GetDateCheckInByTable(id);
-            dateCheckinTxb.Text = dateCheckIn;
-        }
-        private void LoadBillByTable(int id)
-        {
+            try
+            {
+                string dateCheckIn = BillDAO.Instance.GetDateCheckInByTable(id);
+                dateCheckinTxb.Text = dateCheckIn;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
         private void exportBillBtn_Click_1(object sender, RoutedEventArgs e)
@@ -87,8 +112,11 @@ namespace QuanLyNhaHang
                 if (printDialog.ShowDialog() == true)
                 {
                     printDialog.PrintVisual(billGrd, "invoice");
-
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -97,29 +125,36 @@ namespace QuanLyNhaHang
         }
         private void gridBill_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            string headername = e.Column.Header.ToString();
+            try
+            {
+                string headername = e.Column.Header.ToString();
 
-            //update column details when generating
-            if (headername == "FoodName")
-            {
-                e.Column.Header = "Name";
-                e.Column.DisplayIndex = 0;
+                //update column details when generating
+                if (headername == "FoodName")
+                {
+                    e.Column.Header = "Name";
+                    e.Column.DisplayIndex = 0;
+                }
+                else if (headername == "Price")
+                {
+                    e.Column.DisplayIndex = 1;
+                }
+                else if (headername == "Count")
+                {
+                    e.Column.Header = "Quantity";
+                    e.Column.DisplayIndex = 2;
+                }
+                else if (headername == "TotalPrice")
+                {
+                    e.Column.Header = "Total Price";
+                    e.Column.DisplayIndex = 3;
+                }
+                else e.Column.Visibility = Visibility.Collapsed;
             }
-            else if (headername == "Price")
+            catch (Exception ex)
             {
-                e.Column.DisplayIndex = 1;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else if (headername == "Count")
-            {
-                e.Column.Header = "Quantity";
-                e.Column.DisplayIndex = 2;
-            }
-            else if (headername == "TotalPrice")
-            {
-                e.Column.Header = "Total Price";
-                e.Column.DisplayIndex = 3;
-            }
-            else e.Column.Visibility = Visibility.Collapsed;
         }
     }
 }

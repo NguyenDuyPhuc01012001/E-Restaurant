@@ -18,15 +18,15 @@ namespace QuanLyNhaHang
     /// <summary>
     /// Interaction logic for ModifyCategory.xaml
     /// </summary>
-    
-    
+
+
     public partial class ModifyCategory : Window
     {
         private string function;
         private int id;
         private event EventHandler modify;
         private string name;
-        public bool isUpdate=false;
+        public bool isUpdate = false;
 
         public string Name { get => name; set => name = value; }
 
@@ -47,58 +47,76 @@ namespace QuanLyNhaHang
         }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            this.Name = txtNameCategory.Text;
-            if (String.IsNullOrWhiteSpace(name))
+            try
             {
-                MessageBox.Show("Category name must not be empty");
-                return;
+                this.Name = txtNameCategory.Text;
+                if (String.IsNullOrWhiteSpace(name))
+                {
+                    MessageBox.Show("Category name must not be empty");
+                    return;
+                }
+
+                switch (function)
+                {
+                    case "Add":
+                        AddCategory();
+                        break;
+                    case "Edit":
+                        EditCategory();
+                        break;
+                }
             }
-            
-            switch (function)
+            catch (Exception ex)
             {
-                case "Add":
-                    AddCategory();
-                    break;
-                case "Edit":
-                    EditCategory();
-                    break;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
         }
 
         private void AddCategory()
         {
-            if (CategoryDAO.Instance.InsertCategory(this.Name))
+            try
             {
-                MessageBox.Show("Add new category succesfully");
-                if (modify != null)
-                    modify(this, new EventArgs());
-                this.Close();
+                if (CategoryDAO.Instance.InsertCategory(this.Name))
+                {
+                    MessageBox.Show("Add new category succesfully");
+                    if (modify != null)
+                        modify(this, new EventArgs());
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Add new category failed");
+                    this.Close();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Add new category failed");
-                this.Close();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void EditCategory()
         {
-            if (CategoryDAO.Instance.UpdateCategory(this.Name, this.id))
+            try
             {
-                MessageBox.Show("Edit category succesfully");
-                if (modify != null)
+                if (CategoryDAO.Instance.UpdateCategory(this.Name, this.id))
                 {
-                    isUpdate = true;
-                    modify(this, new EventArgs());
+                    MessageBox.Show("Edit category succesfully");
+                    if (modify != null)
+                    {
+                        isUpdate = true;
+                        modify(this, new EventArgs());
+                    }
+                    this.Close();
                 }
-                    
-                this.Close();
+                else
+                {
+                    MessageBox.Show("Edit category failed");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Edit category failed");
-                this.Close();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

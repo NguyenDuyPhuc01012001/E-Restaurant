@@ -9,8 +9,8 @@
         Title="AddNewMeal" Height="400" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="76*"></ColumnDefinition>
-            <ColumnDefinition Width="149*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid x:Name="restaurantInformation" VerticalAlignment="Center">
             <Image Source="/MainTemplate/restaurant.png" />
@@ -122,7 +122,8 @@
                     HorizontalAlignment="{Binding HorizontalAlignment, ElementName=txtNameMeal}" 
                     VerticalContentAlignment="{Binding VerticalContentAlignment, ElementName=txtNameMeal}"   
                     VerticalAlignment="{Binding VerticalAlignment, ElementName=txtNameMeal}" 
-                    FontWeight="{Binding FontWeight, ElementName=txtNameMeal}"/>
+                    FontWeight="{Binding FontWeight, ElementName=txtNameMeal}"
+                    PreviewTextInput="OnlyNumber"/>
             </Grid>
             <Grid x:Name="grdSelection" 
                   Width="{Binding ActualWidth, ElementName=recNameMeal}"

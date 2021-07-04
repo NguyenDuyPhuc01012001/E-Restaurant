@@ -15,12 +15,12 @@
             CornerRadius="10">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="140" />
                 </Grid.ColumnDefinitions>
                 <CheckBox
                     Height="50"
@@ -40,7 +40,7 @@
                   
                     <TextBlock
                         x:Name="mealName"
-                        Margin="10,0,10,0"
+                        Margin="10,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Foreground="Black"
@@ -53,7 +53,7 @@
                     Orientation="Horizontal">
                     <TextBlock
                         x:Name="mealCategory"
-                        Margin="10,0,10,0"
+                        Margin="10,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Foreground="Black"
@@ -62,11 +62,11 @@
                 <StackPanel
                     x:Name="mealPriceContainer"
                     Grid.Column="3"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <TextBlock
                         x:Name="mealPrice"
-                        Margin="10,0,10,0"
+                        Margin="10,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Text="100000 Vnd" />
@@ -74,7 +74,7 @@
                 <StackPanel
                     Name="mealOrderQuantityContainer"
                     Grid.Column="4"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <TextBlock
                         x:Name="orderQuantity"
