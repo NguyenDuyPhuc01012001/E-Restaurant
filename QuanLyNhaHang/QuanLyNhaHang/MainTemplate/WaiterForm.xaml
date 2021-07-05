@@ -186,9 +186,6 @@
                     </Grid>
                     <ScrollViewer x:Name="MealStatusCardContainer" Grid.Row="1">
                         <StackPanel x:Name="spmealstatus" Orientation="Vertical">
-                            <local:MealStatusCard />
-                            <local:MealStatusCard />
-                            <local:MealStatusCard />
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -286,7 +283,7 @@
                             VerticalAlignment="Center"
                             FontSize="19"
                             FontWeight="Bold"
-                            Text="100000 VND"
+                            Text="0 VND"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
                         <Button

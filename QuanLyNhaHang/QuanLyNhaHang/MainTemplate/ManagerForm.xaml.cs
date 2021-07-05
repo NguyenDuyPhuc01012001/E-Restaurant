@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -507,9 +508,7 @@ namespace QuanLyNhaHang
                     string category = CategoryDAO.Instance.GetCategoryByID(food.CategoryID);
                     int quantity = FoodDAO.Instance.GetOrderQuantityByID(food.Id);
 
-
                     MealCard meal = new MealCard();
-
 
                     meal.SetText(food.Name, category, food.Price, quantity);
                     meal.editButton.Tag = food;
@@ -1325,7 +1324,6 @@ namespace QuanLyNhaHang
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void BtnSortMealQuantity_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1346,7 +1344,6 @@ namespace QuanLyNhaHang
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void BtnSortMealPrice_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1496,7 +1493,6 @@ namespace QuanLyNhaHang
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1551,7 +1547,6 @@ namespace QuanLyNhaHang
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void BtnConfirm_Click1(object sender, RoutedEventArgs e)
         {
             try
@@ -1564,7 +1559,6 @@ namespace QuanLyNhaHang
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
             SetStaffPage();
@@ -1577,7 +1571,6 @@ namespace QuanLyNhaHang
         {
             SetTableManagerPage();
         }
-
         private void Acc_DeleteAccount(object sender, EventArgs e)
         {
             IncludeAccountList();

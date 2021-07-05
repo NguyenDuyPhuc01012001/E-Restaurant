@@ -320,7 +320,7 @@ namespace QuanLyNhaHang.MainTemplate {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;V1.0.0.0;component/maintemplate/editstaff.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyNhaHang;component/maintemplate/editstaff.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MainTemplate\EditStaff.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
