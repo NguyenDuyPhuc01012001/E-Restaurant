@@ -30,7 +30,13 @@ namespace QuanLyNhaHang.MainTemplate
         {
             try
             {
-                string name = txtNameTable.Text;
+                string name = txtNameTable.Text.Trim();
+                if (name == null || name == "")
+                {
+                    MessageBox.Show("Please fill out the form first", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 if (TableDAO.Instance.AddTable(name))
                 {
                     MessageBox.Show("Add New Table Successfully");
